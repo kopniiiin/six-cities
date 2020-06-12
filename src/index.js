@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 
 import App from "./components/app/app.jsx";
 
-const PLACE_AMOUNT = 4;
+const PLACES = [
+  `Wood and stone place`,
+  `Only wood place`,
+  `Only stone place`,
+  `Paper place`
+];
 
-ReactDOM.render(<App placeAmount={PLACE_AMOUNT}/>, document.querySelector(`#root`));
+ReactDOM.render(<App places={PLACES}/>, document.querySelector(`#root`));
