@@ -10,4 +10,9 @@ const PLACES = [
   `Paper place`
 ];
 
-ReactDOM.render(<App places={PLACES}/>, document.querySelector(`#root`));
+const placeNameClickHandler = () => {};
+
+ReactDOM.render(
+    <App places={PLACES} placeNameClickHandler={placeNameClickHandler}/>,
+    document.querySelector(`#root`)
+);
