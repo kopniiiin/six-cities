@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main component should render correctly 1`] = `
+exports[`snapshot test: Main component should render correctly 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -336,6 +336,7 @@ exports[`Main component should render correctly 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Wood and stone place
                   </a>
@@ -430,6 +431,7 @@ exports[`Main component should render correctly 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Only wood place
                   </a>
@@ -524,6 +526,7 @@ exports[`Main component should render correctly 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Only stone place
                   </a>
@@ -618,6 +621,7 @@ exports[`Main component should render correctly 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Paper place
                   </a>

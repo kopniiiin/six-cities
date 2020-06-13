@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 
 import Main from "./main.jsx";
 
-describe(`Main component`, () => {
+describe(`snapshot test: Main component`, () => {
   it(`should render correctly`, () => {
     const PLACES = [
       `Wood and stone place`,
@@ -12,7 +12,9 @@ describe(`Main component`, () => {
       `Paper place`
     ];
 
-    const tree = renderer.create(<Main places={PLACES}/>).toJSON();
+    const placeNameClickHandler = () => {};
+
+    const tree = renderer.create(<Main places={PLACES} placeNameClickHandler={placeNameClickHandler}/>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
