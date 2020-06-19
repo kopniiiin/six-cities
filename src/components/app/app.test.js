@@ -1,20 +1,23 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import {shallow} from "enzyme";
+
+import {OfferType} from "../../const.js";
 
 import App from "./app.jsx";
 
 describe(`snapshot test: App component`, () => {
   it(`should render correctly`, () => {
-    const PLACES = [
-      `Wood and stone place`,
-      `Only wood place`,
-      `Only stone place`,
-      `Paper place`
-    ];
+    const offers = [{
+      id: `4`,
+      type: OfferType.ROOM,
+      name: `Paper place`,
+      photo: {src: `img/room.jpg`, alt: `Place photo`},
+      price: 400,
+      rating: 4,
+      isFavorite: false,
+      isPremium: false
+    }];
 
-    const placeNameClickHandler = () => {};
-
-    const tree = renderer.create(<App places={PLACES} placeNameClickHandler={placeNameClickHandler}/>).toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(shallow(<App offers={offers}/>)).toMatchSnapshot();
   });
 });
