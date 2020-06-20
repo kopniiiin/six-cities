@@ -1,17 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
 
+const propTypes = Main.propTypes;
+
 const App = (props) => {
-  const {places, placeNameClickHandler} = props;
+  const {offers} = props;
 
-  return <Main places={places} placeNameClickHandler={placeNameClickHandler}/>;
+  return <Main offers={offers}/>;
 };
 
-App.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.string).isRequired,
-  placeNameClickHandler: PropTypes.func.isRequired
-};
+App.propTypes = propTypes;
 
 export default App;

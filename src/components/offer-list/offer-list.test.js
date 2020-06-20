@@ -3,9 +3,9 @@ import {shallow} from "enzyme";
 
 import {OfferType} from "../../const.js";
 
-import App from "./app.jsx";
+import OfferList from "./offer-list.jsx";
 
-describe(`snapshot test: App component`, () => {
+describe(`snapshot test: OfferList component`, () => {
   it(`should render correctly`, () => {
     const offers = [{
       id: `4`,
@@ -18,6 +18,6 @@ describe(`snapshot test: App component`, () => {
       isPremium: false
     }];
 
-    expect(shallow(<App offers={offers}/>)).toMatchSnapshot();
+    expect(shallow(<OfferList offers={offers}/>)).toMatchSnapshot();
   });
 });

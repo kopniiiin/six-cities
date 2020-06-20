@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: OfferList component should render correctly 1`] = `
+<div
+  className="cities__places-list places__list tabs__content"
+>
+  <OfferCard
+    id="4"
+    isFavorite={false}
+    isPremium={false}
+    key="4"
+    name="Paper place"
+    onMouseEnter={[Function]}
+    onNameClick={[Function]}
+    photo={
+      Object {
+        "alt": "Place photo",
+        "src": "img/room.jpg",
+      }
+    }
+    price={400}
+    rating={4}
+    type="room"
+  />
+</div>
+`;
