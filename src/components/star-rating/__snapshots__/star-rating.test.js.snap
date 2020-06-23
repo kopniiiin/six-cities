@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: StarRating component should render correctly 1`] = `
+<div
+  className="block__rating rating"
+>
+  <div
+    className="block__stars rating__stars"
+  >
+    <span
+      style={
+        Object {
+          "width": "80%",
+        }
+      }
+    />
+    <span
+      className="visually-hidden"
+    >
+      Rating
+    </span>
+  </div>
+</div>
+`;
+
+exports[`snapshot test: StarRating component should render value 1`] = `
+<div
+  className="block__rating rating"
+>
+  <div
+    className="block__stars rating__stars"
+  >
+    <span
+      style={
+        Object {
+          "width": "80%",
+        }
+      }
+    />
+    <span
+      className="visually-hidden"
+    >
+      Rating
+    </span>
+  </div>
+  <span
+    className="block__rating-value rating__value"
+  >
+    4
+  </span>
+</div>
+`;
