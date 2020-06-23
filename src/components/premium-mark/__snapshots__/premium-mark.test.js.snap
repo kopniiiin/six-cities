@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: PremiumMark component should render correctly 1`] = `
+<div
+  className="block__mark"
+>
+  <span>
+    Premium
+  </span>
+</div>
+`;
