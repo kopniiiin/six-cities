@@ -4,36 +4,72 @@ export default [{
   id: `1`,
   type: OfferType.APARTMENT,
   name: `Wood and stone place`,
-  photo: {src: `img/room.jpg`, alt: `Place photo`},
-  price: 1000,
-  rating: 1,
+  description: `Lots of wood and stone`,
+  photos: [{src: `img/room.jpg`, alt: `Place photo`}],
   isFavorite: false,
-  isPremium: false
+  isPremium: false,
+  rating: 1,
+  price: 100,
+  bedroomAmount: 1,
+  guestAmount: 1,
+  features: [`wood`, `stone`],
+  host: {
+    name: `Host`,
+    photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
+    isPro: false
+  }
 }, {
   id: `2`,
   type: OfferType.HOTEL,
   name: `Only wood place`,
-  photo: {src: `img/room.jpg`, alt: `Place photo`},
-  price: 800,
-  rating: 2,
+  description: `Lots of wood`,
+  photos: [{src: `img/room.jpg`, alt: `Place photo`}],
   isFavorite: true,
-  isPremium: false
+  isPremium: false,
+  rating: 2,
+  price: 200,
+  bedroomAmount: 2,
+  guestAmount: 2,
+  features: [`wood`],
+  host: {
+    name: `Host`,
+    photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
+    isPro: false
+  }
 }, {
   id: `3`,
   type: OfferType.HOUSE,
   name: `Only stone place`,
-  photo: {src: `img/room.jpg`, alt: `Place photo`},
-  price: 600,
-  rating: 3,
+  description: `Lots of stone`,
+  photos: [{src: `img/room.jpg`, alt: `Place photo`}],
   isFavorite: false,
-  isPremium: false
+  isPremium: false,
+  rating: 3,
+  price: 300,
+  bedroomAmount: 3,
+  guestAmount: 3,
+  features: [`stone`],
+  host: {
+    name: `Host`,
+    photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
+    isPro: false
+  }
 }, {
   id: `4`,
   type: OfferType.ROOM,
   name: `Paper place`,
-  photo: {src: `img/room.jpg`, alt: `Place photo`},
-  price: 400,
-  rating: 4,
+  description: `Lots of paper`,
+  photos: [{src: `img/room.jpg`, alt: `Place photo`}],
   isFavorite: true,
-  isPremium: true
+  isPremium: true,
+  rating: 4,
+  price: 400,
+  bedroomAmount: 4,
+  guestAmount: 4,
+  features: [`paper`, `coffee machine`],
+  host: {
+    name: `Host`,
+    photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
+    isPro: true
+  }
 }];
