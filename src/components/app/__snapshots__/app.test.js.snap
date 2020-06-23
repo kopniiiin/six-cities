@@ -1,23 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`snapshot test: App component should render correctly 1`] = `
-<Main
-  offers={
-    Array [
-      Object {
-        "id": "4",
-        "isFavorite": false,
-        "isPremium": false,
-        "name": "Paper place",
-        "photo": Object {
-          "alt": "Place photo",
-          "src": "img/room.jpg",
-        },
-        "price": 400,
-        "rating": 4,
-        "type": "room",
-      },
-    ]
-  }
-/>
+<BrowserRouter>
+  <Switch>
+    <Route
+      exact={true}
+      path="/"
+    >
+      <Main
+        offers={
+          Array [
+            Object {
+              "bedroomAmount": 4,
+              "description": "Lots of paper",
+              "features": Array [
+                "paper",
+                "coffee machine",
+              ],
+              "guestAmount": 4,
+              "host": Object {
+                "isPro": false,
+                "name": "Host",
+                "photo": Object {
+                  "alt": "Host photo",
+                  "src": "img/avatar-max.jpg",
+                },
+              },
+              "id": "4",
+              "isFavorite": false,
+              "isPremium": false,
+              "name": "Paper place",
+              "photos": Array [
+                Object {
+                  "alt": "Place photo",
+                  "src": "img/room.jpg",
+                },
+              ],
+              "price": 4,
+              "rating": 4,
+              "type": "room",
+            },
+          ]
+        }
+        onOfferCardNameClick={[Function]}
+      />
+    </Route>
+    <Route
+      exact={true}
+      path="/dev-offer"
+    >
+      <OfferScreen
+        bedroomAmount={4}
+        description="Lots of paper"
+        features={
+          Array [
+            "paper",
+            "coffee machine",
+          ]
+        }
+        guestAmount={4}
+        host={
+          Object {
+            "isPro": false,
+            "name": "Host",
+            "photo": Object {
+              "alt": "Host photo",
+              "src": "img/avatar-max.jpg",
+            },
+          }
+        }
+        id="4"
+        isFavorite={false}
+        isPremium={false}
+        name="Paper place"
+        photos={
+          Array [
+            Object {
+              "alt": "Place photo",
+              "src": "img/room.jpg",
+            },
+          ]
+        }
+        price={4}
+        rating={4}
+        type="room"
+      />
+    </Route>
+  </Switch>
+</BrowserRouter>
 `;

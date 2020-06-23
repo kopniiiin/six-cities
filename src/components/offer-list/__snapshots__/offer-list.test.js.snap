@@ -12,13 +12,15 @@ exports[`snapshot test: OfferList component should render correctly 1`] = `
     name="Paper place"
     onMouseEnter={[Function]}
     onNameClick={[Function]}
-    photo={
-      Object {
-        "alt": "Place photo",
-        "src": "img/room.jpg",
-      }
+    photos={
+      Array [
+        Object {
+          "alt": "Place photo",
+          "src": "img/room.jpg",
+        },
+      ]
     }
-    price={400}
+    price={4}
     rating={4}
     type="room"
   />

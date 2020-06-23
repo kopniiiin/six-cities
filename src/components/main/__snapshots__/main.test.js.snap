@@ -258,16 +258,19 @@ exports[`snapshot test: Main component should render correctly 1`] = `
                   "isFavorite": false,
                   "isPremium": false,
                   "name": "Paper place",
-                  "photo": Object {
-                    "alt": "Place photo",
-                    "src": "img/room.jpg",
-                  },
-                  "price": 400,
+                  "photos": Array [
+                    Object {
+                      "alt": "Place photo",
+                      "src": "img/room.jpg",
+                    },
+                  ],
+                  "price": 4,
                   "rating": 4,
                   "type": "room",
                 },
               ]
             }
+            onOfferCardNameClick={[Function]}
           />
         </section>
         <div
