@@ -33,7 +33,7 @@ exports[`snapshot test: OfferCard component should render correctly 1`] = `
           className="place-card__price-value"
         >
           €
-          400
+          4
         </b>
         <span
           className="place-card__price-text"
@@ -41,46 +41,17 @@ exports[`snapshot test: OfferCard component should render correctly 1`] = `
           / night
         </span>
       </div>
-      <button
-        className="place-card__bookmark-button  button"
-        type="button"
-      >
-        <svg
-          className="place-card__bookmark-icon"
-          height="19"
-          width="18"
-        >
-          <use
-            xlinkHref="#icon-bookmark"
-          />
-        </svg>
-        <span
-          className="visually-hidden"
-        >
-          To bookmarks
-        </span>
-      </button>
+      <BookmarkButton
+        blockClassName="place-card"
+        isActive={false}
+        isBig={false}
+      />
     </div>
-    <div
-      className="place-card__rating rating"
-    >
-      <div
-        className="place-card__stars rating__stars"
-      >
-        <span
-          style={
-            Object {
-              "width": "80%",
-            }
-          }
-        />
-        <span
-          className="visually-hidden"
-        >
-          Rating
-        </span>
-      </div>
-    </div>
+    <StarRating
+      blockClassName="place-card"
+      isValueShown={false}
+      value={4}
+    />
     <h2
       className="place-card__name"
     >
@@ -105,13 +76,9 @@ exports[`snapshot test: OfferCard component should render premium mark 1`] = `
   className="cities__place-card place-card"
   onMouseEnter={[Function]}
 >
-  <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
+  <PremiumMark
+    blockClassName="place-card"
+  />
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
@@ -140,7 +107,7 @@ exports[`snapshot test: OfferCard component should render premium mark 1`] = `
           className="place-card__price-value"
         >
           €
-          400
+          4
         </b>
         <span
           className="place-card__price-text"
@@ -148,46 +115,17 @@ exports[`snapshot test: OfferCard component should render premium mark 1`] = `
           / night
         </span>
       </div>
-      <button
-        className="place-card__bookmark-button  button"
-        type="button"
-      >
-        <svg
-          className="place-card__bookmark-icon"
-          height="19"
-          width="18"
-        >
-          <use
-            xlinkHref="#icon-bookmark"
-          />
-        </svg>
-        <span
-          className="visually-hidden"
-        >
-          To bookmarks
-        </span>
-      </button>
+      <BookmarkButton
+        blockClassName="place-card"
+        isActive={false}
+        isBig={false}
+      />
     </div>
-    <div
-      className="place-card__rating rating"
-    >
-      <div
-        className="place-card__stars rating__stars"
-      >
-        <span
-          style={
-            Object {
-              "width": "80%",
-            }
-          }
-        />
-        <span
-          className="visually-hidden"
-        >
-          Rating
-        </span>
-      </div>
-    </div>
+    <StarRating
+      blockClassName="place-card"
+      isValueShown={false}
+      value={4}
+    />
     <h2
       className="place-card__name"
     >

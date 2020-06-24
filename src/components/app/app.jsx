@@ -1,15 +1,76 @@
-import React from "react";
+import React, {PureComponent} from "react";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
+import OfferScreen from "../offer-screen/offer-screen.jsx";
+import {OfferType} from "../../const";
 
-const propTypes = Main.propTypes;
+const offerScreenPropTypesCopy = Object.assign({}, OfferScreen.propTypes);
+offerScreenPropTypesCopy.id = PropTypes.string.isRequired;
 
-const App = (props) => {
-  const {offers} = props;
-
-  return <Main offers={offers}/>;
+const propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape(offerScreenPropTypesCopy)).isRequired
 };
+
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {activeOfferId: null};
+    this._handleOfferCardNameClick = this._handleOfferCardNameClick.bind(this);
+  }
+
+  render() {
+    const {offers} = this.props;
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">{this._renderApp()}</Route>
+          <Route exact path="/dev-offer"><OfferScreen {...offers[0]}/></Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+
+  _renderApp() {
+    const {offers} = this.props;
+    const {activeOfferId} = this.state;
+
+    if (activeOfferId) {
+      return <OfferScreen {...offers.find(({id}) => id === activeOfferId)}/>;
+    }
+
+    return <Main offers={offers} onOfferCardNameClick={this._handleOfferCardNameClick}/>;
+  }
+
+  _handleOfferCardNameClick(id) {
+    this.setState({activeOfferId: id});
+  }
+}
 
 App.propTypes = propTypes;
 
 export default App;
+
+export const testProps = {
+  offers: [{
+    id: `4`,
+    type: OfferType.ROOM,
+    name: `Paper place`,
+    description: `Lots of paper`,
+    photos: [{src: `img/room.jpg`, alt: `Place photo`}],
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+    price: 4,
+    bedroomAmount: 4,
+    guestAmount: 4,
+    features: [`paper`, `coffee machine`],
+    host: {
+      name: `Host`,
+      photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
+      isPro: false
+    }
+  }]
+};

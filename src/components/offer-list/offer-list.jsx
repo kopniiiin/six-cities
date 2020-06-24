@@ -5,61 +5,55 @@ import {OfferType} from "../../const.js";
 
 import OfferCard from "../offer-card/offer-card.jsx";
 
+const offerCardPropTypesCopy = Object.assign({}, OfferCard.propTypes);
+delete offerCardPropTypesCopy[`onMouseEnter`];
+delete offerCardPropTypesCopy[`onNameClick`];
+
 const propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
-    name: PropTypes.string.isRequired,
-    photo: PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired,
-    }).isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired
-  })).isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape(offerCardPropTypesCopy)).isRequired,
+  onOfferCardNameClick: PropTypes.func.isRequired
 };
 
 class OfferList extends PureComponent {
   constructor(props) {
     super(props);
-    this.handleOfferCardMouseEnter = this.handleOfferCardMouseEnter.bind(this);
-    this.handleOfferCardNameClick = this.handleOfferCardNameClick.bind(this);
+    this.state = {activeOfferId: null};
+    this._handleOfferCardMouseEnter = this._handleOfferCardMouseEnter.bind(this);
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, onOfferCardNameClick} = this.props;
 
-    const offerCards = offers.map((offer) => {
-      const {id, type, name, photo, price, rating, isFavorite, isPremium} = offer;
-
-      return (
-        <OfferCard
-          key={id}
-          id={id}
-          type={type}
-          name={name}
-          photo={photo}
-          price={price}
-          rating={rating}
-          isFavorite={isFavorite}
-          isPremium={isPremium}
-          onMouseEnter={this.handleOfferCardMouseEnter}
-          onNameClick={this.handleOfferCardNameClick}/>
-      );
-    });
+    const offerCards = offers.map((offer) => (
+      <OfferCard
+        key={offer.id}
+        {...offer}
+        onMouseEnter={this._handleOfferCardMouseEnter}
+        onNameClick={onOfferCardNameClick}/>
+    ));
 
     return <div className="cities__places-list places__list tabs__content">{offerCards}</div>;
   }
 
-  handleOfferCardMouseEnter(id) {
+  _handleOfferCardMouseEnter(id) {
     this.setState({activeOfferId: id});
   }
-
-  handleOfferCardNameClick() {}
 }
 
 OfferList.propTypes = propTypes;
 
 export default OfferList;
+
+export const testProps = {
+  offers: [{
+    id: `4`,
+    type: OfferType.ROOM,
+    name: `Paper place`,
+    photos: [{src: `img/room.jpg`, alt: `Place photo`}],
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+    price: 4
+  }],
+  onOfferCardNameClick: () => {}
+};

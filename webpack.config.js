@@ -8,7 +8,8 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, `public`),
-    port: 1337
+    port: 1337,
+    historyApiFallback: true
   },
   module: {
     rules: [

@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: BookmarkButton component should render active 1`] = `
+<button
+  className="block__bookmark-button block__bookmark-button--active button"
+  type="button"
+>
+  <svg
+    className="block__bookmark-icon"
+    height={19}
+    width={18}
+  >
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    In bookmarks
+  </span>
+</button>
+`;
+
+exports[`snapshot test: BookmarkButton component should render big 1`] = `
+<button
+  className="block__bookmark-button  button"
+  type="button"
+>
+  <svg
+    className="block__bookmark-icon"
+    height={33}
+    width={31}
+  >
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    To bookmarks
+  </span>
+</button>
+`;
+
+exports[`snapshot test: BookmarkButton component should render correctly 1`] = `
+<button
+  className="block__bookmark-button  button"
+  type="button"
+>
+  <svg
+    className="block__bookmark-icon"
+    height={19}
+    width={18}
+  >
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    To bookmarks
+  </span>
+</button>
+`;
