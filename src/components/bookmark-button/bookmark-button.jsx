@@ -35,9 +35,3 @@ const BookmarkButton = ({blockClassName, isActive, isBig}) => {
 BookmarkButton.propTypes = propTypes;
 
 export default BookmarkButton;
-
-export const testProps = {
-  blockClassName: `block`,
-  isActive: false,
-  isBig: false
-};

@@ -1,8 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
-import {OfferType} from "../../const.js";
-
 import OfferCard from "../offer-card/offer-card.jsx";
 
 const offerCardPropTypesCopy = Object.assign({}, OfferCard.propTypes);
@@ -43,17 +41,3 @@ class OfferList extends PureComponent {
 OfferList.propTypes = propTypes;
 
 export default OfferList;
-
-export const testProps = {
-  offers: [{
-    id: `4`,
-    type: OfferType.ROOM,
-    name: `Paper place`,
-    photos: [{src: `img/room.jpg`, alt: `Place photo`}],
-    isFavorite: false,
-    isPremium: false,
-    rating: 4,
-    price: 4
-  }],
-  onOfferCardNameClick: () => {}
-};
