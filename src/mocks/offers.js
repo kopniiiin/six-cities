@@ -13,6 +13,7 @@ export default [{
   bedroomAmount: 1,
   guestAmount: 1,
   features: [`wood`, `stone`],
+  coordinates: [52.3909553943508, 4.85309666406198],
   host: {
     name: `Host`,
     photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
@@ -31,6 +32,7 @@ export default [{
   bedroomAmount: 2,
   guestAmount: 2,
   features: [`wood`],
+  coordinates: [52.369553943508, 4.85309666406198],
   host: {
     name: `Host`,
     photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
@@ -49,6 +51,7 @@ export default [{
   bedroomAmount: 3,
   guestAmount: 3,
   features: [`stone`],
+  coordinates: [52.3909553943508, 4.929309666406198],
   host: {
     name: `Host`,
     photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
@@ -67,6 +70,7 @@ export default [{
   bedroomAmount: 4,
   guestAmount: 4,
   features: [`paper`, `coffee machine`],
+  coordinates: [52.3809553943508, 4.939309666406198],
   host: {
     name: `Host`,
     photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
