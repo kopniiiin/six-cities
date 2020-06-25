@@ -72,16 +72,3 @@ const OfferCard = (props) => {
 OfferCard.propTypes = propTypes;
 
 export default OfferCard;
-
-export const testProps = {
-  id: `4`,
-  type: OfferType.ROOM,
-  name: `Paper place`,
-  photos: [{src: `img/room.jpg`, alt: `Place photo`}],
-  isFavorite: false,
-  isPremium: false,
-  rating: 4,
-  price: 4,
-  onMouseEnter: () => {},
-  onNameClick: () => {}
-};

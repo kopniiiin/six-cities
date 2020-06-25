@@ -32,9 +32,3 @@ const StarRating = ({blockClassName, value, isValueShown}) => {
 StarRating.propTypes = propTypes;
 
 export default StarRating;
-
-export const testProps = {
-  blockClassName: `block`,
-  value: 4,
-  isValueShown: false
-};
