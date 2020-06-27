@@ -10,6 +10,7 @@ import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
 import StarRating from "../star-rating/star-rating.jsx";
 
 const propTypes = {
+  blockClassName: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
   name: PropTypes.string.isRequired,
@@ -27,6 +28,7 @@ const propTypes = {
 
 const OfferCard = (props) => {
   const {
+    blockClassName,
     id,
     type,
     name,
@@ -39,14 +41,17 @@ const OfferCard = (props) => {
     onNameClick
   } = props;
 
+  const cardClassName = `${blockClassName}__place-card place-card`;
+  const photoClassName = `${blockClassName}__image-wrapper place-card__image-wrapper`;
+
   const premiumMark = <PremiumMark blockClassName={`place-card`}/>;
   const bookmarkButton = <BookmarkButton blockClassName={`place-card`} isActive={isFavorite} isBig={false}/>;
   const starRating = <StarRating blockClassName={`place-card`} value={rating} isValueShown={false}/>;
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={() => onMouseEnter(id)}>
+    <article className={cardClassName} onMouseEnter={() => onMouseEnter(id)}>
       {isPremium && premiumMark}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={photoClassName}>
         <a href="#">
           <img className="place-card__image" src={photoSrc} alt={photoAlt} width="260" height="200"/>
         </a>

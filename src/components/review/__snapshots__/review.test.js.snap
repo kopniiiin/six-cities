@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: Review component should render correctly 1`] = `
+<li
+  className="reviews__item"
+>
+  <div
+    className="reviews__user user"
+  >
+    <div
+      className="reviews__avatar-wrapper user__avatar-wrapper"
+    >
+      <img
+        alt="User photo"
+        className="reviews__avatar user__avatar"
+        height="54"
+        src="img/avatar-max.jpg"
+        width="54"
+      />
+    </div>
+    <span
+      className="reviews__user-name"
+    >
+      User
+    </span>
+  </div>
+  <div
+    className="reviews__info"
+  >
+    <StarRating
+      blockClassName="reviews"
+      isValueShown={false}
+      value={4}
+    />
+    <p
+      className="reviews__text"
+    >
+      Good
+    </p>
+    <time
+      className="reviews__time"
+      dateTime="2020-04-04"
+    >
+      April 4, 2020
+    </time>
+  </div>
+</li>
+`;

@@ -9,7 +9,8 @@ export default {
     isFavorite: false,
     isPremium: false,
     rating: 4,
-    price: 4
+    price: 4,
+    coordinates: [4, 4]
   }],
   onOfferCardNameClick: () => {}
 };

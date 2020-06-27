@@ -251,9 +251,14 @@ exports[`snapshot test: Main component should render correctly 1`] = `
             </select>
           </form>
           <OfferList
+            blockClassName="cities"
             offers={
               Array [
                 Object {
+                  "coordinates": Array [
+                    4,
+                    4,
+                  ],
                   "id": "4",
                   "isFavorite": false,
                   "isPremium": false,
@@ -280,7 +285,10 @@ exports[`snapshot test: Main component should render correctly 1`] = `
             blockClassName="cities"
             markerCoordinates={
               Array [
-                undefined,
+                Array [
+                  4,
+                  4,
+                ],
               ]
             }
           />

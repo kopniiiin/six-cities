@@ -1,6 +1,7 @@
 import {OfferType} from "../const.js";
 
 export default {
+  blockClassName: `block`,
   offers: [{
     id: `4`,
     type: OfferType.ROOM,
