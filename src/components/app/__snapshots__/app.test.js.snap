@@ -12,6 +12,10 @@ exports[`snapshot test: App component should render correctly 1`] = `
           Array [
             Object {
               "bedroomAmount": 4,
+              "coordinates": Array [
+                4,
+                4,
+              ],
               "description": "Lots of paper",
               "features": Array [
                 "paper",
@@ -38,6 +42,21 @@ exports[`snapshot test: App component should render correctly 1`] = `
               ],
               "price": 4,
               "rating": 4,
+              "reviews": Array [
+                Object {
+                  "date": "2020-04-04",
+                  "id": "4",
+                  "rating": 4,
+                  "text": "Good",
+                  "user": Object {
+                    "name": "User",
+                    "photo": Object {
+                      "alt": "User photo",
+                      "src": "img/avatar-max.jpg",
+                    },
+                  },
+                },
+              ],
               "type": "room",
             },
           ]
@@ -51,6 +70,12 @@ exports[`snapshot test: App component should render correctly 1`] = `
     >
       <OfferScreen
         bedroomAmount={4}
+        coordinates={
+          Array [
+            4,
+            4,
+          ]
+        }
         description="Lots of paper"
         features={
           Array [
@@ -73,6 +98,59 @@ exports[`snapshot test: App component should render correctly 1`] = `
         isFavorite={false}
         isPremium={false}
         name="Paper place"
+        nearOffers={
+          Array [
+            Object {
+              "bedroomAmount": 4,
+              "coordinates": Array [
+                4,
+                4,
+              ],
+              "description": "Lots of paper",
+              "features": Array [
+                "paper",
+                "coffee machine",
+              ],
+              "guestAmount": 4,
+              "host": Object {
+                "isPro": false,
+                "name": "Host",
+                "photo": Object {
+                  "alt": "Host photo",
+                  "src": "img/avatar-max.jpg",
+                },
+              },
+              "id": "4",
+              "isFavorite": false,
+              "isPremium": false,
+              "name": "Paper place",
+              "photos": Array [
+                Object {
+                  "alt": "Place photo",
+                  "src": "img/room.jpg",
+                },
+              ],
+              "price": 4,
+              "rating": 4,
+              "reviews": Array [
+                Object {
+                  "date": "2020-04-04",
+                  "id": "4",
+                  "rating": 4,
+                  "text": "Good",
+                  "user": Object {
+                    "name": "User",
+                    "photo": Object {
+                      "alt": "User photo",
+                      "src": "img/avatar-max.jpg",
+                    },
+                  },
+                },
+              ],
+              "type": "room",
+            },
+          ]
+        }
         photos={
           Array [
             Object {
@@ -83,6 +161,23 @@ exports[`snapshot test: App component should render correctly 1`] = `
         }
         price={4}
         rating={4}
+        reviews={
+          Array [
+            Object {
+              "date": "2020-04-04",
+              "id": "4",
+              "rating": 4,
+              "text": "Good",
+              "user": Object {
+                "name": "User",
+                "photo": Object {
+                  "alt": "User photo",
+                  "src": "img/avatar-max.jpg",
+                },
+              },
+            },
+          ]
+        }
         type="room"
       />
     </Route>

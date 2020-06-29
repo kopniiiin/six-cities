@@ -2,9 +2,10 @@
 
 exports[`snapshot test: OfferList component should render correctly 1`] = `
 <div
-  className="cities__places-list places__list tabs__content"
+  className="block__places-list places__list"
 >
   <OfferCard
+    blockClassName="block"
     id="4"
     isFavorite={false}
     isPremium={false}

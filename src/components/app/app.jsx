@@ -7,6 +7,7 @@ import OfferScreen from "../offer-screen/offer-screen.jsx";
 
 const offerScreenPropTypesCopy = Object.assign({}, OfferScreen.propTypes);
 offerScreenPropTypesCopy.id = PropTypes.string.isRequired;
+delete offerScreenPropTypesCopy.nearOffers;
 
 const propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerScreenPropTypesCopy)).isRequired
@@ -26,7 +27,7 @@ class App extends PureComponent {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">{this._renderApp()}</Route>
-          <Route exact path="/dev-offer"><OfferScreen {...offers[0]}/></Route>
+          <Route exact path="/dev-offer"><OfferScreen {...offers[0]} nearOffers={offers}/></Route>
         </Switch>
       </BrowserRouter>
     );
@@ -37,7 +38,7 @@ class App extends PureComponent {
     const {activeOfferId} = this.state;
 
     if (activeOfferId) {
-      return <OfferScreen {...offers.find(({id}) => id === activeOfferId)}/>;
+      return <OfferScreen {...offers.find(({id}) => id === activeOfferId)} nearOffers={offers}/>;
     }
 
     return <Main offers={offers} onOfferCardNameClick={this._handleOfferCardNameClick}/>;

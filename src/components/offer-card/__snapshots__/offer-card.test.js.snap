@@ -2,11 +2,11 @@
 
 exports[`snapshot test: OfferCard component should render correctly 1`] = `
 <article
-  className="cities__place-card place-card"
+  className="block__place-card place-card"
   onMouseEnter={[Function]}
 >
   <div
-    className="cities__image-wrapper place-card__image-wrapper"
+    className="block__image-wrapper place-card__image-wrapper"
   >
     <a
       href="#"
@@ -73,14 +73,14 @@ exports[`snapshot test: OfferCard component should render correctly 1`] = `
 
 exports[`snapshot test: OfferCard component should render premium mark 1`] = `
 <article
-  className="cities__place-card place-card"
+  className="block__place-card place-card"
   onMouseEnter={[Function]}
 >
   <PremiumMark
     blockClassName="place-card"
   />
   <div
-    className="cities__image-wrapper place-card__image-wrapper"
+    className="block__image-wrapper place-card__image-wrapper"
   >
     <a
       href="#"

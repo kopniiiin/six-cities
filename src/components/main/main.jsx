@@ -1,12 +1,31 @@
 import React from "react";
+import PropTypes from "prop-types";
+
+import {OfferType} from "../../const.js";
 
 import OfferList from "../offer-list/offer-list.jsx";
 import Map from "../map/map.jsx";
 
-const propTypes = OfferList.propTypes;
+const propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
+    name: PropTypes.string.isRequired,
+    photos: PropTypes.arrayOf(PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired,
+    })).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+  })).isRequired,
+  onOfferCardNameClick: PropTypes.func.isRequired
+};
 
 const Main = ({offers, onOfferCardNameClick}) => {
-  const offerList = <OfferList offers={offers} onOfferCardNameClick={onOfferCardNameClick}/>;
+  const offerList = <OfferList blockClassName={`cities`} offers={offers} onOfferCardNameClick={onOfferCardNameClick}/>;
   const map = <Map blockClassName={`cities`} markerCoordinates={offers.map(({coordinates}) => coordinates)}/>;
 
   return (

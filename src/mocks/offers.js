@@ -18,7 +18,17 @@ export default [{
     name: `Host`,
     photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
     isPro: false
-  }
+  },
+  reviews: [{
+    id: `4`,
+    date: `2020-04-04`,
+    text: `Good`,
+    rating: 4,
+    user: {
+      name: `User`,
+      photo: {src: `img/avatar-max.jpg`, alt: `User photo`}
+    }
+  }]
 }, {
   id: `2`,
   type: OfferType.HOTEL,
@@ -37,7 +47,17 @@ export default [{
     name: `Host`,
     photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
     isPro: false
-  }
+  },
+  reviews: [{
+    id: `4`,
+    date: `2020-04-04`,
+    text: `Good`,
+    rating: 4,
+    user: {
+      name: `User`,
+      photo: {src: `img/avatar-max.jpg`, alt: `User photo`}
+    }
+  }]
 }, {
   id: `3`,
   type: OfferType.HOUSE,
@@ -56,7 +76,17 @@ export default [{
     name: `Host`,
     photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
     isPro: false
-  }
+  },
+  reviews: [{
+    id: `4`,
+    date: `2020-04-04`,
+    text: `Good`,
+    rating: 4,
+    user: {
+      name: `User`,
+      photo: {src: `img/avatar-max.jpg`, alt: `User photo`}
+    }
+  }]
 }, {
   id: `4`,
   type: OfferType.ROOM,
@@ -75,5 +105,15 @@ export default [{
     name: `Host`,
     photo: {src: `img/avatar-max.jpg`, alt: `Host photo`},
     isPro: true
-  }
+  },
+  reviews: [{
+    id: `4`,
+    date: `2020-04-04`,
+    text: `Good`,
+    rating: 4,
+    user: {
+      name: `User`,
+      photo: {src: `img/avatar-max.jpg`, alt: `User photo`}
+    }
+  }]
 }];
