@@ -29,8 +29,6 @@ const Review = (props) => {
     }
   } = props;
 
-  const starRating = <StarRating blockClassName={`reviews`} value={rating} isValueShown={false}/>;
-
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -40,7 +38,7 @@ const Review = (props) => {
         <span className="reviews__user-name">{userName}</span>
       </div>
       <div className="reviews__info">
-        {starRating}
+        <StarRating blockClassName={`reviews`} value={rating} isValueShown={false}/>
         <p className="reviews__text">{text}</p>
         <time className="reviews__time" dateTime={date}>{formatDate(date)}</time>
       </div>

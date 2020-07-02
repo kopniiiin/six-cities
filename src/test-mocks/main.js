@@ -1,6 +1,8 @@
 import {OfferType} from "../const.js";
 
 export default {
+  cities: [`city`],
+  activeCity: `city`,
   offers: [{
     id: `4`,
     type: OfferType.ROOM,
@@ -12,5 +14,6 @@ export default {
     price: 4,
     coordinates: [4, 4]
   }],
+  onCityClick: () => {},
   onOfferCardNameClick: () => {}
 };

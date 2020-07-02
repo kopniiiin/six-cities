@@ -1,6 +1,8 @@
 import {OfferType} from "../const.js";
 
 export default {
+  cities: [`city`],
+  activeCity: `city`,
   offers: [{
     id: `4`,
     type: OfferType.ROOM,
@@ -30,5 +32,6 @@ export default {
         photo: {src: `img/avatar-max.jpg`, alt: `User photo`}
       }
     }]
-  }]
+  }],
+  onCityClick: () => {}
 };

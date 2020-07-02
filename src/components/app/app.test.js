@@ -1,7 +1,7 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import App from "./app.jsx";
+import {App} from "./app.jsx";
 
 import testMocks from "../../test-mocks/app.js";
 
