@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 
 import {OfferType} from "../../const.js";
 
+import CityList from "../city-list/city-list.jsx";
 import OfferList from "../offer-list/offer-list.jsx";
 import Map from "../map/map.jsx";
 
 const propTypes = {
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
@@ -21,10 +24,14 @@ const propTypes = {
     price: PropTypes.number.isRequired,
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired,
+  onCityClick: PropTypes.func.isRequired,
   onOfferCardNameClick: PropTypes.func.isRequired
 };
 
-const Main = ({offers, onOfferCardNameClick}) => {
+const Main = (props) => {
+  const {cities, activeCity, offers, onCityClick, onOfferCardNameClick} = props;
+
+  const cityList = <CityList cities={cities} activeCity={activeCity} onClick={onCityClick}/>;
   const offerList = <OfferList blockClassName={`cities`} offers={offers} onOfferCardNameClick={onOfferCardNameClick}/>;
   const map = <Map blockClassName={`cities`} markerCoordinates={offers.map(({coordinates}) => coordinates)}/>;
 
@@ -55,47 +62,12 @@ const Main = ({offers, onOfferCardNameClick}) => {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        {cityList}
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in {activeCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">

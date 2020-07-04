@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: CityList component should render correctly 1`] = `
+<div
+  className="tabs"
+>
+  <section
+    className="locations container"
+  >
+    <ul
+      className="tabs__list locations__list"
+    >
+      <li
+        className="locations__item"
+        key="city"
+      >
+        <a
+          className="tabs__item tabs__item--active locations__item-link"
+          onClick={[Function]}
+        >
+          <span>
+            city
+          </span>
+        </a>
+      </li>
+    </ul>
+  </section>
+</div>
+`;

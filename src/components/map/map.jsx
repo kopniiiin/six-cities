@@ -15,6 +15,12 @@ const propTypes = {
 };
 
 class Map extends PureComponent {
+  constructor(props) {
+    super(props);
+    this._map = null;
+    this._markers = null;
+  }
+
   render() {
     const {blockClassName} = this.props;
 
@@ -22,21 +28,33 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {markerCoordinates} = this.props;
-
-    const map = Leaflet.map(`map`, {
+    this._map = Leaflet.map(`map`, {
       center: CENTER,
       zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    map.setView(CENTER, ZOOM);
+    this._map.setView(CENTER, ZOOM);
+    Leaflet.tileLayer(LAYER_URL, {attribution: LAYER_ATTRIBUTION}).addTo(this._map);
 
-    Leaflet.tileLayer(LAYER_URL, {attribution: LAYER_ATTRIBUTION}).addTo(map);
+    this._updateMarkers();
+  }
+
+  componentDidUpdate() {
+    this._updateMarkers();
+  }
+
+  _updateMarkers() {
+    const {markerCoordinates} = this.props;
+
+    if (this._markers) {
+      this._markers.forEach((marker) => marker.remove());
+    }
 
     const icon = Leaflet.icon({iconUrl: ICON_URL, iconSize: ICON_SIZE});
-    markerCoordinates.forEach((coordinates) => Leaflet.marker(coordinates, {icon}).addTo(map));
+    this._markers = markerCoordinates.map((coordinates) => Leaflet.marker(coordinates, {icon}));
+    this._markers.forEach((marker) => marker.addTo(this._map));
   }
 }
 

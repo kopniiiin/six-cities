@@ -8,6 +8,12 @@ exports[`snapshot test: App component should render correctly 1`] = `
       path="/"
     >
       <Main
+        activeCity="city"
+        cities={
+          Array [
+            "city",
+          ]
+        }
         offers={
           Array [
             Object {
@@ -61,6 +67,7 @@ exports[`snapshot test: App component should render correctly 1`] = `
             },
           ]
         }
+        onCityClick={[Function]}
         onOfferCardNameClick={[Function]}
       />
     </Route>
