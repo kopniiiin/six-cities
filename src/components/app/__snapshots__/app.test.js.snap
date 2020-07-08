@@ -9,6 +9,7 @@ exports[`snapshot test: App component should render correctly 1`] = `
     >
       <Main
         activeCity="city"
+        activeSortType="popular"
         cities={
           Array [
             "city",
@@ -69,6 +70,7 @@ exports[`snapshot test: App component should render correctly 1`] = `
         }
         onCityClick={[Function]}
         onOfferCardNameClick={[Function]}
+        onSortTypeChange={[Function]}
       />
     </Route>
     <Route
