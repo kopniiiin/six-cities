@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: Sort component should render active 1`] = `
+<form
+  action="#"
+  className="places__sorting"
+  method="get"
+>
+  <span
+    className="places__sorting-caption"
+  >
+    Sort by 
+  </span>
+  <span
+    className="places__sorting-type"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    popular
+    <svg
+      className="places__sorting-arrow"
+      height="4"
+      width="7"
+    >
+      <use
+        xlinkHref="#icon-arrow-select"
+      />
+    </svg>
+  </span>
+  <ul
+    className="places__options places__options--custom places__options--opened"
+  >
+    <li
+      className="places__option places__option--active"
+      key="popular"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Popular
+    </li>
+    <li
+      className="places__option "
+      key="price: low to high"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Price: low to high
+    </li>
+    <li
+      className="places__option "
+      key="price: high to low"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Price: high to low
+    </li>
+    <li
+      className="places__option "
+      key="top rated first"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Top rated first
+    </li>
+  </ul>
+</form>
+`;
+
+exports[`snapshot test: Sort component should render correctly 1`] = `
+<form
+  action="#"
+  className="places__sorting"
+  method="get"
+>
+  <span
+    className="places__sorting-caption"
+  >
+    Sort by 
+  </span>
+  <span
+    className="places__sorting-type"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    popular
+    <svg
+      className="places__sorting-arrow"
+      height="4"
+      width="7"
+    >
+      <use
+        xlinkHref="#icon-arrow-select"
+      />
+    </svg>
+  </span>
+  <ul
+    className="places__options places__options--custom "
+  >
+    <li
+      className="places__option places__option--active"
+      key="popular"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Popular
+    </li>
+    <li
+      className="places__option "
+      key="price: low to high"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Price: low to high
+    </li>
+    <li
+      className="places__option "
+      key="price: high to low"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Price: high to low
+    </li>
+    <li
+      className="places__option "
+      key="top rated first"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Top rated first
+    </li>
+  </ul>
+</form>
+`;

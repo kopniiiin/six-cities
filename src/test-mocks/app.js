@@ -1,8 +1,9 @@
-import {OfferType} from "../const.js";
+import {OfferType, SortType} from "../const.js";
 
 export default {
   cities: [`city`],
   activeCity: `city`,
+  activeSortType: SortType.POPULAR,
   offers: [{
     id: `4`,
     type: OfferType.ROOM,
@@ -33,5 +34,6 @@ export default {
       }
     }]
   }],
-  onCityClick: () => {}
+  onCityClick: () => {},
+  onSortTypeChange: () => {}
 };

@@ -11,5 +11,6 @@ export default {
   rating: 4,
   price: 4,
   onMouseEnter: () => {},
+  onMouseLeave: () => {},
   onNameClick: () => {}
 };

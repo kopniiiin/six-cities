@@ -70,6 +70,7 @@ const OfferScreen = (props) => {
     bedroomAmount,
     guestAmount,
     features,
+    coordinates,
     host: {
       name: hostName,
       photo: {src: hostPhotoSrc, alt: hostPhotoAlt},
@@ -89,14 +90,10 @@ const OfferScreen = (props) => {
     </div>
   );
 
-  const slicedNearOffers = nearOffers.slice(0, MAX_NEAR_OFFER_AMOUNT);
-
   const premiumMark = <PremiumMark blockClassName={`property`}/>;
   const bookmarkButton = <BookmarkButton blockClassName={`property`} isActive={isFavorite} isBig={true}/>;
   const starRating = <StarRating blockClassName={`property`} value={rating} isValueShown={true}/>;
   const reviewList = <ReviewList reviews={reviews}/>;
-  const map = <Map blockClassName={`property`} markerCoordinates={slicedNearOffers.map(({coordinates}) => coordinates)}/>;
-  const nearOfferList = <OfferList blockClassName={`near-places`} offers={slicedNearOffers} onOfferCardNameClick={() => {}}/>;
 
   const featureList = (
     <div className="property__inside">
@@ -105,6 +102,24 @@ const OfferScreen = (props) => {
         {features.map((feature) => <li key={feature} className="property__inside-item">{feature}</li>)}
       </ul>
     </div>
+  );
+
+  const slicedNearOffers = nearOffers.slice(0, MAX_NEAR_OFFER_AMOUNT);
+
+  const map = (
+    <Map
+      blockClassName={`property`}
+      markerCoordinates={slicedNearOffers.map(({coordinates: nearOfferCoordinates}) => nearOfferCoordinates)}
+      activeMarkerCoordinates={[coordinates]}/>
+  );
+
+  const nearOfferList = (
+    <OfferList
+      blockClassName={`near-places`}
+      offers={slicedNearOffers}
+      onOfferCardMouseEnter={() => {}}
+      onOfferCardMouseLeave={() => {}}
+      onOfferCardNameClick={() => {}}/>
   );
 
   const hostPhotoClassName = `property__avatar-wrapper ${isHostPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`;

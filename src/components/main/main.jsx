@@ -1,15 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {OfferType} from "../../const.js";
+import {OfferType, SortType} from "../../const.js";
 
 import CityList from "../city-list/city-list.jsx";
+import Sort from "../sort/sort.jsx";
 import OfferList from "../offer-list/offer-list.jsx";
 import Map from "../map/map.jsx";
 
+import withActiveState from "../../hocs/with-active-state/with-active-state.jsx";
+
+const SortWithActiveState = withActiveState(Sort);
+
 const propTypes = {
+  activeItem: PropTypes.string,
+  onActiveItemChange: PropTypes.func.isRequired,
+  onActiveItemRemoval: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeCity: PropTypes.string.isRequired,
+  activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
@@ -25,15 +34,42 @@ const propTypes = {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired,
   onCityClick: PropTypes.func.isRequired,
+  onSortTypeChange: PropTypes.func.isRequired,
   onOfferCardNameClick: PropTypes.func.isRequired
 };
 
 const Main = (props) => {
-  const {cities, activeCity, offers, onCityClick, onOfferCardNameClick} = props;
+  const {
+    activeItem: activeOfferId,
+    onActiveItemChange: onActiveOfferIdChange,
+    onActiveItemRemoval: onActiveOfferIdRemoval,
+    cities,
+    activeCity,
+    activeSortType,
+    offers,
+    onCityClick,
+    onSortTypeChange,
+    onOfferCardNameClick
+  } = props;
 
   const cityList = <CityList cities={cities} activeCity={activeCity} onClick={onCityClick}/>;
-  const offerList = <OfferList blockClassName={`cities`} offers={offers} onOfferCardNameClick={onOfferCardNameClick}/>;
-  const map = <Map blockClassName={`cities`} markerCoordinates={offers.map(({coordinates}) => coordinates)}/>;
+  const sort = <SortWithActiveState activeType={activeSortType} onTypeChange={onSortTypeChange}/>;
+
+  const offerList = (
+    <OfferList
+      blockClassName={`cities`}
+      offers={offers}
+      onOfferCardMouseEnter={onActiveOfferIdChange}
+      onOfferCardMouseLeave={onActiveOfferIdRemoval}
+      onOfferCardNameClick={onOfferCardNameClick}/>
+  );
+
+  const map = (
+    <Map
+      blockClassName={`cities`}
+      markerCoordinates={offers.filter(({id}) => id !== activeOfferId).map(({coordinates}) => coordinates)}
+      activeMarkerCoordinates={offers.filter(({id}) => id === activeOfferId).map(({coordinates}) => coordinates)}/>
+  );
 
   return (
     <div className="page page--gray page--main">
@@ -68,29 +104,7 @@ const Main = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in {activeCity}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"/>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-
-                <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular">Popular</option>
-                  <option className="places__option" value="to-high">Price: low to high</option>
-                  <option className="places__option" value="to-low">Price: high to low</option>
-                  <option className="places__option" value="top-rated">Top rated first</option>
-                </select>
-
-              </form>
+              {sort}
               {offerList}
             </section>
             <div className="cities__right-section">{map}</div>

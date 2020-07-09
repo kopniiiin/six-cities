@@ -12,6 +12,7 @@ exports[`snapshot test: OfferList component should render correctly 1`] = `
     key="4"
     name="Paper place"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onNameClick={[Function]}
     photos={
       Array [

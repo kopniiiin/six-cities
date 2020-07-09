@@ -12,5 +12,7 @@ export default {
     rating: 4,
     price: 4
   }],
+  onOfferCardMouseEnter: () => {},
+  onOfferCardMouseLeave: () => {},
   onOfferCardNameClick: () => {}
 };
