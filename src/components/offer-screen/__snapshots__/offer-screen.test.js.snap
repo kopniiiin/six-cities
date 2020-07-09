@@ -228,6 +228,14 @@ exports[`snapshot test: OfferScreen component should render correctly 1`] = `
         </div>
       </div>
       <Map
+        activeMarkerCoordinates={
+          Array [
+            Array [
+              4,
+              4,
+            ],
+          ]
+        }
         blockClassName="property"
         markerCoordinates={
           Array [
@@ -275,6 +283,8 @@ exports[`snapshot test: OfferScreen component should render correctly 1`] = `
               },
             ]
           }
+          onOfferCardMouseEnter={[Function]}
+          onOfferCardMouseLeave={[Function]}
           onOfferCardNameClick={[Function]}
         />
       </section>
@@ -514,6 +524,14 @@ exports[`snapshot test: OfferScreen component should render premium mark 1`] = `
         </div>
       </div>
       <Map
+        activeMarkerCoordinates={
+          Array [
+            Array [
+              4,
+              4,
+            ],
+          ]
+        }
         blockClassName="property"
         markerCoordinates={
           Array [
@@ -561,6 +579,8 @@ exports[`snapshot test: OfferScreen component should render premium mark 1`] = `
               },
             ]
           }
+          onOfferCardMouseEnter={[Function]}
+          onOfferCardMouseLeave={[Function]}
           onOfferCardNameClick={[Function]}
         />
       </section>

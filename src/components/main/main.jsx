@@ -13,6 +13,9 @@ import withActiveState from "../../hocs/with-active-state/with-active-state.jsx"
 const SortWithActiveState = withActiveState(Sort);
 
 const propTypes = {
+  activeItem: PropTypes.string,
+  onActiveItemChange: PropTypes.func.isRequired,
+  onActiveItemRemoval: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeCity: PropTypes.string.isRequired,
   activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
@@ -37,6 +40,9 @@ const propTypes = {
 
 const Main = (props) => {
   const {
+    activeItem: activeOfferId,
+    onActiveItemChange: onActiveOfferIdChange,
+    onActiveItemRemoval: onActiveOfferIdRemoval,
     cities,
     activeCity,
     activeSortType,
@@ -48,8 +54,22 @@ const Main = (props) => {
 
   const cityList = <CityList cities={cities} activeCity={activeCity} onClick={onCityClick}/>;
   const sort = <SortWithActiveState activeType={activeSortType} onTypeChange={onSortTypeChange}/>;
-  const offerList = <OfferList blockClassName={`cities`} offers={offers} onOfferCardNameClick={onOfferCardNameClick}/>;
-  const map = <Map blockClassName={`cities`} markerCoordinates={offers.map(({coordinates}) => coordinates)}/>;
+
+  const offerList = (
+    <OfferList
+      blockClassName={`cities`}
+      offers={offers}
+      onOfferCardMouseEnter={onActiveOfferIdChange}
+      onOfferCardMouseLeave={onActiveOfferIdRemoval}
+      onOfferCardNameClick={onOfferCardNameClick}/>
+  );
+
+  const map = (
+    <Map
+      blockClassName={`cities`}
+      markerCoordinates={offers.filter(({id}) => id !== activeOfferId).map(({coordinates}) => coordinates)}
+      activeMarkerCoordinates={offers.filter(({id}) => id === activeOfferId).map(({coordinates}) => coordinates)}/>
+  );
 
   return (
     <div className="page page--gray page--main">

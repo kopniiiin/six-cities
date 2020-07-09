@@ -10,7 +10,11 @@ import {sortOffers} from "../../utils.js";
 import Main from "../main/main.jsx";
 import OfferScreen from "../offer-screen/offer-screen.jsx";
 
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+
 import {ActionCreator} from "../../reducer.js";
+
+const MainWithActiveItem = withActiveItem(Main);
 
 const offerScreenPropTypesCopy = Object.assign({}, OfferScreen.propTypes);
 offerScreenPropTypesCopy.id = PropTypes.string.isRequired;
@@ -54,7 +58,7 @@ class App extends PureComponent {
     }
 
     return (
-      <Main
+      <MainWithActiveItem
         cities={cities}
         activeCity={activeCity}
         activeSortType={activeSortType}

@@ -7,12 +7,12 @@ import {upperCaseFirstLetter} from "../../utils";
 
 const propTypes = {
   isActive: PropTypes.bool.isRequired,
-  activeType: PropTypes.oneOf(Object.values(SortType)).isRequired,
   onActiveStateChange: PropTypes.func.isRequired,
+  activeType: PropTypes.oneOf(Object.values(SortType)).isRequired,
   onTypeChange: PropTypes.func.isRequired
 };
 
-const Sort = ({isActive, activeType, onActiveStateChange, onTypeChange}) => (
+const Sort = ({isActive, onActiveStateChange, activeType, onTypeChange}) => (
   <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by </span>
     <span className="places__sorting-type" tabIndex="0" onClick={onActiveStateChange}>

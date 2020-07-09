@@ -1,6 +1,9 @@
 import {OfferType, SortType} from "../const.js";
 
 export default {
+  activeItem: `4`,
+  onActiveItemChange: () => {},
+  onActiveItemRemoval: () => {},
   cities: [`city`],
   activeCity: `city`,
   activeSortType: SortType.POPULAR,

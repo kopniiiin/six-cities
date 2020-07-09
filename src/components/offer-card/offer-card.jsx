@@ -23,6 +23,7 @@ const propTypes = {
   rating: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
   onNameClick: PropTypes.func.isRequired
 };
 
@@ -38,6 +39,7 @@ const OfferCard = (props) => {
     rating,
     price,
     onMouseEnter,
+    onMouseLeave,
     onNameClick
   } = props;
 
@@ -49,7 +51,10 @@ const OfferCard = (props) => {
   const starRating = <StarRating blockClassName={`place-card`} value={rating} isValueShown={false}/>;
 
   return (
-    <article className={cardClassName} onMouseEnter={() => onMouseEnter(id)}>
+    <article
+      className={cardClassName}
+      onMouseEnter={() => onMouseEnter(id)}
+      onMouseLeave={() => onMouseLeave(id)}>
       {isPremium && premiumMark}
       <div className={photoClassName}>
         <a href="#">

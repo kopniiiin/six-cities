@@ -7,7 +7,7 @@ exports[`snapshot test: App component should render correctly 1`] = `
       exact={true}
       path="/"
     >
-      <Main
+      <WithActiveItem
         activeCity="city"
         activeSortType="popular"
         cities={

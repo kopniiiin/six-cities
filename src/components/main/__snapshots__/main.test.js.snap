@@ -123,6 +123,8 @@ exports[`snapshot test: Main component should render correctly 1`] = `
                 },
               ]
             }
+            onOfferCardMouseEnter={[Function]}
+            onOfferCardMouseLeave={[Function]}
             onOfferCardNameClick={[Function]}
           />
         </section>
@@ -130,8 +132,7 @@ exports[`snapshot test: Main component should render correctly 1`] = `
           className="cities__right-section"
         >
           <Map
-            blockClassName="cities"
-            markerCoordinates={
+            activeMarkerCoordinates={
               Array [
                 Array [
                   4,
@@ -139,6 +140,8 @@ exports[`snapshot test: Main component should render correctly 1`] = `
                 ],
               ]
             }
+            blockClassName="cities"
+            markerCoordinates={Array []}
           />
         </div>
       </div>

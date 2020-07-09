@@ -17,6 +17,17 @@ describe(`e2e test: OfferCard component`, () => {
     expect(onMouseEnter.mock.calls[0][0]).toBe(id);
   });
 
+  it(`should call onMouseLeave with id`, () => {
+    const id = `4`;
+    const onMouseLeave = jest.fn();
+
+    shallow(<OfferCard {...Object.assign({}, testMocks, {id, onMouseLeave})}/>)
+      .find(`.place-card`).simulate(`mouseleave`);
+
+    expect(onMouseLeave).toHaveBeenCalledTimes(1);
+    expect(onMouseLeave.mock.calls[0][0]).toBe(id);
+  });
+
   it(`should call onNameClick with id`, () => {
     const id = `4`;
     const onNameClick = jest.fn();

@@ -4,6 +4,7 @@ exports[`snapshot test: OfferCard component should render correctly 1`] = `
 <article
   className="block__place-card place-card"
   onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <div
     className="block__image-wrapper place-card__image-wrapper"
@@ -75,6 +76,7 @@ exports[`snapshot test: OfferCard component should render premium mark 1`] = `
 <article
   className="block__place-card place-card"
   onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <PremiumMark
     blockClassName="place-card"
