@@ -12,6 +12,10 @@ import ReviewList from "../review-list/review-list.jsx";
 import Map from "../map/map.jsx";
 import OfferList from "../offer-list/offer-list.jsx";
 
+import withMarkers from "../../hocs/with-markers/with-markers.jsx";
+
+const MapWithMarkers = withMarkers(Map);
+
 const MAX_PHOTO_AMOUNT = 6;
 
 const MAX_NEAR_OFFER_AMOUNT = 3;
@@ -107,7 +111,7 @@ const OfferScreen = (props) => {
   const slicedNearOffers = nearOffers.slice(0, MAX_NEAR_OFFER_AMOUNT);
 
   const map = (
-    <Map
+    <MapWithMarkers
       blockClassName={`property`}
       markerCoordinates={slicedNearOffers.map(({coordinates: nearOfferCoordinates}) => nearOfferCoordinates)}
       activeMarkerCoordinates={[coordinates]}/>

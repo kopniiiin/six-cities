@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: Map component should render correctly 1`] = `
+<section
+  className="block__map map"
+  id="map"
+/>
+`;

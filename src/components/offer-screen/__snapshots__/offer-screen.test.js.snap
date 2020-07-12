@@ -227,7 +227,7 @@ exports[`snapshot test: OfferScreen component should render correctly 1`] = `
           />
         </div>
       </div>
-      <Map
+      <WithMarkers
         activeMarkerCoordinates={
           Array [
             Array [
@@ -523,7 +523,7 @@ exports[`snapshot test: OfferScreen component should render premium mark 1`] = `
           />
         </div>
       </div>
-      <Map
+      <WithMarkers
         activeMarkerCoordinates={
           Array [
             Array [
