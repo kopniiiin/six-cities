@@ -1,6 +1,8 @@
 import React from "react";
 import {shallow} from "enzyme";
 
+import {extend} from "../../utils.js";
+
 import OfferCard from "./offer-card.jsx";
 
 import testMocks from "../../test-mocks/offer-card.js";
@@ -10,7 +12,7 @@ describe(`e2e test: OfferCard component`, () => {
     const id = `4`;
     const onMouseEnter = jest.fn();
 
-    shallow(<OfferCard {...Object.assign({}, testMocks, {id, onMouseEnter})}/>)
+    shallow(<OfferCard {...extend(testMocks, {id, onMouseEnter})}/>)
       .find(`.place-card`).simulate(`mouseenter`);
 
     expect(onMouseEnter).toHaveBeenCalledTimes(1);
@@ -21,7 +23,7 @@ describe(`e2e test: OfferCard component`, () => {
     const id = `4`;
     const onMouseLeave = jest.fn();
 
-    shallow(<OfferCard {...Object.assign({}, testMocks, {id, onMouseLeave})}/>)
+    shallow(<OfferCard {...extend(testMocks, {id, onMouseLeave})}/>)
       .find(`.place-card`).simulate(`mouseleave`);
 
     expect(onMouseLeave).toHaveBeenCalledTimes(1);
@@ -32,7 +34,7 @@ describe(`e2e test: OfferCard component`, () => {
     const id = `4`;
     const onNameClick = jest.fn();
 
-    shallow(<OfferCard {...Object.assign({}, testMocks, {id, onNameClick})}/>)
+    shallow(<OfferCard {...extend(testMocks, {id, onNameClick})}/>)
       .find(`.place-card__name a`).simulate(`click`);
 
     expect(onNameClick).toHaveBeenCalledTimes(1);
