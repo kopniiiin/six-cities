@@ -9,8 +9,10 @@ import OfferList from "../offer-list/offer-list.jsx";
 import Map from "../map/map.jsx";
 
 import withActiveState from "../../hocs/with-active-state/with-active-state.jsx";
+import withMarkers from "../../hocs/with-markers/with-markers.jsx";
 
 const SortWithActiveState = withActiveState(Sort);
+const MapWithMarkers = withMarkers(Map);
 
 const propTypes = {
   activeItem: PropTypes.string,
@@ -65,7 +67,7 @@ const Main = (props) => {
   );
 
   const map = (
-    <Map
+    <MapWithMarkers
       blockClassName={`cities`}
       markerCoordinates={offers.filter(({id}) => id !== activeOfferId).map(({coordinates}) => coordinates)}
       activeMarkerCoordinates={offers.filter(({id}) => id === activeOfferId).map(({coordinates}) => coordinates)}/>

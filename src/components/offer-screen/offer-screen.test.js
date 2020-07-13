@@ -1,6 +1,8 @@
 import React from "react";
 import {shallow} from "enzyme";
 
+import {extend} from "../../utils.js";
+
 import OfferScreen from "./offer-screen.jsx";
 
 import testMocks from "../../test-mocks/offer-screen.js";
@@ -11,6 +13,6 @@ describe(`snapshot test: OfferScreen component`, () => {
   ).toMatchSnapshot());
 
   it(`should render premium mark`, () => expect(
-      shallow(<OfferScreen {...Object.assign({}, testMocks, {isPremium: true})}/>)
+      shallow(<OfferScreen {...extend(testMocks, {isPremium: true})}/>)
   ).toMatchSnapshot());
 });
