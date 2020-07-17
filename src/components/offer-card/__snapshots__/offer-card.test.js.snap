@@ -16,7 +16,7 @@ exports[`snapshot test: OfferCard component should render correctly 1`] = `
         alt="Place photo"
         className="place-card__image"
         height="200"
-        src="img/room.jpg"
+        src="photo"
         width="260"
       />
     </a>
@@ -91,7 +91,7 @@ exports[`snapshot test: OfferCard component should render premium mark 1`] = `
         alt="Place photo"
         className="place-card__image"
         height="200"
-        src="img/room.jpg"
+        src="photo"
         width="260"
       />
     </a>

@@ -65,12 +65,7 @@ exports[`snapshot test: Main component should render correctly 1`] = `
       Cities
     </h1>
     <CityList
-      activeCity="city"
-      cities={
-        Array [
-          "city",
-        ]
-      }
+      activeCity="Amsterdam"
       onClick={[Function]}
     />
     <div
@@ -92,7 +87,7 @@ exports[`snapshot test: Main component should render correctly 1`] = `
           >
             1
              places to stay in 
-            city
+            Amsterdam
           </b>
           <WithActiveState
             activeType="popular"
@@ -103,20 +98,26 @@ exports[`snapshot test: Main component should render correctly 1`] = `
             offers={
               Array [
                 Object {
-                  "coordinates": Array [
-                    4,
-                    4,
-                  ],
+                  "city": Object {
+                    "location": Object {
+                      "coordinates": Array [
+                        4,
+                        4,
+                      ],
+                      "zoom": 4,
+                    },
+                  },
                   "id": "4",
                   "isFavorite": false,
                   "isPremium": false,
+                  "location": Object {
+                    "coordinates": Array [
+                      4,
+                      4,
+                    ],
+                  },
+                  "mainPhoto": "photo",
                   "name": "Paper place",
-                  "photos": Array [
-                    Object {
-                      "alt": "Place photo",
-                      "src": "img/room.jpg",
-                    },
-                  ],
                   "price": 4,
                   "rating": 4,
                   "type": "room",
@@ -141,7 +142,14 @@ exports[`snapshot test: Main component should render correctly 1`] = `
               ]
             }
             blockClassName="cities"
+            centerCoordinates={
+              Array [
+                4,
+                4,
+              ]
+            }
             markerCoordinates={Array []}
+            zoom={4}
           />
         </div>
       </div>
@@ -215,12 +223,7 @@ exports[`snapshot test: Main component should render message without offers 1`] 
       Cities
     </h1>
     <CityList
-      activeCity="city"
-      cities={
-        Array [
-          "city",
-        ]
-      }
+      activeCity="Amsterdam"
       onClick={[Function]}
     />
     <div
@@ -230,7 +233,7 @@ exports[`snapshot test: Main component should render message without offers 1`] 
         className="cities__places-container cities__places-container--empty container"
       >
         <NoOffersMessage
-          activeCity="city"
+          activeCity="Amsterdam"
         />
         <div
           className="cities__right-section"

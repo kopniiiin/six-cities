@@ -2,8 +2,6 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Leaflet from "leaflet";
 
-const CENTER = [52.38333, 4.9];
-const ZOOM = 12;
 const LAYER_URL = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`;
 const LAYER_ATTRIBUTION = `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`;
 const ICON_URL = `img/pin.svg`;
@@ -12,6 +10,8 @@ const ICON_SIZE = [27, 39];
 
 const withMarkers = (Component) => {
   const propTypes = Object.assign({}, Component.propTypes);
+  propTypes.centerCoordinates = PropTypes.arrayOf(PropTypes.number).isRequired;
+  propTypes.zoom = PropTypes.number.isRequired;
   propTypes.markerCoordinates = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired;
   propTypes.activeMarkerCoordinates = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired;
 
@@ -24,6 +24,8 @@ const withMarkers = (Component) => {
 
     render() {
       const props = Object.assign({}, this.props);
+      delete props.centerCoordinates;
+      delete props.zoom;
       delete props.markerCoordinates;
       delete props.activeMarkerCoordinates;
 
@@ -31,21 +33,33 @@ const withMarkers = (Component) => {
     }
 
     componentDidMount() {
+      // eslint-disable-next-line react/prop-types
+      const {centerCoordinates, zoom} = this.props;
+
       this._map = Leaflet.map(`map`, {
-        center: CENTER,
-        zoom: ZOOM,
+        center: centerCoordinates,
+        zoom,
         zoomControl: false,
         marker: true
       });
 
-      this._map.setView(CENTER, ZOOM);
       Leaflet.tileLayer(LAYER_URL, {attribution: LAYER_ATTRIBUTION}).addTo(this._map);
 
       this._updateMarkers();
     }
 
     componentDidUpdate() {
+      // eslint-disable-next-line react/prop-types
+      const {centerCoordinates, zoom} = this.props;
+
+      this._map.flyTo(centerCoordinates, zoom);
+
       this._updateMarkers();
+    }
+
+    componentWillUnmount() {
+      this._markers.forEach((marker) => marker.remove());
+      this._map.remove();
     }
 
     _updateMarkers() {

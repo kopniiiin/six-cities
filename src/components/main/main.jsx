@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {OfferType, SortType} from "../../const.js";
+import {OfferType, City, SortType} from "../../const.js";
 
 import CityList from "../city-list/city-list.jsx";
 import Sort from "../sort/sort.jsx";
@@ -19,22 +19,26 @@ const propTypes = {
   activeItem: PropTypes.string,
   onActiveItemChange: PropTypes.func.isRequired,
   onActiveItemRemoval: PropTypes.func.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeCity: PropTypes.string.isRequired,
+  activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
   activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
     name: PropTypes.string.isRequired,
-    photos: PropTypes.arrayOf(PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired,
-    })).isRequired,
+    mainPhoto: PropTypes.string.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+    location: PropTypes.shape({
+      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+        zoom: PropTypes.number.isRequired
+      }).isRequired
+    }).isRequired
   })).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onSortTypeChange: PropTypes.func.isRequired,
@@ -46,7 +50,6 @@ const Main = (props) => {
     activeItem: activeOfferId,
     onActiveItemChange: onActiveOfferIdChange,
     onActiveItemRemoval: onActiveOfferIdRemoval,
-    cities,
     activeCity,
     activeSortType,
     offers,
@@ -55,7 +58,7 @@ const Main = (props) => {
     onOfferCardNameClick
   } = props;
 
-  const cityList = <CityList cities={cities} activeCity={activeCity} onClick={onCityClick}/>;
+  const cityList = <CityList activeCity={activeCity} onClick={onCityClick}/>;
   const sort = <SortWithActiveState activeType={activeSortType} onTypeChange={onSortTypeChange}/>;
   const noOffersMessage = <NoOffersMessage activeCity={activeCity}/>;
 
@@ -68,12 +71,14 @@ const Main = (props) => {
       onOfferCardNameClick={onOfferCardNameClick}/>
   );
 
-  const map = (
+  const map = offers.length ? (
     <MapWithMarkers
       blockClassName={`cities`}
-      markerCoordinates={offers.filter(({id}) => id !== activeOfferId).map(({coordinates}) => coordinates)}
-      activeMarkerCoordinates={offers.filter(({id}) => id === activeOfferId).map(({coordinates}) => coordinates)}/>
-  );
+      centerCoordinates={offers[0].city.location.coordinates}
+      zoom={offers[0].city.location.zoom}
+      markerCoordinates={offers.filter(({id}) => id !== activeOfferId).map(({location: {coordinates}}) => coordinates)}
+      activeMarkerCoordinates={offers.filter(({id}) => id === activeOfferId).map(({location: {coordinates}}) => coordinates)}/>
+  ) : null;
 
   const mainClassName = `page__main page__main--index ${offers.length ? `` : `page__main--index-empty`}`;
   const containerClassName = `cities__places-container ${offers.length ? `` : `cities__places-container--empty`} container`;
@@ -116,9 +121,7 @@ const Main = (props) => {
                 {offerList}
               </section>
             ) : noOffersMessage}
-            <div className="cities__right-section">
-              {offers.length ? map : ``}
-            </div>
+            <div className="cities__right-section">{map}</div>
           </div>
         </div>
       </main>

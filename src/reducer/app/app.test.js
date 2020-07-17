@@ -1,12 +1,10 @@
-import {SortType} from "./const.js";
+import {City, DEFAULT_CITY, SortType, DEFAULT_SORT_TYPE} from "../../const.js";
 
-import {ActionType, ActionCreator, reducer} from "./reducer.js";
+import {ActionType, ActionCreator, reducer} from "./app.js";
 
-import offers from "./mocks/offers.js";
-
-describe(`ActionCreator`, () => {
+describe(`AppActionCreator`, () => {
   it(`should create SET_ACTIVE_CITY action`, () => {
-    const city = `city`;
+    const city = City.AMSTERDAM;
 
     expect(ActionCreator.setActiveCity(city)).toEqual({
       type: ActionType.SET_ACTIVE_CITY,
@@ -15,7 +13,7 @@ describe(`ActionCreator`, () => {
   });
 
   it(`should create SET_ACTIVE_SORT_TYPE action`, () => {
-    const sortType = SortType.POPULAR;
+    const sortType = SortType.TOP_RATED;
 
     expect(ActionCreator.setActiveSortType(sortType)).toEqual({
       type: ActionType.SET_ACTIVE_SORT_TYPE,
@@ -24,30 +22,27 @@ describe(`ActionCreator`, () => {
   });
 });
 
-describe(`reducer`, () => {
-  it(`should return initial state`, () => expect(reducer(undefined, {})).toEqual({
-    activeCity: offers[0].city,
-    activeSortType: SortType.POPULAR,
-    offers
+describe(`appReducer`, () => {
+  it(`should return initialState`, () => expect(reducer(undefined, {})).toEqual({
+    activeCity: DEFAULT_CITY,
+    activeSortType: DEFAULT_SORT_TYPE
   }));
 
-  it(`should set active city`, () => {
-    const city = `city`;
+  it(`should set activeCity`, () => {
+    const city = City.AMSTERDAM;
 
     expect(reducer(undefined, {type: ActionType.SET_ACTIVE_CITY, payload: city})).toEqual({
       activeCity: city,
-      activeSortType: SortType.POPULAR,
-      offers
+      activeSortType: DEFAULT_SORT_TYPE
     });
   });
 
-  it(`should set active sortType`, () => {
+  it(`should set activeSortType`, () => {
     const sortType = SortType.TOP_RATED;
 
     expect(reducer(undefined, {type: ActionType.SET_ACTIVE_SORT_TYPE, payload: sortType})).toEqual({
-      activeCity: offers[0].city,
-      activeSortType: sortType,
-      offers
+      activeCity: DEFAULT_CITY,
+      activeSortType: sortType
     });
   });
 });

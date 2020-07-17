@@ -1,13 +1,10 @@
-import {SortType} from "./const.js";
+import {DEFAULT_CITY, DEFAULT_SORT_TYPE} from "../../const.js";
 
-import {extend} from "./utils.js";
-
-import offers from "./mocks/offers.js";
+import {extend} from "../../utils.js";
 
 const initialState = {
-  activeCity: offers[0].city,
-  activeSortType: SortType.POPULAR,
-  offers
+  activeCity: DEFAULT_CITY,
+  activeSortType: DEFAULT_SORT_TYPE
 };
 
 export const ActionType = {
@@ -16,8 +13,8 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  setActiveCity: (city) => ({type: ActionType.SET_ACTIVE_CITY, payload: city}),
-  setActiveSortType: (sortType) => ({type: ActionType.SET_ACTIVE_SORT_TYPE, payload: sortType})
+  setActiveCity: (activeCity) => ({type: ActionType.SET_ACTIVE_CITY, payload: activeCity}),
+  setActiveSortType: (activeSortType) => ({type: ActionType.SET_ACTIVE_SORT_TYPE, payload: activeSortType})
 };
 
 export const reducer = (state = initialState, action) => {

@@ -1,22 +1,22 @@
-import {OfferType, SortType} from "../const.js";
+import {OfferType, City, SortType} from "../const.js";
 
 export default {
   activeItem: `4`,
   onActiveItemChange: () => {},
   onActiveItemRemoval: () => {},
-  cities: [`city`],
-  activeCity: `city`,
+  activeCity: City.AMSTERDAM,
   activeSortType: SortType.POPULAR,
   offers: [{
     id: `4`,
     type: OfferType.ROOM,
     name: `Paper place`,
-    photos: [{src: `img/room.jpg`, alt: `Place photo`}],
+    mainPhoto: `photo`,
     isFavorite: false,
     isPremium: false,
     rating: 4,
     price: 4,
-    coordinates: [4, 4]
+    location: {coordinates: [4, 4]},
+    city: {location: {coordinates: [4, 4], zoom: 4}}
   }],
   onCityClick: () => {},
   onSortTypeChange: () => {},

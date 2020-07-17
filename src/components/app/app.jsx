@@ -3,16 +3,16 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import {SortType} from "../../const.js";
-
-import {sortOffers} from "../../utils.js";
+import {City, SortType} from "../../const.js";
 
 import Main from "../main/main.jsx";
 import OfferScreen from "../offer-screen/offer-screen.jsx";
 
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
+import {getActiveCity, getActiveSortType} from "../../reducer/app/selectors.js";
+import {getFilteredAndSortedOffers} from "../../reducer/offers/selectors.js";
 
 const MainWithActiveItem = withActiveItem(Main);
 
@@ -21,8 +21,7 @@ offerScreenPropTypesCopy.id = PropTypes.string.isRequired;
 delete offerScreenPropTypesCopy.nearOffers;
 
 const propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeCity: PropTypes.string.isRequired,
+  activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
   activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerScreenPropTypesCopy)).isRequired,
   onCityClick: PropTypes.func.isRequired,
@@ -50,7 +49,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {cities, activeCity, activeSortType, offers, onCityClick, onSortTypeChange} = this.props;
+    const {activeCity, activeSortType, offers, onCityClick, onSortTypeChange} = this.props;
     const {activeOfferId} = this.state;
 
     if (activeOfferId) {
@@ -59,7 +58,6 @@ class App extends PureComponent {
 
     return (
       <MainWithActiveItem
-        cities={cities}
         activeCity={activeCity}
         activeSortType={activeSortType}
         offers={offers}
@@ -76,16 +74,15 @@ class App extends PureComponent {
 
 App.propTypes = propTypes;
 
-const mapStateToProps = ({activeCity, activeSortType, offers}) => ({
-  cities: offers.map(({city}) => city),
-  activeCity,
-  activeSortType,
-  offers: sortOffers(offers.find(({city}) => city === activeCity).offers, activeSortType)
+const mapStateToProps = (state) => ({
+  activeCity: getActiveCity(state),
+  activeSortType: getActiveSortType(state),
+  offers: getFilteredAndSortedOffers(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityClick: (city) => dispatch(ActionCreator.setActiveCity(city)),
-  onSortTypeChange: (sortType) => dispatch(ActionCreator.setActiveSortType(sortType))
+  onCityClick: (city) => dispatch(AppActionCreator.setActiveCity(city)),
+  onSortTypeChange: (sortType) => dispatch(AppActionCreator.setActiveSortType(sortType))
 });
 
 export {App};

@@ -1,17 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {City} from "../../const.js";
+
 const propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeCity: PropTypes.string.isRequired,
+  activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
   onClick: PropTypes.func.isRequired
 };
 
-const CityList = ({cities, activeCity, onClick}) => (
+const CityList = ({activeCity, onClick}) => (
   <div className="tabs">
     <section className="locations container">
       <ul className="tabs__list locations__list">
-        {cities.map((city) => {
+        {Object.values(City).map((city) => {
           const itemClassName = `tabs__item ${city === activeCity ? `tabs__item--active` : ``} locations__item-link`;
 
           return (
