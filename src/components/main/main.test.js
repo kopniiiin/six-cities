@@ -9,10 +9,10 @@ import testMocks from "../../test-mocks/main.js";
 
 describe(`snapshot test: Main component`, () => {
   it(`should render correctly`, () => expect(
-      shallow(<Main {...testMocks}/>)
+      shallow(<Main {...testMocks}><div/></Main>)
   ).toMatchSnapshot());
 
   it(`should render message without offers`, () => expect(
-      shallow(<Main {...extend(testMocks, {offers: []})}/>)
+      shallow(<Main {...extend(testMocks, {offers: []})}><div/></Main>)
   ).toMatchSnapshot());
 });

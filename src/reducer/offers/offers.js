@@ -18,7 +18,7 @@ export const ActionCreator = {
 
 export const Operation = {
   loadOffers: () => (dispatch, getState, api) => api.get(ServerURL.OFFERS)
-    .then((response) => dispatch(ActionCreator.setOffers(convertOffersFromServerFormat(response.data))))
+    .then(({data}) => dispatch(ActionCreator.setOffers(convertOffersFromServerFormat(data))))
 };
 
 export const reducer = (state = initialState, action) => {
