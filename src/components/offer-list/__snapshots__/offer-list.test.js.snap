@@ -10,18 +10,11 @@ exports[`snapshot test: OfferList component should render correctly 1`] = `
     isFavorite={false}
     isPremium={false}
     key="4"
+    mainPhoto="photo"
     name="Paper place"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     onNameClick={[Function]}
-    photos={
-      Array [
-        Object {
-          "alt": "Place photo",
-          "src": "img/room.jpg",
-        },
-      ]
-    }
     price={4}
     rating={4}
     type="room"

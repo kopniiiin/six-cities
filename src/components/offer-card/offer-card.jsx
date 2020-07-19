@@ -14,10 +14,7 @@ const propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
   name: PropTypes.string.isRequired,
-  photos: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-  })).isRequired,
+  mainPhoto: PropTypes.string.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   isPremium: PropTypes.bool.isRequired,
   rating: PropTypes.number.isRequired,
@@ -33,7 +30,7 @@ const OfferCard = (props) => {
     id,
     type,
     name,
-    photos: [{src: photoSrc, alt: photoAlt}],
+    mainPhoto,
     isFavorite,
     isPremium,
     rating,
@@ -58,7 +55,7 @@ const OfferCard = (props) => {
       {isPremium && premiumMark}
       <div className={photoClassName}>
         <a href="#">
-          <img className="place-card__image" src={photoSrc} alt={photoAlt} width="260" height="200"/>
+          <img className="place-card__image" src={mainPhoto} alt="Place photo" width="260" height="200"/>
         </a>
       </div>
       <div className="place-card__info">

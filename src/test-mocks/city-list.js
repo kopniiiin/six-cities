@@ -1,5 +1,6 @@
+import {City} from "../const.js";
+
 export default {
-  cities: [`city`],
-  activeCity: `city`,
+  activeCity: City.AMSTERDAM,
   onClick: () => {}
 };

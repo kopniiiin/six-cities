@@ -6,7 +6,7 @@ export default {
     id: `4`,
     type: OfferType.ROOM,
     name: `Paper place`,
-    photos: [{src: `img/room.jpg`, alt: `Place photo`}],
+    mainPhoto: `photo`,
     isFavorite: false,
     isPremium: false,
     rating: 4,
