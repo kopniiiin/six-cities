@@ -22,7 +22,7 @@ describe(`OffersOperation`, () => {
     const offers = [];
     const dispatch = jest.fn();
 
-    const api = createAPI();
+    const api = createAPI(() => {});
     new MockAdapter(api).onGet(ServerURL.OFFERS).reply(ServerResponseStatus.OK, offers);
 
     Operation.loadOffers()(dispatch, () => {}, api)

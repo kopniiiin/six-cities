@@ -26,9 +26,16 @@ export const SortType = {
 export const DEFAULT_SORT_TYPE = SortType.POPULAR;
 
 export const ServerURL = {
+  LOGIN: `/login`,
   OFFERS: `/hotels`
 };
 
 export const ServerResponseStatus = {
   OK: 200,
+  UNAUTHORIZED: 401
+};
+
+export const AuthorizationStatus = {
+  AUTHORIZED: `AUTHORIZED`,
+  UNAUTHORIZED: `UNAUTHORIZED`
 };
