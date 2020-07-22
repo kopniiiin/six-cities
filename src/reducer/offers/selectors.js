@@ -25,6 +25,8 @@ const sortOffers = (offers, sortType) => {
 
 export const getOffers = (state) => state[NameSpace.OFFERS].offers;
 
+export const getNearOffers = (state) => state[NameSpace.OFFERS].nearOffers;
+
 export const getFilteredAndSortedOffers = createSelector(
     getOffers,
     getActiveCity,
@@ -33,3 +35,5 @@ export const getFilteredAndSortedOffers = createSelector(
       sortOffers(offers.filter(({city: {name: city}}) => city === activeCity), activeSortType)
     )
 );
+
+export const getOfferWithId = (state, offerId) => getOffers(state).find(({id}) => id === offerId);

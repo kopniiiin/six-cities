@@ -14,7 +14,7 @@ exports[`snapshot test: Review component should render correctly 1`] = `
         alt="User photo"
         className="reviews__avatar user__avatar"
         height="54"
-        src="img/avatar-max.jpg"
+        src="photo"
         width="54"
       />
     </div>

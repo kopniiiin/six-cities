@@ -17,7 +17,9 @@ import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
 import {getActiveCity, getActiveSortType} from "../../reducer/app/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {getEmail} from "../../reducer/user/selectors.js";
+import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
 import {getFilteredAndSortedOffers} from "../../reducer/offers/selectors.js";
+import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
 
 const MainWithActiveItem = withActiveItem(Main);
 const LoginScreenWithAuthorizationData = withAuthorizationData(LoginScreen);
@@ -39,7 +41,8 @@ const propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerScreenPropTypesCopy)).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onSortTypeChange: PropTypes.func.isRequired,
-  onLoginScreenSubmit: PropTypes.func.isRequired
+  onLoginScreenSubmit: PropTypes.func.isRequired,
+  onActiveOfferIdChange: PropTypes.func.isRequired
 };
 
 class App extends PureComponent {
@@ -109,7 +112,7 @@ class App extends PureComponent {
 
         break;
       case Screen.OFFER:
-        screen = <OfferScreen {...offers.find(({id}) => id === activeOfferId)} nearOffers={offers}/>;
+        screen = <OfferScreen id={activeOfferId}>{header}</OfferScreen>;
     }
 
     return screen;
@@ -119,8 +122,11 @@ class App extends PureComponent {
     this.setState({activeScreen: Screen.LOGIN});
   }
 
-  _handleOfferCardNameClick(id) {
-    this.setState({activeScreen: Screen.OFFER, activeOfferId: id});
+  _handleOfferCardNameClick(activeOfferId) {
+    const {onActiveOfferIdChange} = this.props;
+
+    onActiveOfferIdChange(activeOfferId);
+    this.setState({activeScreen: Screen.OFFER, activeOfferId});
   }
 }
 
@@ -136,7 +142,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(AppActionCreator.setActiveCity(city)),
   onSortTypeChange: (sortType) => dispatch(AppActionCreator.setActiveSortType(sortType)),
-  onLoginScreenSubmit: (authorizationData) => dispatch(UserOperation.login(authorizationData))
+  onLoginScreenSubmit: (authorizationData) => dispatch(UserOperation.login(authorizationData)),
+  onActiveOfferIdChange: (activeOfferId) => {
+    dispatch(OffersOperation.loadNearOffers(activeOfferId));
+    dispatch(ReviewsOperation.loadReviews(activeOfferId));
+  }
 });
 
 export {App};
