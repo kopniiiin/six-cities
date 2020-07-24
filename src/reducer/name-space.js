@@ -1,7 +1,8 @@
 const NameSpace = {
   APP: `APP`,
   USER: `USER`,
-  OFFERS: `OFFERS`
+  OFFERS: `OFFERS`,
+  REVIEWS: `REVIEWS`
 };
 
 export default NameSpace;

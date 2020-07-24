@@ -2,9 +2,9 @@ const convertLocationFromServerFormat = ({latitude, longitude, zoom}) => ({coord
 
 const convertCityFromServerFormat = ({name, location}) => ({name, location: convertLocationFromServerFormat(location)});
 
-const convertHostFromServerFormat = ({id, name, avatar_url: photo, is_pro: isPro}) => ({id, name, photo, isPro});
+const convertUserFromServerFormat = ({id, name, avatar_url: photo, is_pro: isPro}) => ({id: String(id), name, photo, isPro});
 
-const convertOfferFromServerFormat = (offer) => {
+export const convertOfferFromServerFormat = (offer) => {
   const {
     id,
     type,
@@ -40,8 +40,20 @@ const convertOfferFromServerFormat = (offer) => {
     features,
     location: convertLocationFromServerFormat(location),
     city: convertCityFromServerFormat(city),
-    host: convertHostFromServerFormat(host)
+    host: convertUserFromServerFormat(host)
   };
 };
 
 export const convertOffersFromServerFormat = (offers) => offers.map(convertOfferFromServerFormat);
+
+export const convertReviewFromServerFormat = ({id, date, comment: text, rating, user}) => ({
+  id: String(id),
+  date,
+  text,
+  rating,
+  user: convertUserFromServerFormat(user)
+});
+
+export const convertReviewToServerFormat = ({text: comment, rating}) => ({comment, rating});
+
+export const convertReviewsFromServerFormat = (reviews) => reviews.map(convertReviewFromServerFormat);

@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
-import {OfferType} from "../../const.js";
+import {OfferType, AuthorizationStatus} from "../../const.js";
 
 import {upperCaseFirstLetter} from "../../utils.js";
 
@@ -14,6 +15,11 @@ import OfferList from "../offer-list/offer-list.jsx";
 
 import withMarkers from "../../hocs/with-markers/with-markers.jsx";
 
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getNearOffers, getOfferWithId} from "../../reducer/offers/selectors.js";
+import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
+import {getReviews} from "../../reducer/reviews/selectors.js";
+
 const MapWithMarkers = withMarkers(Map);
 
 const MAX_PHOTO_AMOUNT = 6;
@@ -21,74 +27,92 @@ const MAX_PHOTO_AMOUNT = 6;
 const MAX_NEAR_OFFER_AMOUNT = 3;
 
 const propTypes = {
-  type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  photos: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-  })).isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  isPremium: PropTypes.bool.isRequired,
-  rating: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  bedroomAmount: PropTypes.number.isRequired,
-  guestAmount: PropTypes.number.isRequired,
-  features: PropTypes.arrayOf(PropTypes.string).isRequired,
-  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  host: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    photo: PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired
-    }).isRequired,
-    isPro: PropTypes.bool.isRequired
-  }).isRequired,
-  reviews: ReviewList.propTypes.reviews,
-  nearOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
+  id: PropTypes.string.isRequired,
+  offer: PropTypes.shape({
     type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
     name: PropTypes.string.isRequired,
-    photos: PropTypes.arrayOf(PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired,
-    })).isRequired,
+    description: PropTypes.string.isRequired,
+    photos: PropTypes.arrayOf(PropTypes.string).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
-  })).isRequired
+    bedroomAmount: PropTypes.number.isRequired,
+    guestAmount: PropTypes.number.isRequired,
+    features: PropTypes.arrayOf(PropTypes.string).isRequired,
+    location: PropTypes.shape({
+      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+        zoom: PropTypes.number.isRequired
+      }).isRequired
+    }).isRequired,
+    host: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      photo: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired
+    }).isRequired,
+  }).isRequired,
+  nearOffers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
+    name: PropTypes.string.isRequired,
+    mainPhoto: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    location: PropTypes.shape({
+      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+    }).isRequired
+  })).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      photo: PropTypes.string.isRequired
+    }).isRequired
+  })).isRequired,
+  onReviewFormSubmit: PropTypes.func.isRequired
 };
 
 const OfferScreen = (props) => {
   const {
-    type,
-    name,
-    description,
-    photos,
-    isFavorite,
-    isPremium,
-    rating,
-    price,
-    bedroomAmount,
-    guestAmount,
-    features,
-    coordinates,
-    host: {
-      name: hostName,
-      photo: {src: hostPhotoSrc, alt: hostPhotoAlt},
-      isPro: isHostPro
+    children,
+    authorizationStatus,
+    offer: {
+      type,
+      name,
+      description,
+      photos,
+      isFavorite,
+      isPremium,
+      rating,
+      price,
+      bedroomAmount,
+      guestAmount,
+      features,
+      location: {coordinates},
+      city: {location: {coordinates: cityCoordinates, zoom}},
+      host: {name: hostName, photo: hostPhoto, isPro: isHostPro}
     },
+    nearOffers,
     reviews,
-    nearOffers
+    onReviewFormSubmit
   } = props;
 
   const gallery = (
     <div className="property__gallery">
-      {photos.slice(0, MAX_PHOTO_AMOUNT).map(({src, alt}) => (
-        <div key={src} className="property__image-wrapper">
-          <img className="property__image" src={src} alt={alt}/>
+      {photos.slice(0, MAX_PHOTO_AMOUNT).map((photo) => (
+        <div key={photo} className="property__image-wrapper">
+          <img className="property__image" src={photo} alt="Place photo"/>
         </div>
       ))}
     </div>
@@ -97,7 +121,7 @@ const OfferScreen = (props) => {
   const premiumMark = <PremiumMark blockClassName={`property`}/>;
   const bookmarkButton = <BookmarkButton blockClassName={`property`} isActive={isFavorite} isBig={true}/>;
   const starRating = <StarRating blockClassName={`property`} value={rating} isValueShown={true}/>;
-  const reviewList = <ReviewList reviews={reviews}/>;
+  const reviewList = <ReviewList authorizationStatus={authorizationStatus} reviews={reviews} onReviewFormSubmit={onReviewFormSubmit}/>;
 
   const featureList = (
     <div className="property__inside">
@@ -113,7 +137,9 @@ const OfferScreen = (props) => {
   const map = (
     <MapWithMarkers
       blockClassName={`property`}
-      markerCoordinates={slicedNearOffers.map(({coordinates: nearOfferCoordinates}) => nearOfferCoordinates)}
+      centerCoordinates={cityCoordinates}
+      zoom={zoom}
+      markerCoordinates={slicedNearOffers.map(({location: {coordinates: nearOfferCoordinates}}) => nearOfferCoordinates)}
       activeMarkerCoordinates={[coordinates]}/>
   );
 
@@ -130,28 +156,7 @@ const OfferScreen = (props) => {
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      {children}
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -178,7 +183,7 @@ const OfferScreen = (props) => {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className={hostPhotoClassName}>
-                    <img className="property__avatar user__avatar" src={hostPhotoSrc} alt={hostPhotoAlt} width="74" height="74"/>
+                    <img className="property__avatar user__avatar" src={hostPhoto} alt="Host photo" width="74" height="74"/>
                   </div>
                   <span className="property__user-name">{hostName}</span>
                 </div>
@@ -202,4 +207,16 @@ const OfferScreen = (props) => {
 
 OfferScreen.propTypes = propTypes;
 
-export default OfferScreen;
+const mapStateToProps = (state, {id}) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  offer: getOfferWithId(state, id),
+  nearOffers: getNearOffers(state),
+  reviews: getReviews(state)
+});
+
+const mapDispatchToProps = (dispatch, {id}) => ({
+  onReviewFormSubmit: (review) => dispatch(ReviewsOperation.sendReview(id, review))
+});
+
+export {OfferScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);

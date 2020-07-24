@@ -25,9 +25,12 @@ export const SortType = {
 
 export const DEFAULT_SORT_TYPE = SortType.POPULAR;
 
+export const MAX_RATING = 5;
+
 export const ServerURL = {
   LOGIN: `/login`,
-  OFFERS: `/hotels`
+  OFFERS: `/hotels`,
+  REVIEWS: `/comments`
 };
 
 export const ServerResponseStatus = {
