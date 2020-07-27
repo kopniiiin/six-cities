@@ -1,7 +1,9 @@
 import React, {PureComponent} from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+
+import history from "../../history.js";
 
 import {City, SortType, Path, AuthorizationStatus} from "../../const.js";
 
@@ -71,7 +73,7 @@ class App extends PureComponent {
     const header = <Header email={email}/>;
 
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
 
           <Route path={Path.MAIN} exact render={() => (
@@ -96,7 +98,7 @@ class App extends PureComponent {
           )}/>
 
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 
@@ -163,7 +165,10 @@ class App extends PureComponent {
 
     if (authorizationStatus === AuthorizationStatus.AUTHORIZED) {
       onOfferFavoritenessChange(offerId);
+      return;
     }
+
+    history.push(Path.LOGIN);
   }
 
   _handleOfferCardNameClick(activeOfferId) {
