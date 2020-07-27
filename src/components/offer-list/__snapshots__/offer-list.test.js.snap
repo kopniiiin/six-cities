@@ -12,6 +12,7 @@ exports[`snapshot test: OfferList component should render correctly 1`] = `
     key="4"
     mainPhoto="photo"
     name="Paper place"
+    onBookmarkButtonClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     onNameClick={[Function]}

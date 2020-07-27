@@ -3,8 +3,9 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import {City, SortType} from "../../const.js";
+import {City, SortType, Path, AuthorizationStatus} from "../../const.js";
 
+import GuestRoute from "../guest-route/guest-route.jsx";
 import Header from "../header/header.jsx";
 import Main from "../main/main.jsx";
 import LoginScreen from "../login-screen/login-screen.jsx";
@@ -16,7 +17,7 @@ import withAuthorizationData from "../../hocs/with-authorization-data/with-autho
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
 import {getActiveCity, getActiveSortType} from "../../reducer/app/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
-import {getEmail} from "../../reducer/user/selectors.js";
+import {getAuthorizationStatus, getEmail} from "../../reducer/user/selectors.js";
 import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
 import {getFilteredAndSortedOffers} from "../../reducer/offers/selectors.js";
 import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
@@ -35,6 +36,7 @@ offerScreenPropTypesCopy.id = PropTypes.string.isRequired;
 delete offerScreenPropTypesCopy.nearOffers;
 
 const propTypes = {
+  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   email: PropTypes.string,
   activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
   activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
@@ -42,6 +44,7 @@ const propTypes = {
   onCityClick: PropTypes.func.isRequired,
   onSortTypeChange: PropTypes.func.isRequired,
   onLoginScreenSubmit: PropTypes.func.isRequired,
+  onOfferFavoritenessChange: PropTypes.func.isRequired,
   onActiveOfferIdChange: PropTypes.func.isRequired
 };
 
@@ -49,18 +52,49 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {activeScreen: Screen.MAIN, activeOfferId: null};
-    this._handleHeaderLoginButtonClick = this._handleHeaderLoginButtonClick.bind(this);
+    this._handleLoginScreenSubmit = this._handleLoginScreenSubmit.bind(this);
+    this._handleOfferCardBookmarkButtonClick = this._handleOfferCardBookmarkButtonClick.bind(this);
     this._handleOfferCardNameClick = this._handleOfferCardNameClick.bind(this);
   }
 
   render() {
-    const {offers} = this.props;
+    const {
+      authorizationStatus,
+      email,
+      activeCity,
+      activeSortType,
+      offers,
+      onCityClick,
+      onSortTypeChange,
+    } = this.props;
+
+    const header = <Header email={email}/>;
 
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">{this._renderApp()}</Route>
-          <Route exact path="/dev-offer"><OfferScreen {...offers[0]} nearOffers={offers}/></Route>
+
+          <Route path={Path.MAIN} exact render={() => (
+            <MainWithActiveItem
+              activeCity={activeCity}
+              activeSortType={activeSortType}
+              offers={offers}
+              onCityClick={onCityClick}
+              onSortTypeChange={onSortTypeChange}
+              onOfferCardBookmarkButtonClick={this._handleOfferCardBookmarkButtonClick}
+              onOfferCardNameClick={this._handleOfferCardNameClick}>
+              {header}
+            </MainWithActiveItem>
+          )}/>
+
+          <GuestRoute authorizationStatus={authorizationStatus} path={Path.LOGIN} exact render={() => (
+            <LoginScreenWithAuthorizationData
+              activeCity={activeCity}
+              onSubmit={this._handleLoginScreenSubmit}>
+              {header}
+            </LoginScreenWithAuthorizationData>
+          )}/>
+
         </Switch>
       </BrowserRouter>
     );
@@ -118,8 +152,18 @@ class App extends PureComponent {
     return screen;
   }
 
-  _handleHeaderLoginButtonClick() {
-    this.setState({activeScreen: Screen.LOGIN});
+  _handleLoginScreenSubmit(authorizationData) {
+    const {onLoginScreenSubmit} = this.props;
+
+    onLoginScreenSubmit(authorizationData);
+  }
+
+  _handleOfferCardBookmarkButtonClick(offerId) {
+    const {authorizationStatus, onOfferFavoritenessChange} = this.props;
+
+    if (authorizationStatus === AuthorizationStatus.AUTHORIZED) {
+      onOfferFavoritenessChange(offerId);
+    }
   }
 
   _handleOfferCardNameClick(activeOfferId) {
@@ -133,6 +177,7 @@ class App extends PureComponent {
 App.propTypes = propTypes;
 
 const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
   email: getEmail(state),
   activeCity: getActiveCity(state),
   activeSortType: getActiveSortType(state),
@@ -143,6 +188,7 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(AppActionCreator.setActiveCity(city)),
   onSortTypeChange: (sortType) => dispatch(AppActionCreator.setActiveSortType(sortType)),
   onLoginScreenSubmit: (authorizationData) => dispatch(UserOperation.login(authorizationData)),
+  onOfferFavoritenessChange: (offerId) => dispatch(OffersOperation.toggleFavoriteness(offerId)),
   onActiveOfferIdChange: (activeOfferId) => {
     dispatch(OffersOperation.loadNearOffers(activeOfferId));
     dispatch(ReviewsOperation.loadReviews(activeOfferId));

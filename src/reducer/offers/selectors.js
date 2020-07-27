@@ -27,6 +27,8 @@ export const getOffers = (state) => state[NameSpace.OFFERS].offers;
 
 export const getNearOffers = (state) => state[NameSpace.OFFERS].nearOffers;
 
+export const getFavoriteOffers = (state) => state[NameSpace.OFFERS].favoriteOffers;
+
 export const getFilteredAndSortedOffers = createSelector(
     getOffers,
     getActiveCity,

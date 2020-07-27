@@ -3,6 +3,7 @@
 exports[`snapshot test: BookmarkButton component should render active 1`] = `
 <button
   className="block__bookmark-button block__bookmark-button--active button"
+  onClick={[Function]}
   type="button"
 >
   <svg
@@ -25,6 +26,7 @@ exports[`snapshot test: BookmarkButton component should render active 1`] = `
 exports[`snapshot test: BookmarkButton component should render big 1`] = `
 <button
   className="block__bookmark-button  button"
+  onClick={[Function]}
   type="button"
 >
   <svg
@@ -47,6 +49,7 @@ exports[`snapshot test: BookmarkButton component should render big 1`] = `
 exports[`snapshot test: BookmarkButton component should render correctly 1`] = `
 <button
   className="block__bookmark-button  button"
+  onClick={[Function]}
   type="button"
 >
   <svg

@@ -27,9 +27,16 @@ export const DEFAULT_SORT_TYPE = SortType.POPULAR;
 
 export const MAX_RATING = 5;
 
+export const Path = {
+  MAIN: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`
+};
+
 export const ServerURL = {
   LOGIN: `/login`,
   OFFERS: `/hotels`,
+  FAVORITES: `/favorite`,
   REVIEWS: `/comments`
 };
 
