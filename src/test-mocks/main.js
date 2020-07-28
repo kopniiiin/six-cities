@@ -20,5 +20,6 @@ export default {
   }],
   onCityClick: () => {},
   onSortTypeChange: () => {},
+  onOfferCardBookmarkButtonClick: () => {},
   onOfferCardNameClick: () => {}
 };

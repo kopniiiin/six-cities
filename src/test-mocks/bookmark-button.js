@@ -1,5 +1,6 @@
 export default {
   blockClassName: `block`,
   isActive: false,
-  isBig: false
+  isBig: false,
+  onClick: () => {}
 };

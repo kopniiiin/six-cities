@@ -21,6 +21,7 @@ const propTypes = {
   price: PropTypes.number.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
+  onBookmarkButtonClick: PropTypes.func.isRequired,
   onNameClick: PropTypes.func.isRequired
 };
 
@@ -37,6 +38,7 @@ const OfferCard = (props) => {
     price,
     onMouseEnter,
     onMouseLeave,
+    onBookmarkButtonClick,
     onNameClick
   } = props;
 
@@ -44,8 +46,15 @@ const OfferCard = (props) => {
   const photoClassName = `${blockClassName}__image-wrapper place-card__image-wrapper`;
 
   const premiumMark = <PremiumMark blockClassName={`place-card`}/>;
-  const bookmarkButton = <BookmarkButton blockClassName={`place-card`} isActive={isFavorite} isBig={false}/>;
   const starRating = <StarRating blockClassName={`place-card`} value={rating} isValueShown={false}/>;
+
+  const bookmarkButton = (
+    <BookmarkButton
+      blockClassName={`place-card`}
+      isActive={isFavorite}
+      isBig={false}
+      onClick={() => onBookmarkButtonClick(id)}/>
+  );
 
   return (
     <article

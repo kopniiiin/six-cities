@@ -7,6 +7,7 @@ const offerCardPropTypesCopy = Object.assign({}, OfferCard.propTypes);
 delete offerCardPropTypesCopy.blockClassName;
 delete offerCardPropTypesCopy.onMouseEnter;
 delete offerCardPropTypesCopy.onMouseLeave;
+delete offerCardPropTypesCopy.onBookmarkButtonClick;
 delete offerCardPropTypesCopy.onNameClick;
 
 const propTypes = {
@@ -14,6 +15,7 @@ const propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerCardPropTypesCopy)).isRequired,
   onOfferCardMouseEnter: PropTypes.func.isRequired,
   onOfferCardMouseLeave: PropTypes.func.isRequired,
+  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired,
   onOfferCardNameClick: PropTypes.func.isRequired
 };
 
@@ -23,6 +25,7 @@ const OfferList = (props) => {
     offers,
     onOfferCardMouseEnter,
     onOfferCardMouseLeave,
+    onOfferCardBookmarkButtonClick,
     onOfferCardNameClick
   } = props;
 
@@ -35,6 +38,7 @@ const OfferList = (props) => {
       {...offer}
       onMouseEnter={onOfferCardMouseEnter}
       onMouseLeave={onOfferCardMouseLeave}
+      onBookmarkButtonClick={onOfferCardBookmarkButtonClick}
       onNameClick={onOfferCardNameClick}/>
   ));
 

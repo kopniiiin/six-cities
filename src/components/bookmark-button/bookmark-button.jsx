@@ -8,10 +8,11 @@ const BigSize = {WIDTH: 31, HEIGHT: 33};
 const propTypes = {
   blockClassName: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
-  isBig: PropTypes.bool.isRequired
+  isBig: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
-const BookmarkButton = ({blockClassName, isActive, isBig}) => {
+const BookmarkButton = ({blockClassName, isActive, isBig, onClick}) => {
   const baseClassName = `${blockClassName}__bookmark-button`;
   const activeClassName = `${baseClassName}--active`;
   const buttonClassName = `${baseClassName} ${isActive ? activeClassName : ``} button`;
@@ -23,7 +24,7 @@ const BookmarkButton = ({blockClassName, isActive, isBig}) => {
   const text = isActive ? `In bookmarks` : `To bookmarks`;
 
   return (
-    <button className={buttonClassName} type="button">
+    <button className={buttonClassName} type="button" onClick={onClick}>
       <svg className={iconClassName} width={width} height={height}>
         <use xlinkHref="#icon-bookmark"/>
       </svg>

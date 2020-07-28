@@ -43,6 +43,7 @@ const propTypes = {
   })).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onSortTypeChange: PropTypes.func.isRequired,
+  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired,
   onOfferCardNameClick: PropTypes.func.isRequired
 };
 
@@ -57,6 +58,7 @@ const Main = (props) => {
     offers,
     onCityClick,
     onSortTypeChange,
+    onOfferCardBookmarkButtonClick,
     onOfferCardNameClick
   } = props;
 
@@ -70,6 +72,7 @@ const Main = (props) => {
       offers={offers}
       onOfferCardMouseEnter={onActiveOfferIdChange}
       onOfferCardMouseLeave={onActiveOfferIdRemoval}
+      onOfferCardBookmarkButtonClick={onOfferCardBookmarkButtonClick}
       onOfferCardNameClick={onOfferCardNameClick}/>
   );
 

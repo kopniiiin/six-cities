@@ -14,5 +14,6 @@ export default {
   }],
   onOfferCardMouseEnter: () => {},
   onOfferCardMouseLeave: () => {},
+  onOfferCardBookmarkButtonClick: () => {},
   onOfferCardNameClick: () => {}
 };
