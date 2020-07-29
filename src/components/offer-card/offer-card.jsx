@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
-import {OfferType} from "../../const.js";
+import {OfferType, Path} from "../../const.js";
 
 import {upperCaseFirstLetter} from "../../utils.js";
 
@@ -21,8 +22,7 @@ const propTypes = {
   price: PropTypes.number.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
-  onBookmarkButtonClick: PropTypes.func.isRequired,
-  onNameClick: PropTypes.func.isRequired
+  onBookmarkButtonClick: PropTypes.func.isRequired
 };
 
 const OfferCard = (props) => {
@@ -39,7 +39,6 @@ const OfferCard = (props) => {
     onMouseEnter,
     onMouseLeave,
     onBookmarkButtonClick,
-    onNameClick
   } = props;
 
   const cardClassName = `${blockClassName}__place-card place-card`;
@@ -77,7 +76,7 @@ const OfferCard = (props) => {
         </div>
         {starRating}
         <h2 className="place-card__name">
-          <a href="#" onClick={() => onNameClick(id)}>{name}</a>
+          <Link to={`${Path.OFFER}/${id}`}>{name}</Link>
         </h2>
         <p className="place-card__type">{upperCaseFirstLetter(type)}</p>
       </div>

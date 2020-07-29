@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
@@ -15,7 +15,7 @@ import OfferList from "../offer-list/offer-list.jsx";
 
 import withMarkers from "../../hocs/with-markers/with-markers.jsx";
 
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
 import {getNearOffers, getOfferWithId} from "../../reducer/offers/selectors.js";
 import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
 import {getReviews} from "../../reducer/reviews/selectors.js";
@@ -80,141 +80,175 @@ const propTypes = {
       photo: PropTypes.string.isRequired
     }).isRequired
   })).isRequired,
-  onReviewFormSubmit: PropTypes.func.isRequired
+  loadData: PropTypes.func.isRequired,
+  onReviewFormSubmit: PropTypes.func.isRequired,
+  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
 };
 
-const OfferScreen = (props) => {
-  const {
-    children,
-    authorizationStatus,
-    offer: {
-      type,
-      name,
-      description,
-      photos,
-      isFavorite,
-      isPremium,
-      rating,
-      price,
-      bedroomAmount,
-      guestAmount,
-      features,
-      location: {coordinates},
-      city: {location: {coordinates: cityCoordinates, zoom}},
-      host: {name: hostName, photo: hostPhoto, isPro: isHostPro}
-    },
-    nearOffers,
-    reviews,
-    onReviewFormSubmit
-  } = props;
+class OfferScreen extends PureComponent {
+  render() {
+    const {
+      children,
+      authorizationStatus,
+      id,
+      offer: {
+        type,
+        name,
+        description,
+        photos,
+        isFavorite,
+        isPremium,
+        rating,
+        price,
+        bedroomAmount,
+        guestAmount,
+        features,
+        location: {coordinates},
+        city: {location: {coordinates: cityCoordinates, zoom}},
+        host: {name: hostName, photo: hostPhoto, isPro: isHostPro}
+      },
+      nearOffers,
+      reviews,
+      onReviewFormSubmit,
+      onOfferCardBookmarkButtonClick
+    } = this.props;
 
-  const gallery = (
-    <div className="property__gallery">
-      {photos.slice(0, MAX_PHOTO_AMOUNT).map((photo) => (
-        <div key={photo} className="property__image-wrapper">
-          <img className="property__image" src={photo} alt="Place photo"/>
-        </div>
-      ))}
-    </div>
-  );
-
-  const premiumMark = <PremiumMark blockClassName={`property`}/>;
-  const bookmarkButton = <BookmarkButton blockClassName={`property`} isActive={isFavorite} isBig={true}/>;
-  const starRating = <StarRating blockClassName={`property`} value={rating} isValueShown={true}/>;
-  const reviewList = <ReviewList authorizationStatus={authorizationStatus} reviews={reviews} onReviewFormSubmit={onReviewFormSubmit}/>;
-
-  const featureList = (
-    <div className="property__inside">
-      <h2 className="property__inside-title">What&apos;s inside</h2>
-      <ul className="property__inside-list">
-        {features.map((feature) => <li key={feature} className="property__inside-item">{feature}</li>)}
-      </ul>
-    </div>
-  );
-
-  const slicedNearOffers = nearOffers.slice(0, MAX_NEAR_OFFER_AMOUNT);
-
-  const map = (
-    <MapWithMarkers
-      blockClassName={`property`}
-      centerCoordinates={cityCoordinates}
-      zoom={zoom}
-      markerCoordinates={slicedNearOffers.map(({location: {coordinates: nearOfferCoordinates}}) => nearOfferCoordinates)}
-      activeMarkerCoordinates={[coordinates]}/>
-  );
-
-  const nearOfferList = (
-    <OfferList
-      blockClassName={`near-places`}
-      offers={slicedNearOffers}
-      onOfferCardMouseEnter={() => {}}
-      onOfferCardMouseLeave={() => {}}
-      onOfferCardNameClick={() => {}}/>
-  );
-
-  const hostPhotoClassName = `property__avatar-wrapper ${isHostPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`;
-
-  return (
-    <div className="page">
-      {children}
-
-      <main className="page__main page__main--property">
-        <section className="property">
-          <div className="property__gallery-container container">{gallery}</div>
-          <div className="property__container container">
-            <div className="property__wrapper">
-              {isPremium && premiumMark}
-              <div className="property__name-wrapper">
-                <h1 className="property__name">{name}</h1>
-                {bookmarkButton}
-              </div>
-              {starRating}
-              <ul className="property__features">
-                <li className="property__feature property__feature--entire">{upperCaseFirstLetter(type)}</li>
-                <li className="property__feature property__feature--bedrooms">{bedroomAmount} Bedrooms</li>
-                <li className="property__feature property__feature--adults">Max {guestAmount} adults</li>
-              </ul>
-              <div className="property__price">
-                <b className="property__price-value">&euro;{price}</b>
-                <span className="property__price-text">&nbsp;night</span>
-              </div>
-              {featureList}
-              <div className="property__host">
-                <h2 className="property__host-title">Meet the host</h2>
-                <div className="property__host-user user">
-                  <div className={hostPhotoClassName}>
-                    <img className="property__avatar user__avatar" src={hostPhoto} alt="Host photo" width="74" height="74"/>
-                  </div>
-                  <span className="property__user-name">{hostName}</span>
-                </div>
-                <div className="property__description"><p className="property__text">{description}</p></div>
-              </div>
-              {reviewList}
-            </div>
+    const gallery = (
+      <div className="property__gallery">
+        {photos.slice(0, MAX_PHOTO_AMOUNT).map((photo) => (
+          <div key={photo} className="property__image-wrapper">
+            <img className="property__image" src={photo} alt="Place photo"/>
           </div>
-          {map}
-        </section>
-        <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            {nearOfferList}
+        ))}
+      </div>
+    );
+
+    const premiumMark = <PremiumMark blockClassName={`property`}/>;
+    const starRating = <StarRating blockClassName={`property`} value={rating} isValueShown={true}/>;
+    const reviewList = <ReviewList authorizationStatus={authorizationStatus} reviews={reviews} onReviewFormSubmit={onReviewFormSubmit}/>;
+
+    const bookmarkButton = (
+      <BookmarkButton
+        blockClassName={`property`}
+        isActive={isFavorite}
+        isBig={true}
+        onClick={() => onOfferCardBookmarkButtonClick(id)}/>
+    );
+
+    const featureList = (
+      <div className="property__inside">
+        <h2 className="property__inside-title">What&apos;s inside</h2>
+        <ul className="property__inside-list">
+          {features.map((feature) => <li key={feature} className="property__inside-item">{feature}</li>)}
+        </ul>
+      </div>
+    );
+
+    const slicedNearOffers = nearOffers.slice(0, MAX_NEAR_OFFER_AMOUNT);
+
+    const map = (
+      <MapWithMarkers
+        blockClassName={`property`}
+        centerCoordinates={cityCoordinates}
+        zoom={zoom}
+        markerCoordinates={slicedNearOffers.map(({location: {coordinates: nearOfferCoordinates}}) => nearOfferCoordinates)}
+        activeMarkerCoordinates={[coordinates]}/>
+    );
+
+    const nearOfferList = (
+      <OfferList
+        blockClassName={`near-places`}
+        offers={slicedNearOffers}
+        onOfferCardMouseEnter={() => {}}
+        onOfferCardMouseLeave={() => {}}
+        onOfferCardBookmarkButtonClick={onOfferCardBookmarkButtonClick}/>
+    );
+
+    const hostPhotoClassName = `property__avatar-wrapper ${isHostPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`;
+
+    return (
+      <div className="page">
+        {children}
+
+        <main className="page__main page__main--property">
+          <section className="property">
+            <div className="property__gallery-container container">{gallery}</div>
+            <div className="property__container container">
+              <div className="property__wrapper">
+                {isPremium && premiumMark}
+                <div className="property__name-wrapper">
+                  <h1 className="property__name">{name}</h1>
+                  {bookmarkButton}
+                </div>
+                {starRating}
+                <ul className="property__features">
+                  <li className="property__feature property__feature--entire">{upperCaseFirstLetter(type)}</li>
+                  <li className="property__feature property__feature--bedrooms">{bedroomAmount} Bedrooms</li>
+                  <li className="property__feature property__feature--adults">Max {guestAmount} adults</li>
+                </ul>
+                <div className="property__price">
+                  <b className="property__price-value">&euro;{price}</b>
+                  <span className="property__price-text">&nbsp;night</span>
+                </div>
+                {featureList}
+                <div className="property__host">
+                  <h2 className="property__host-title">Meet the host</h2>
+                  <div className="property__host-user user">
+                    <div className={hostPhotoClassName}>
+                      <img className="property__avatar user__avatar" src={hostPhoto} alt="Host photo" width="74" height="74"/>
+                    </div>
+                    <span className="property__user-name">{hostName}</span>
+                  </div>
+                  <div className="property__description"><p className="property__text">{description}</p></div>
+                </div>
+                {reviewList}
+              </div>
+            </div>
+            {map}
           </section>
-        </div>
-      </main>
-    </div>
-  );
-};
+          <div className="container">
+            <section className="near-places places">
+              <h2 className="near-places__title">Other places in the neighbourhood</h2>
+              {nearOfferList}
+            </section>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  componentDidMount() {
+    this._update();
+  }
+
+  componentDidUpdate({id: oldId}) {
+    const {id: newId} = this.props;
+
+    if (oldId !== newId) {
+      this._update();
+    }
+  }
+
+  _update() {
+    const {loadData} = this.props;
+
+    loadData();
+  }
+}
 
 OfferScreen.propTypes = propTypes;
 
 const mapStateToProps = (state, {id}) => ({
-  authorizationStatus: getAuthorizationStatus(state),
   offer: getOfferWithId(state, id),
   nearOffers: getNearOffers(state),
   reviews: getReviews(state)
 });
 
 const mapDispatchToProps = (dispatch, {id}) => ({
+  loadData: () => {
+    dispatch(OffersOperation.loadNearOffers(id));
+    dispatch(ReviewsOperation.loadReviews(id));
+  },
   onReviewFormSubmit: (review) => dispatch(ReviewsOperation.sendReview(id, review))
 });
 

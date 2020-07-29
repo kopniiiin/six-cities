@@ -30,6 +30,7 @@ export const MAX_RATING = 5;
 export const Path = {
   MAIN: `/`,
   LOGIN: `/login`,
+  OFFER: `/offer`,
   FAVORITES: `/favorites`
 };
 

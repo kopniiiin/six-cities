@@ -15,7 +15,6 @@ exports[`snapshot test: OfferList component should render correctly 1`] = `
     onBookmarkButtonClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    onNameClick={[Function]}
     price={4}
     rating={4}
     type="room"

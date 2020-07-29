@@ -20,7 +20,6 @@ import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {getAuthorizationStatus, getEmail} from "../../reducer/user/selectors.js";
 import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
 import {getFilteredAndSortedOffers} from "../../reducer/offers/selectors.js";
-import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
 
 const MainWithActiveItem = withActiveItem(Main);
 const LoginScreenWithAuthorizationData = withAuthorizationData(LoginScreen);
@@ -44,17 +43,14 @@ const propTypes = {
   onCityClick: PropTypes.func.isRequired,
   onSortTypeChange: PropTypes.func.isRequired,
   onLoginScreenSubmit: PropTypes.func.isRequired,
-  onOfferFavoritenessChange: PropTypes.func.isRequired,
-  onActiveOfferIdChange: PropTypes.func.isRequired
+  onOfferFavoritenessChange: PropTypes.func.isRequired
 };
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {activeScreen: Screen.MAIN, activeOfferId: null};
     this._handleLoginScreenSubmit = this._handleLoginScreenSubmit.bind(this);
     this._handleOfferCardBookmarkButtonClick = this._handleOfferCardBookmarkButtonClick.bind(this);
-    this._handleOfferCardNameClick = this._handleOfferCardNameClick.bind(this);
   }
 
   render() {
@@ -81,8 +77,7 @@ class App extends PureComponent {
               offers={offers}
               onCityClick={onCityClick}
               onSortTypeChange={onSortTypeChange}
-              onOfferCardBookmarkButtonClick={this._handleOfferCardBookmarkButtonClick}
-              onOfferCardNameClick={this._handleOfferCardNameClick}>
+              onOfferCardBookmarkButtonClick={this._handleOfferCardBookmarkButtonClick}>
               {header}
             </MainWithActiveItem>
           )}/>
@@ -95,61 +90,18 @@ class App extends PureComponent {
             </LoginScreenWithAuthorizationData>
           )}/>
 
+          <Route path={`${Path.OFFER}/:offerId`} exact render={({match: {params: {offerId}}}) => (
+            <OfferScreen
+              authorizationStatus={authorizationStatus}
+              id={offerId}
+              onOfferCardBookmarkButtonClick={this._handleOfferCardBookmarkButtonClick}>
+              {header}
+            </OfferScreen>
+          )}/>
+
         </Switch>
       </BrowserRouter>
     );
-  }
-
-  _renderApp() {
-    const {
-      email,
-      activeCity,
-      activeSortType,
-      offers,
-      onCityClick,
-      onSortTypeChange,
-      onLoginScreenSubmit
-    } = this.props;
-
-    const {activeScreen, activeOfferId} = this.state;
-
-    const header = <Header email={email} onLoginButtonClick={this._handleHeaderLoginButtonClick}/>;
-
-    let screen;
-
-    switch (activeScreen) {
-      case Screen.MAIN:
-        screen = (
-          <MainWithActiveItem
-            activeCity={activeCity}
-            activeSortType={activeSortType}
-            offers={offers}
-            onCityClick={onCityClick}
-            onSortTypeChange={onSortTypeChange}
-            onOfferCardNameClick={this._handleOfferCardNameClick}>
-            {header}
-          </MainWithActiveItem>
-        );
-
-        break;
-      case Screen.LOGIN:
-        screen = (
-          <LoginScreenWithAuthorizationData
-            activeCity={activeCity}
-            onSubmit={(authorizationData) => {
-              this.setState({activeScreen: Screen.MAIN});
-              onLoginScreenSubmit(authorizationData);
-            }}>
-            {header}
-          </LoginScreenWithAuthorizationData>
-        );
-
-        break;
-      case Screen.OFFER:
-        screen = <OfferScreen id={activeOfferId}>{header}</OfferScreen>;
-    }
-
-    return screen;
   }
 
   _handleLoginScreenSubmit(authorizationData) {
@@ -164,13 +116,6 @@ class App extends PureComponent {
     if (authorizationStatus === AuthorizationStatus.AUTHORIZED) {
       onOfferFavoritenessChange(offerId);
     }
-  }
-
-  _handleOfferCardNameClick(activeOfferId) {
-    const {onActiveOfferIdChange} = this.props;
-
-    onActiveOfferIdChange(activeOfferId);
-    this.setState({activeScreen: Screen.OFFER, activeOfferId});
   }
 }
 
@@ -188,11 +133,7 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(AppActionCreator.setActiveCity(city)),
   onSortTypeChange: (sortType) => dispatch(AppActionCreator.setActiveSortType(sortType)),
   onLoginScreenSubmit: (authorizationData) => dispatch(UserOperation.login(authorizationData)),
-  onOfferFavoritenessChange: (offerId) => dispatch(OffersOperation.toggleFavoriteness(offerId)),
-  onActiveOfferIdChange: (activeOfferId) => {
-    dispatch(OffersOperation.loadNearOffers(activeOfferId));
-    dispatch(ReviewsOperation.loadReviews(activeOfferId));
-  }
+  onOfferFavoritenessChange: (offerId) => dispatch(OffersOperation.toggleFavoriteness(offerId))
 });
 
 export {App};

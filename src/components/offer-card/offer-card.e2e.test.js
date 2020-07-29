@@ -29,15 +29,4 @@ describe(`e2e test: OfferCard component`, () => {
     expect(onMouseLeave).toHaveBeenCalledTimes(1);
     expect(onMouseLeave.mock.calls[0][0]).toBe(id);
   });
-
-  it(`should call onNameClick with id`, () => {
-    const id = `4`;
-    const onNameClick = jest.fn();
-
-    shallow(<OfferCard {...extend(testMocks, {id, onNameClick})}/>)
-      .find(`.place-card__name a`).simulate(`click`);
-
-    expect(onNameClick).toHaveBeenCalledTimes(1);
-    expect(onNameClick.mock.calls[0][0]).toBe(id);
-  });
 });
