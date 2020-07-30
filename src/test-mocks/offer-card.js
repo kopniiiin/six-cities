@@ -12,6 +12,5 @@ export default {
   price: 4,
   onMouseEnter: () => {},
   onMouseLeave: () => {},
-  onBookmarkButtonClick: () => {},
-  onNameClick: () => {}
+  onBookmarkButtonClick: () => {}
 };

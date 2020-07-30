@@ -43,8 +43,7 @@ const propTypes = {
   })).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onSortTypeChange: PropTypes.func.isRequired,
-  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired,
-  onOfferCardNameClick: PropTypes.func.isRequired
+  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
 };
 
 const Main = (props) => {
@@ -58,8 +57,7 @@ const Main = (props) => {
     offers,
     onCityClick,
     onSortTypeChange,
-    onOfferCardBookmarkButtonClick,
-    onOfferCardNameClick
+    onOfferCardBookmarkButtonClick
   } = props;
 
   const cityList = <CityList activeCity={activeCity} onClick={onCityClick}/>;
@@ -72,8 +70,7 @@ const Main = (props) => {
       offers={offers}
       onOfferCardMouseEnter={onActiveOfferIdChange}
       onOfferCardMouseLeave={onActiveOfferIdRemoval}
-      onOfferCardBookmarkButtonClick={onOfferCardBookmarkButtonClick}
-      onOfferCardNameClick={onOfferCardNameClick}/>
+      onOfferCardBookmarkButtonClick={onOfferCardBookmarkButtonClick}/>
   );
 
   const map = offers.length ? (

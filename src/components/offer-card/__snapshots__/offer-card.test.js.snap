@@ -57,12 +57,11 @@ exports[`snapshot test: OfferCard component should render correctly 1`] = `
     <h2
       className="place-card__name"
     >
-      <a
-        href="#"
-        onClick={[Function]}
+      <Link
+        to="/offer/4"
       >
         Paper place
-      </a>
+      </Link>
     </h2>
     <p
       className="place-card__type"
@@ -133,12 +132,11 @@ exports[`snapshot test: OfferCard component should render premium mark 1`] = `
     <h2
       className="place-card__name"
     >
-      <a
-        href="#"
-        onClick={[Function]}
+      <Link
+        to="/offer/4"
       >
         Paper place
-      </a>
+      </Link>
     </h2>
     <p
       className="place-card__type"

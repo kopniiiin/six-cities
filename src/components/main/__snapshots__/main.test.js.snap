@@ -76,7 +76,6 @@ exports[`snapshot test: Main component should render correctly 1`] = `
             onOfferCardBookmarkButtonClick={[Function]}
             onOfferCardMouseEnter={[Function]}
             onOfferCardMouseLeave={[Function]}
-            onOfferCardNameClick={[Function]}
           />
         </section>
         <div

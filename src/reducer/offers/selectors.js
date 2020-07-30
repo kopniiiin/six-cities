@@ -38,4 +38,16 @@ export const getFilteredAndSortedOffers = createSelector(
     )
 );
 
+export const getGroupedByCityFavoriteOffers = (state) => getFavoriteOffers(state).reduce((groups, offer) => {
+  const {city: {name: city}} = offer;
+
+  if (!groups[city]) {
+    groups[city] = [];
+  }
+
+  groups[city].push(offer);
+
+  return groups;
+}, {});
+
 export const getOfferWithId = (state, offerId) => getOffers(state).find(({id}) => id === offerId);

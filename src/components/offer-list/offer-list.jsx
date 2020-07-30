@@ -8,15 +8,13 @@ delete offerCardPropTypesCopy.blockClassName;
 delete offerCardPropTypesCopy.onMouseEnter;
 delete offerCardPropTypesCopy.onMouseLeave;
 delete offerCardPropTypesCopy.onBookmarkButtonClick;
-delete offerCardPropTypesCopy.onNameClick;
 
 const propTypes = {
   blockClassName: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerCardPropTypesCopy)).isRequired,
   onOfferCardMouseEnter: PropTypes.func.isRequired,
   onOfferCardMouseLeave: PropTypes.func.isRequired,
-  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired,
-  onOfferCardNameClick: PropTypes.func.isRequired
+  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
 };
 
 const OfferList = (props) => {
@@ -25,8 +23,7 @@ const OfferList = (props) => {
     offers,
     onOfferCardMouseEnter,
     onOfferCardMouseLeave,
-    onOfferCardBookmarkButtonClick,
-    onOfferCardNameClick
+    onOfferCardBookmarkButtonClick
   } = props;
 
   const listClassName = `${blockClassName}__places-list places__list`;
@@ -38,8 +35,7 @@ const OfferList = (props) => {
       {...offer}
       onMouseEnter={onOfferCardMouseEnter}
       onMouseLeave={onOfferCardMouseLeave}
-      onBookmarkButtonClick={onOfferCardBookmarkButtonClick}
-      onNameClick={onOfferCardNameClick}/>
+      onBookmarkButtonClick={onOfferCardBookmarkButtonClick}/>
   ));
 
   return <div className={listClassName}>{offerCards}</div>;
