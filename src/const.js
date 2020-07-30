@@ -50,3 +50,5 @@ export const AuthorizationStatus = {
   AUTHORIZED: `AUTHORIZED`,
   UNAUTHORIZED: `UNAUTHORIZED`
 };
+
+export const ERROR_TIMEOUT = 4000;

@@ -5,11 +5,13 @@ import {Link} from "react-router-dom";
 import {Path} from "../../const.js";
 
 const propTypes = {
+  children: PropTypes.element,
   email: PropTypes.string
 };
 
-const Header = ({email}) => (
+const Header = ({children, email}) => (
   <header className="header">
+    {children}
     <div className="container">
       <div className="header__wrapper">
         <div className="header__left">
