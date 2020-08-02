@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {Path} from "../../const.js";
+import {OfferType, Path} from "../../const.js";
 
 import OfferList from "../offer-list/offer-list.jsx";
 
@@ -12,7 +12,16 @@ import {getGroupedByCityFavoriteOffers} from "../../reducer/offers/selectors.js"
 
 const propTypes = {
   children: PropTypes.element.isRequired,
-  citiesToOffers: PropTypes.object.isRequired,
+  citiesToOffers: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
+    name: PropTypes.string.isRequired,
+    mainPhoto: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired
+  }))).isRequired,
   loadData: PropTypes.func.isRequired,
   onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
 };
@@ -45,14 +54,12 @@ class FavoritesScreen extends PureComponent {
                           </a>
                         </div>
                       </div>
-                      {
-                        <OfferList
-                          blockClassName={`favorites`}
-                          offers={offers}
-                          onOfferCardMouseEnter={() => {}}
-                          onOfferCardMouseLeave={() => {}}
-                          onOfferCardBookmarkButtonClick={onOfferCardBookmarkButtonClick}/>
-                      }
+                      <OfferList
+                        blockClassName={`favorites`}
+                        offers={offers}
+                        onOfferCardMouseEnter={() => {}}
+                        onOfferCardMouseLeave={() => {}}
+                        onOfferCardBookmarkButtonClick={onOfferCardBookmarkButtonClick}/>
                     </li>
                   ))}
                 </ul>

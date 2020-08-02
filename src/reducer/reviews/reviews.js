@@ -40,7 +40,7 @@ export const Operation = {
   sendReview: (offerId, review) => (dispatch, getState, api) => {
     dispatch(ActionCreator.setReviewSendingStatus(true));
 
-    api.post(`${ServerURL.REVIEWS}/${offerId}`, convertReviewToServerFormat(review))
+    return api.post(`${ServerURL.REVIEWS}/${offerId}`, convertReviewToServerFormat(review))
       .then(({data}) => dispatch(ActionCreator.setReviews(convertReviewsFromServerFormat(data))))
       .catch(() => temporarilySetError(dispatch, `review sending error`))
       .finally(() => dispatch(ActionCreator.setReviewSendingStatus(false)));
