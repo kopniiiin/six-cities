@@ -207,7 +207,7 @@ class OfferScreen extends PureComponent {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className={hostPhotoClassName}>
-                      <img className="property__avatar user__avatar" src={hostPhoto} alt="Host photo" width="74" height="74"/>
+                      <img className="property__avatar user__avatar" src={`/${hostPhoto}`} alt="Host photo" width="74" height="74"/>
                     </div>
                     <span className="property__user-name">{hostName}</span>
                   </div>

@@ -129,7 +129,7 @@ exports[`snapshot test: OfferScreen component should render correctly 1`] = `
                   alt="Host photo"
                   className="property__avatar user__avatar"
                   height="74"
-                  src="photo"
+                  src="/photo"
                   width="74"
                 />
               </div>

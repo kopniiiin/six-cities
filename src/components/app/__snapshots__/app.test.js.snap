@@ -1,195 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`snapshot test: App component should render correctly 1`] = `
-<BrowserRouter>
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
   <Switch>
     <Route
       exact={true}
       path="/"
-    >
-      <WithActiveItem
-        activeCity="city"
-        activeSortType="popular"
-        cities={
-          Array [
-            "city",
-          ]
-        }
-        offers={
-          Array [
-            Object {
-              "bedroomAmount": 4,
-              "coordinates": Array [
-                4,
-                4,
-              ],
-              "description": "Lots of paper",
-              "features": Array [
-                "paper",
-                "coffee machine",
-              ],
-              "guestAmount": 4,
-              "host": Object {
-                "isPro": false,
-                "name": "Host",
-                "photo": Object {
-                  "alt": "Host photo",
-                  "src": "img/avatar-max.jpg",
-                },
-              },
-              "id": "4",
-              "isFavorite": false,
-              "isPremium": false,
-              "name": "Paper place",
-              "photos": Array [
-                Object {
-                  "alt": "Place photo",
-                  "src": "img/room.jpg",
-                },
-              ],
-              "price": 4,
-              "rating": 4,
-              "reviews": Array [
-                Object {
-                  "date": "2020-04-04",
-                  "id": "4",
-                  "rating": 4,
-                  "text": "Good",
-                  "user": Object {
-                    "name": "User",
-                    "photo": Object {
-                      "alt": "User photo",
-                      "src": "img/avatar-max.jpg",
-                    },
-                  },
-                },
-              ],
-              "type": "room",
-            },
-          ]
-        }
-        onCityClick={[Function]}
-        onOfferCardNameClick={[Function]}
-        onSortTypeChange={[Function]}
-      />
-    </Route>
+      render={[Function]}
+    />
+    <GuestRoute
+      authorizationStatus="UNAUTHORIZED"
+      exact={true}
+      path="/login"
+      render={[Function]}
+    />
     <Route
       exact={true}
-      path="/dev-offer"
-    >
-      <OfferScreen
-        bedroomAmount={4}
-        coordinates={
-          Array [
-            4,
-            4,
-          ]
-        }
-        description="Lots of paper"
-        features={
-          Array [
-            "paper",
-            "coffee machine",
-          ]
-        }
-        guestAmount={4}
-        host={
-          Object {
-            "isPro": false,
-            "name": "Host",
-            "photo": Object {
-              "alt": "Host photo",
-              "src": "img/avatar-max.jpg",
-            },
-          }
-        }
-        id="4"
-        isFavorite={false}
-        isPremium={false}
-        name="Paper place"
-        nearOffers={
-          Array [
-            Object {
-              "bedroomAmount": 4,
-              "coordinates": Array [
-                4,
-                4,
-              ],
-              "description": "Lots of paper",
-              "features": Array [
-                "paper",
-                "coffee machine",
-              ],
-              "guestAmount": 4,
-              "host": Object {
-                "isPro": false,
-                "name": "Host",
-                "photo": Object {
-                  "alt": "Host photo",
-                  "src": "img/avatar-max.jpg",
-                },
-              },
-              "id": "4",
-              "isFavorite": false,
-              "isPremium": false,
-              "name": "Paper place",
-              "photos": Array [
-                Object {
-                  "alt": "Place photo",
-                  "src": "img/room.jpg",
-                },
-              ],
-              "price": 4,
-              "rating": 4,
-              "reviews": Array [
-                Object {
-                  "date": "2020-04-04",
-                  "id": "4",
-                  "rating": 4,
-                  "text": "Good",
-                  "user": Object {
-                    "name": "User",
-                    "photo": Object {
-                      "alt": "User photo",
-                      "src": "img/avatar-max.jpg",
-                    },
-                  },
-                },
-              ],
-              "type": "room",
-            },
-          ]
-        }
-        photos={
-          Array [
-            Object {
-              "alt": "Place photo",
-              "src": "img/room.jpg",
-            },
-          ]
-        }
-        price={4}
-        rating={4}
-        reviews={
-          Array [
-            Object {
-              "date": "2020-04-04",
-              "id": "4",
-              "rating": 4,
-              "text": "Good",
-              "user": Object {
-                "name": "User",
-                "photo": Object {
-                  "alt": "User photo",
-                  "src": "img/avatar-max.jpg",
-                },
-              },
-            },
-          ]
-        }
-        type="room"
-      />
-    </Route>
+      path="/offer/:offerId"
+      render={[Function]}
+    />
+    <PrivateRoute
+      authorizationStatus="UNAUTHORIZED"
+      exact={true}
+      path="/favorites"
+      render={[Function]}
+    />
   </Switch>
-</BrowserRouter>
+</Router>
 `;

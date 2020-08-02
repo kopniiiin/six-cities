@@ -1,9 +1,11 @@
 import React, {PureComponent} from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import {City, SortType, Path, AuthorizationStatus} from "../../const.js";
+import history from "../../history.js";
+
+import {OfferType, City, SortType, Path, AuthorizationStatus} from "../../const.js";
 
 import GuestRoute from "../guest-route/guest-route.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
@@ -37,7 +39,25 @@ const propTypes = {
   activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
   activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
   error: PropTypes.string,
-  offers: PropTypes.arrayOf(PropTypes.shape(offerScreenPropTypesCopy)).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
+    name: PropTypes.string.isRequired,
+    mainPhoto: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    location: PropTypes.shape({
+      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+        zoom: PropTypes.number.isRequired
+      }).isRequired
+    }).isRequired
+  })).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onSortTypeChange: PropTypes.func.isRequired,
   onLoginScreenSubmit: PropTypes.func.isRequired,
@@ -66,7 +86,7 @@ class App extends PureComponent {
     const header = <Header email={email}>{error && <ErrorMessage text={error}/>}</Header>;
 
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
 
           <Route path={Path.MAIN} exact render={() => (
@@ -106,7 +126,7 @@ class App extends PureComponent {
           )}/>
 
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 
@@ -121,7 +141,10 @@ class App extends PureComponent {
 
     if (authorizationStatus === AuthorizationStatus.AUTHORIZED) {
       onOfferFavoritenessChange(offerId);
+      return;
     }
+
+    history.push(Path.LOGIN);
   }
 }
 
