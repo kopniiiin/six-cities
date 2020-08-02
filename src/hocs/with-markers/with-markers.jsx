@@ -4,8 +4,8 @@ import Leaflet from "leaflet";
 
 const LAYER_URL = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`;
 const LAYER_ATTRIBUTION = `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`;
-const ICON_URL = `img/pin.svg`;
-const ACTIVE_ICON_URL = `img/pin-active.svg`;
+const ICON_URL = `/img/pin.svg`;
+const ACTIVE_ICON_URL = `/img/pin-active.svg`;
 const ICON_SIZE = [27, 39];
 
 const withMarkers = (Component) => {

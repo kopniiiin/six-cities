@@ -18,11 +18,26 @@ reviewPropTypesCopy.id = PropTypes.string.isRequired;
 const propTypes = {
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape(reviewPropTypesCopy)).isRequired,
+  isReviewFormDisabled: PropTypes.bool.isRequired,
+  reviewFormError: PropTypes.string,
   onReviewFormSubmit: PropTypes.func.isRequired
 };
 
-const ReviewList = ({authorizationStatus, reviews, onReviewFormSubmit}) => {
-  const reviewForm = <ReviewFormWithReviewData onSubmit={onReviewFormSubmit}/>;
+const ReviewList = (props) => {
+  const {
+    authorizationStatus,
+    reviews,
+    isReviewFormDisabled,
+    reviewFormError,
+    onReviewFormSubmit
+  } = props;
+
+  const reviewForm = (
+    <ReviewFormWithReviewData
+      disabled={isReviewFormDisabled}
+      error={reviewFormError}
+      onSubmit={onReviewFormSubmit}/>
+  );
 
   const slicedReviews = reviews.slice(0, MAX_REVIEW_AMOUNT);
 

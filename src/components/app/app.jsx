@@ -1,12 +1,15 @@
 import React, {PureComponent} from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import {City, SortType, Path, AuthorizationStatus} from "../../const.js";
+import history from "../../history.js";
+
+import {OfferType, City, SortType, Path, AuthorizationStatus} from "../../const.js";
 
 import GuestRoute from "../guest-route/guest-route.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
+import ErrorMessage from "../error-message/error-message.jsx";
 import Header from "../header/header.jsx";
 import Main from "../main/main.jsx";
 import LoginScreen from "../login-screen/login-screen.jsx";
@@ -21,7 +24,7 @@ import {getActiveCity, getActiveSortType} from "../../reducer/app/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {getAuthorizationStatus, getEmail} from "../../reducer/user/selectors.js";
 import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
-import {getFilteredAndSortedOffers} from "../../reducer/offers/selectors.js";
+import {getError, getFilteredAndSortedOffers} from "../../reducer/offers/selectors.js";
 
 const MainWithActiveItem = withActiveItem(Main);
 const LoginScreenWithAuthorizationData = withAuthorizationData(LoginScreen);
@@ -35,7 +38,26 @@ const propTypes = {
   email: PropTypes.string,
   activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
   activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape(offerScreenPropTypesCopy)).isRequired,
+  error: PropTypes.string,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
+    name: PropTypes.string.isRequired,
+    mainPhoto: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    location: PropTypes.shape({
+      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+        zoom: PropTypes.number.isRequired
+      }).isRequired
+    }).isRequired
+  })).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onSortTypeChange: PropTypes.func.isRequired,
   onLoginScreenSubmit: PropTypes.func.isRequired,
@@ -55,15 +77,16 @@ class App extends PureComponent {
       email,
       activeCity,
       activeSortType,
+      error,
       offers,
       onCityClick,
       onSortTypeChange,
     } = this.props;
 
-    const header = <Header email={email}/>;
+    const header = <Header email={email}>{error && <ErrorMessage text={error}/>}</Header>;
 
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
 
           <Route path={Path.MAIN} exact render={() => (
@@ -103,7 +126,7 @@ class App extends PureComponent {
           )}/>
 
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 
@@ -118,7 +141,10 @@ class App extends PureComponent {
 
     if (authorizationStatus === AuthorizationStatus.AUTHORIZED) {
       onOfferFavoritenessChange(offerId);
+      return;
     }
+
+    history.push(Path.LOGIN);
   }
 }
 
@@ -129,6 +155,7 @@ const mapStateToProps = (state) => ({
   email: getEmail(state),
   activeCity: getActiveCity(state),
   activeSortType: getActiveSortType(state),
+  error: getError(state),
   offers: getFilteredAndSortedOffers(state)
 });
 

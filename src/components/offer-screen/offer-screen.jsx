@@ -18,7 +18,7 @@ import withMarkers from "../../hocs/with-markers/with-markers.jsx";
 import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
 import {getNearOffers, getOfferWithId} from "../../reducer/offers/selectors.js";
 import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
-import {getReviews} from "../../reducer/reviews/selectors.js";
+import {getReviews, getReviewSendingStatus, getError} from "../../reducer/reviews/selectors.js";
 
 const MapWithMarkers = withMarkers(Map);
 
@@ -81,6 +81,8 @@ const propTypes = {
     }).isRequired
   })).isRequired,
   loadData: PropTypes.func.isRequired,
+  isReviewFormDisabled: PropTypes.bool.isRequired,
+  reviewFormError: PropTypes.string,
   onReviewFormSubmit: PropTypes.func.isRequired,
   onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
 };
@@ -109,6 +111,8 @@ class OfferScreen extends PureComponent {
       },
       nearOffers,
       reviews,
+      isReviewFormDisabled,
+      reviewFormError,
       onReviewFormSubmit,
       onOfferCardBookmarkButtonClick
     } = this.props;
@@ -125,7 +129,15 @@ class OfferScreen extends PureComponent {
 
     const premiumMark = <PremiumMark blockClassName={`property`}/>;
     const starRating = <StarRating blockClassName={`property`} value={rating} isValueShown={true}/>;
-    const reviewList = <ReviewList authorizationStatus={authorizationStatus} reviews={reviews} onReviewFormSubmit={onReviewFormSubmit}/>;
+
+    const reviewList = (
+      <ReviewList
+        authorizationStatus={authorizationStatus}
+        reviews={reviews}
+        isReviewFormDisabled={isReviewFormDisabled}
+        reviewFormError={reviewFormError}
+        onReviewFormSubmit={onReviewFormSubmit}/>
+    );
 
     const bookmarkButton = (
       <BookmarkButton
@@ -195,7 +207,7 @@ class OfferScreen extends PureComponent {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className={hostPhotoClassName}>
-                      <img className="property__avatar user__avatar" src={hostPhoto} alt="Host photo" width="74" height="74"/>
+                      <img className="property__avatar user__avatar" src={`/${hostPhoto}`} alt="Host photo" width="74" height="74"/>
                     </div>
                     <span className="property__user-name">{hostName}</span>
                   </div>
@@ -241,7 +253,9 @@ OfferScreen.propTypes = propTypes;
 const mapStateToProps = (state, {id}) => ({
   offer: getOfferWithId(state, id),
   nearOffers: getNearOffers(state),
-  reviews: getReviews(state)
+  reviews: getReviews(state),
+  isReviewFormDisabled: getReviewSendingStatus(state),
+  reviewFormError: getError(state)
 });
 
 const mapDispatchToProps = (dispatch, {id}) => ({

@@ -12,5 +12,6 @@ export default {
       photo: `photo`
     }
   }],
+  isReviewFormDisabled: false,
   onReviewFormSubmit: () => {}
 };

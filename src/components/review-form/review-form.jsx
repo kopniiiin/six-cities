@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import {MAX_RATING} from "../../const.js";
 
+import ErrorMessage from "../error-message/error-message.jsx";
+
 const TextLengthLimit = {MIN: 50, MAX: 300};
 
 const ratingsToTitles = {
@@ -14,6 +16,8 @@ const ratingsToTitles = {
 };
 
 const propTypes = {
+  disabled: PropTypes.bool.isRequired,
+  error: PropTypes.string,
   text: PropTypes.string,
   rating: PropTypes.number,
   onTextChange: PropTypes.func.isRequired,
@@ -22,7 +26,15 @@ const propTypes = {
 };
 
 const ReviewForm = (props) => {
-  const {text, rating: activeRating, onTextChange, onRatingChange, onSubmit} = props;
+  const {
+    disabled,
+    error,
+    text,
+    rating: activeRating,
+    onTextChange,
+    onRatingChange,
+    onSubmit
+  } = props;
 
   const stars = [];
 
@@ -38,6 +50,7 @@ const ReviewForm = (props) => {
             id={`${rating}-stars`}
             checked={rating === activeRating}
             required
+            disabled={disabled}
             onChange={() => onRatingChange(rating)}/>
 
           <label
@@ -53,7 +66,9 @@ const ReviewForm = (props) => {
     );
   }
 
-  const isSubmitButtonDisabled = !activeRating || !text || text.length < TextLengthLimit.MIN || text.length > TextLengthLimit.MAX;
+  const isSubmitButtonDisabled = (
+    disabled || !activeRating || !text || text.length < TextLengthLimit.MIN || text.length > TextLengthLimit.MAX
+  );
 
   return (
     <form
@@ -64,6 +79,8 @@ const ReviewForm = (props) => {
         evt.preventDefault();
         onSubmit({text, rating: activeRating});
       }}>
+
+      {error && <ErrorMessage text={error}/>}
 
       <label className="reviews__label form__label" htmlFor="text">Your review</label>
 
@@ -78,6 +95,7 @@ const ReviewForm = (props) => {
         placeholder="Tell how was your stay, what you like and what can be improved"
         id="text"
         required
+        disabled={disabled}
         onChange={(evt) => onTextChange(evt.target.value)}/>
 
       <div className="reviews__button-wrapper">

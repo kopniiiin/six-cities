@@ -32,6 +32,7 @@ exports[`snapshot test: ReviewList component should render ReviewForm 1`] = `
     />
   </ul>
   <WithReviewData
+    disabled={false}
     onSubmit={[Function]}
   />
 </section>
