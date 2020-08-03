@@ -1,4 +1,4 @@
-import NameSpace from "../name-space.js";
+import NameSpace from "../name-space";
 
 const sortReviewsByDate = (reviews) => [...reviews].sort((a, b) => new Date(b.date) - new Date(a.date));
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {ServerResponseStatus} from "./const.js";
+import {ServerResponseStatus} from "./const";
 
 const BASE_URL = `https://4.react.pages.academy/six-cities`;
 const TIMEOUT = 5000;

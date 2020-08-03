@@ -1,4 +1,4 @@
-import {OfferType} from "../const.js";
+import {OfferType} from "../const";
 
 export default {
   citiesToOffers: {

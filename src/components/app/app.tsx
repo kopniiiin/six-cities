@@ -3,28 +3,28 @@ import {Router, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import history from "../../history.js";
+import history from "../../history";
 
-import {OfferType, City, SortType, Path, AuthorizationStatus} from "../../const.js";
+import {OfferType, City, SortType, Path, AuthorizationStatus} from "../../const";
 
-import GuestRoute from "../guest-route/guest-route.jsx";
-import PrivateRoute from "../private-route/private-route.jsx";
-import ErrorMessage from "../error-message/error-message.jsx";
-import Header from "../header/header.jsx";
-import Main from "../main/main.jsx";
-import LoginScreen from "../login-screen/login-screen.jsx";
-import OfferScreen from "../offer-screen/offer-screen.jsx";
-import FavoritesScreen from "../favorites-screen/favorites-screen.jsx";
+import GuestRoute from "../guest-route/guest-route";
+import PrivateRoute from "../private-route/private-route";
+import ErrorMessage from "../error-message/error-message";
+import Header from "../header/header";
+import Main from "../main/main";
+import LoginScreen from "../login-screen/login-screen";
+import OfferScreen from "../offer-screen/offer-screen";
+import FavoritesScreen from "../favorites-screen/favorites-screen";
 
-import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
-import withAuthorizationData from "../../hocs/with-authorization-data/with-authorization-data.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import withAuthorizationData from "../../hocs/with-authorization-data/with-authorization-data";
 
-import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
-import {getActiveCity, getActiveSortType} from "../../reducer/app/selectors.js";
-import {Operation as UserOperation} from "../../reducer/user/user.js";
-import {getAuthorizationStatus, getEmail} from "../../reducer/user/selectors.js";
-import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
-import {getError, getFilteredAndSortedOffers} from "../../reducer/offers/selectors.js";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
+import {getActiveCity, getActiveSortType} from "../../reducer/app/selectors";
+import {Operation as UserOperation} from "../../reducer/user/user";
+import {getAuthorizationStatus, getEmail} from "../../reducer/user/selectors";
+import {Operation as OffersOperation} from "../../reducer/offers/offers";
+import {getError, getFilteredAndSortedOffers} from "../../reducer/offers/selectors";
 
 const MainWithActiveItem = withActiveItem(Main);
 const LoginScreenWithAuthorizationData = withAuthorizationData(LoginScreen);

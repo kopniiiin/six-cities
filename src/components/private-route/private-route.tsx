@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Route, Redirect} from "react-router-dom";
 
-import {Path, AuthorizationStatus} from "../../const.js";
+import {Path, AuthorizationStatus} from "../../const";
 
 const propTypes = {
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,

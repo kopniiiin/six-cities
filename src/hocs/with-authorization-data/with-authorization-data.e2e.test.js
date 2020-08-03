@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import withAuthorizationData from "./with-authorization-data.jsx";
+import withAuthorizationData from "./with-authorization-data";
 
-import testMocks from "../../test-mocks/with-authorization-data.js";
+import testMocks from "../../test-mocks/with-authorization-data";
 
 const MockComponent = () => <div/>;
 const MockComponentWithAuthorizationData = withAuthorizationData(MockComponent);

@@ -1,9 +1,9 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import LoginScreen from "./login-screen.jsx";
+import LoginScreen from "./login-screen";
 
-import testMocks from "../../test-mocks/login-screen.js";
+import testMocks from "../../test-mocks/login-screen";
 
 describe(`snapshot test: LoginScreen component`, () => {
   it(`should render correctly`, () => expect(

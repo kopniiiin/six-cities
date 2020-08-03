@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import StarRating from "./star-rating.jsx";
+import StarRating from "./star-rating";
 
-import testMocks from "../../test-mocks/star-rating.js";
+import testMocks from "../../test-mocks/star-rating";
 
 describe(`snapshot test: StarRating component`, () => {
   it(`should render correctly`, () => expect(

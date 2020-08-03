@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-import {Path} from "../../const.js";
+import {Path} from "../../const";
 
 const propTypes = {
   children: PropTypes.element,

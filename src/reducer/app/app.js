@@ -1,6 +1,6 @@
-import {DEFAULT_CITY, DEFAULT_SORT_TYPE} from "../../const.js";
+import {DEFAULT_CITY, DEFAULT_SORT_TYPE} from "../../const";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
 const initialState = {
   activeCity: DEFAULT_CITY,

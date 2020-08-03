@@ -1,4 +1,4 @@
-import {OfferType, City, SortType, AuthorizationStatus} from "../const.js";
+import {OfferType, City, SortType, AuthorizationStatus} from "../const";
 
 export default {
   authorizationStatus: AuthorizationStatus.UNAUTHORIZED,

@@ -1,10 +1,10 @@
 import MockAdapter from "axios-mock-adapter";
 
-import {ServerURL, ServerResponseStatus, AuthorizationStatus} from "../../const.js";
+import {ServerURL, ServerResponseStatus, AuthorizationStatus} from "../../const";
 
-import createAPI from "../../api.js";
+import createAPI from "../../api";
 
-import {ActionType, ActionCreator, Operation, reducer} from "./user.js";
+import {ActionType, ActionCreator, Operation, reducer} from "./user";
 
 describe(`UserActionCreator`, () => {
   it(`should create SET_AUTHORIZATION_STATUS action`, () => {

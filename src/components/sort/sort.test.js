@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import Sort from "./sort.jsx";
+import Sort from "./sort";
 
-import testMocks from "../../test-mocks/sort.js";
+import testMocks from "../../test-mocks/sort";
 
 describe(`snapshot test: Sort component`, () => {
   it(`should render correctly`, () => expect(

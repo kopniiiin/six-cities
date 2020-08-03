@@ -1,10 +1,10 @@
-import {ServerURL, ERROR_TIMEOUT} from "../../const.js";
+import {ServerURL, ERROR_TIMEOUT} from "../../const";
 
-import {extend, pushElement, replaceElement, removeElement} from "../../utils.js";
+import {extend, pushElement, replaceElement, removeElement} from "../../utils";
 
-import {getOffers, getNearOffers, getFavoriteOffers, getOfferWithId} from "./selectors.js";
+import {getOffers, getNearOffers, getFavoriteOffers, getOfferWithId} from "./selectors";
 
-import {convertOffersFromServerFormat} from "../../adapters.js";
+import {convertOffersFromServerFormat} from "../../adapters";
 
 let errorTimeout;
 

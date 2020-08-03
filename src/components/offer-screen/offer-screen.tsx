@@ -2,23 +2,23 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {OfferType, AuthorizationStatus} from "../../const.js";
+import {OfferType, AuthorizationStatus} from "../../const";
 
-import {upperCaseFirstLetter} from "../../utils.js";
+import {upperCaseFirstLetter} from "../../utils";
 
-import PremiumMark from "../premium-mark/premium-mark.jsx";
-import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
-import StarRating from "../star-rating/star-rating.jsx";
-import ReviewList from "../review-list/review-list.jsx";
-import Map from "../map/map.jsx";
-import OfferList from "../offer-list/offer-list.jsx";
+import PremiumMark from "../premium-mark/premium-mark";
+import BookmarkButton from "../bookmark-button/bookmark-button";
+import StarRating from "../star-rating/star-rating";
+import ReviewList from "../review-list/review-list";
+import Map from "../map/map";
+import OfferList from "../offer-list/offer-list";
 
-import withMarkers from "../../hocs/with-markers/with-markers.jsx";
+import withMarkers from "../../hocs/with-markers/with-markers";
 
-import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
-import {getNearOffers, getOfferWithId} from "../../reducer/offers/selectors.js";
-import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
-import {getReviewSendingStatus, getError, getSortedByDateReviews} from "../../reducer/reviews/selectors.js";
+import {Operation as OffersOperation} from "../../reducer/offers/offers";
+import {getNearOffers, getOfferWithId} from "../../reducer/offers/selectors";
+import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews";
+import {getReviewSendingStatus, getError, getSortedByDateReviews} from "../../reducer/reviews/selectors";
 
 const MapWithMarkers = withMarkers(Map);
 

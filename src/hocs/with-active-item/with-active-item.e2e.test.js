@@ -1,7 +1,7 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import withActiveItem from "./with-active-item.jsx";
+import withActiveItem from "./with-active-item";
 
 const MockComponent = () => <div/>;
 const MockComponentWithActiveItem = withActiveItem(MockComponent);

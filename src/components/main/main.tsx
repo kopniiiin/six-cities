@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {OfferType, City, SortType} from "../../const.js";
+import {OfferType, City, SortType} from "../../const";
 
-import CityList from "../city-list/city-list.jsx";
-import Sort from "../sort/sort.jsx";
-import OfferList from "../offer-list/offer-list.jsx";
-import NoOffersMessage from "../no-offers-message/no-offers-message.jsx";
-import Map from "../map/map.jsx";
+import CityList from "../city-list/city-list";
+import Sort from "../sort/sort";
+import OfferList from "../offer-list/offer-list";
+import NoOffersMessage from "../no-offers-message/no-offers-message";
+import Map from "../map/map";
 
-import withActiveState from "../../hocs/with-active-state/with-active-state.jsx";
-import withMarkers from "../../hocs/with-markers/with-markers.jsx";
+import withActiveState from "../../hocs/with-active-state/with-active-state";
+import withMarkers from "../../hocs/with-markers/with-markers";
 
 const SortWithActiveState = withActiveState(Sort);
 const MapWithMarkers = withMarkers(Map);

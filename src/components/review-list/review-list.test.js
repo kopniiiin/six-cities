@@ -1,13 +1,13 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {AuthorizationStatus} from "../../const.js";
+import {AuthorizationStatus} from "../../const";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import ReviewList from "./review-list.jsx";
+import ReviewList from "./review-list";
 
-import testMocks from "../../test-mocks/review-list.js";
+import testMocks from "../../test-mocks/review-list";
 
 describe(`snapshot test: ReviewList component`, () => {
   it(`should render correctly`, () => expect(

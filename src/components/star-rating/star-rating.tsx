@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {MAX_RATING} from "../../const.js";
+import {MAX_RATING} from "../../const";
 
 const propTypes = {
   blockClassName: PropTypes.string.isRequired,

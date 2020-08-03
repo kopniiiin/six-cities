@@ -1,7 +1,7 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import PremiumMark from "./premium-mark.jsx";
+import PremiumMark from "./premium-mark";
 
 describe(`snapshot test: PremiumMark component`, () => {
   it(`should render correctly`, () => expect(

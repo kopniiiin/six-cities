@@ -1,6 +1,6 @@
-import {ServerURL, AuthorizationStatus} from "../../const.js";
+import {ServerURL, AuthorizationStatus} from "../../const";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.UNAUTHORIZED,

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {SortType} from "../../const.js";
+import {SortType} from "../../const";
 
 import {upperCaseFirstLetter} from "../../utils";
 

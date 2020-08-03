@@ -1,11 +1,11 @@
 import {combineReducers} from "redux";
 
-import NameSpace from "./name-space.js";
+import NameSpace from "./name-space";
 
-import {reducer as appReducer} from "./app/app.js";
-import {reducer as userReducer} from "./user/user.js";
-import {reducer as offersReducer} from "./offers/offers.js";
-import {reducer as reviewsReducer} from "./reviews/reviews.js";
+import {reducer as appReducer} from "./app/app";
+import {reducer as userReducer} from "./user/user";
+import {reducer as offersReducer} from "./offers/offers";
+import {reducer as reviewsReducer} from "./reviews/reviews";
 
 const reducer = combineReducers({
   [NameSpace.APP]: appReducer,

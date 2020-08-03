@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import BookmarkButton from "./bookmark-button.jsx";
+import BookmarkButton from "./bookmark-button";
 
-import testMocks from "../../test-mocks/bookmark-button.js";
+import testMocks from "../../test-mocks/bookmark-button";
 
 describe(`e2e test: BookmarkButton component`, () => {
   it(`should call onClick`, () => {

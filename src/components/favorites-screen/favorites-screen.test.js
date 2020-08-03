@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import {FavoritesScreen} from "./favorites-screen.jsx";
+import {FavoritesScreen} from "./favorites-screen";
 
-import testMocks from "../../test-mocks/favorites-screen.js";
+import testMocks from "../../test-mocks/favorites-screen";
 
 describe(`snapshot test: FavoritesScreen component`, () => {
   it(`should render correctly`, () => expect(

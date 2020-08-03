@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {AuthorizationStatus} from "../../const.js";
+import {AuthorizationStatus} from "../../const";
 
-import Review from "../review/review.jsx";
-import ReviewForm from "../review-form/review-form.jsx";
+import Review from "../review/review";
+import ReviewForm from "../review-form/review-form";
 
-import withReviewData from "../../hocs/with-review-data/with-review-data.jsx";
+import withReviewData from "../../hocs/with-review-data/with-review-data";
 
 const ReviewFormWithReviewData = withReviewData(ReviewForm);
 

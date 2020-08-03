@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import Main from "./main.jsx";
+import Main from "./main";
 
-import testMocks from "../../test-mocks/main.js";
+import testMocks from "../../test-mocks/main";
 
 describe(`snapshot test: Main component`, () => {
   it(`should render correctly`, () => expect(

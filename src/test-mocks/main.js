@@ -1,4 +1,4 @@
-import {OfferType, City, SortType} from "../const.js";
+import {OfferType, City, SortType} from "../const";
 
 export default {
   activeItem: `4`,

@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-import {OfferType, Path} from "../../const.js";
+import {OfferType, Path} from "../../const";
 
-import {upperCaseFirstLetter} from "../../utils.js";
+import {upperCaseFirstLetter} from "../../utils";
 
-import PremiumMark from "../premium-mark/premium-mark.jsx";
-import BookmarkButton from "../bookmark-button/bookmark-button.jsx";
-import StarRating from "../star-rating/star-rating.jsx";
+import PremiumMark from "../premium-mark/premium-mark";
+import BookmarkButton from "../bookmark-button/bookmark-button";
+import StarRating from "../star-rating/star-rating";
 
 const propTypes = {
   blockClassName: PropTypes.string.isRequired,

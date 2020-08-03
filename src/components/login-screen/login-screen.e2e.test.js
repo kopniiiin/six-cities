@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import LoginScreen from "./login-screen.jsx";
+import LoginScreen from "./login-screen";
 
-import testMocks from "../../test-mocks/login-screen.js";
+import testMocks from "../../test-mocks/login-screen";
 
 describe(`e2e test: LoginScreen component`, () => {
   it(`should call onEmailChange with email`, () => {

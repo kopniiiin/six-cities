@@ -1,4 +1,4 @@
-import {City} from "../const.js";
+import {City} from "../const";
 
 export default {
   activeCity: City.AMSTERDAM,

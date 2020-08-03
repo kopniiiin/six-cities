@@ -1,8 +1,8 @@
-import {ServerURL, ERROR_TIMEOUT} from "../../const.js";
+import {ServerURL, ERROR_TIMEOUT} from "../../const";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import {convertReviewsFromServerFormat, convertReviewToServerFormat} from "../../adapters.js";
+import {convertReviewsFromServerFormat, convertReviewToServerFormat} from "../../adapters";
 
 let errorTimeout;
 

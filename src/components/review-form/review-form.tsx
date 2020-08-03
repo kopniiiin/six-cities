@@ -1,9 +1,9 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
-import {MAX_RATING} from "../../const.js";
+import {MAX_RATING} from "../../const";
 
-import ErrorMessage from "../error-message/error-message.jsx";
+import ErrorMessage from "../error-message/error-message";
 
 const TextLengthLimit = {MIN: 50, MAX: 300};
 

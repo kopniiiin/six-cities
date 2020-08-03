@@ -1,10 +1,10 @@
 import MockAdapter from "axios-mock-adapter";
 
-import {ServerURL, ServerResponseStatus} from "../../const.js";
+import {ServerURL, ServerResponseStatus} from "../../const";
 
-import createAPI from "../../api.js";
+import createAPI from "../../api";
 
-import {ActionType, ActionCreator, Operation, reducer} from "./reviews.js";
+import {ActionType, ActionCreator, Operation, reducer} from "./reviews";
 
 describe(`ReviewsActionCreator`, () => {
   it(`should create SET_REVIEWS action`, () => {

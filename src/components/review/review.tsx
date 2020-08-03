@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {formatDate} from "../../utils.js";
+import {formatDate} from "../../utils";
 
-import StarRating from "../star-rating/star-rating.jsx";
+import StarRating from "../star-rating/star-rating";
 
 const propTypes = {
   date: PropTypes.string.isRequired,

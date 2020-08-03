@@ -1,10 +1,10 @@
 import {createSelector} from "reselect";
 
-import {SortType} from "../../const.js";
+import {SortType} from "../../const";
 
-import NameSpace from "../name-space.js";
+import NameSpace from "../name-space";
 
-import {getActiveCity, getActiveSortType} from "../app/selectors.js";
+import {getActiveCity, getActiveSortType} from "../app/selectors";
 
 const sortOffers = (offers, sortType) => {
   const offersCopy = [...offers];

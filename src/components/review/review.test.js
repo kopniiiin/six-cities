@@ -1,9 +1,9 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import Review from "./review.jsx";
+import Review from "./review";
 
-import testMocks from "../../test-mocks/review.js";
+import testMocks from "../../test-mocks/review";
 
 describe(`snapshot test: Review component`, () => {
   it(`should render correctly`, () => expect(

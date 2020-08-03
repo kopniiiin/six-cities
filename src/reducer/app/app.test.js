@@ -1,6 +1,6 @@
-import {City, DEFAULT_CITY, SortType, DEFAULT_SORT_TYPE} from "../../const.js";
+import {City, DEFAULT_CITY, SortType, DEFAULT_SORT_TYPE} from "../../const";
 
-import {ActionType, ActionCreator, reducer} from "./app.js";
+import {ActionType, ActionCreator, reducer} from "./app";
 
 describe(`AppActionCreator`, () => {
   it(`should create SET_ACTIVE_CITY action`, () => {

@@ -1,4 +1,4 @@
-import {AuthorizationStatus} from "../const.js";
+import {AuthorizationStatus} from "../const";
 
 export default {
   authorizationStatus: AuthorizationStatus.UNAUTHORIZED,

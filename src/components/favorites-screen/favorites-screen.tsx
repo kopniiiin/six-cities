@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {OfferType, Path} from "../../const.js";
+import {OfferType, Path} from "../../const";
 
-import OfferList from "../offer-list/offer-list.jsx";
+import OfferList from "../offer-list/offer-list";
 
-import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
-import {getGroupedByCityFavoriteOffers} from "../../reducer/offers/selectors.js";
+import {Operation as OffersOperation} from "../../reducer/offers/offers";
+import {getGroupedByCityFavoriteOffers} from "../../reducer/offers/selectors";
 
 const propTypes = {
   children: PropTypes.element.isRequired,

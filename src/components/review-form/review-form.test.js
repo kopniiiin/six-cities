@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import ReviewForm from "./review-form.jsx";
+import ReviewForm from "./review-form";
 
-import testMocks from "../../test-mocks/review-form.js";
+import testMocks from "../../test-mocks/review-form";
 
 describe(`snapshot test: ReviewForm component`, () => {
   it(`should render correctly`, () => expect(

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {City} from "../../const.js";
+import {City} from "../../const";
 
 const propTypes = {
   activeCity: PropTypes.oneOf(Object.values(City)).isRequired,

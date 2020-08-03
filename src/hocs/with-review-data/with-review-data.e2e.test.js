@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
 
-import {extend} from "../../utils.js";
+import {extend} from "../../utils";
 
-import withReviewData from "./with-review-data.jsx";
+import withReviewData from "./with-review-data";
 
-import testMocks from "../../test-mocks/with-review-data.js";
+import testMocks from "../../test-mocks/with-review-data";
 
 const MockComponent = () => <div/>;
 const MockComponentWithReviewData = withReviewData(MockComponent);
