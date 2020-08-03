@@ -18,7 +18,7 @@ import withMarkers from "../../hocs/with-markers/with-markers.jsx";
 import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
 import {getNearOffers, getOfferWithId} from "../../reducer/offers/selectors.js";
 import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
-import {getReviews, getReviewSendingStatus, getError} from "../../reducer/reviews/selectors.js";
+import {getReviewSendingStatus, getError, getSortedByDateReviews} from "../../reducer/reviews/selectors.js";
 
 const MapWithMarkers = withMarkers(Map);
 
@@ -253,7 +253,7 @@ OfferScreen.propTypes = propTypes;
 const mapStateToProps = (state, {id}) => ({
   offer: getOfferWithId(state, id),
   nearOffers: getNearOffers(state),
-  reviews: getReviews(state),
+  reviews: getSortedByDateReviews(state),
   isReviewFormDisabled: getReviewSendingStatus(state),
   reviewFormError: getError(state)
 });
