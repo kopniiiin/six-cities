@@ -1,19 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {City} from "../../const";
+import {City, AuthorizationData} from "../../types";
 
-const propTypes = {
-  children: PropTypes.element.isRequired,
-  activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  onEmailChange: PropTypes.func.isRequired,
-  onPasswordChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
-};
+interface Props {
+  children: React.ReactNode;
+  activeCity: City;
+  email: string;
+  password: string;
+  onEmailChange: (email: string) => void;
+  onPasswordChange: (password: string) => void;
+  onSubmit: (authorizationData: AuthorizationData) => void;
+}
 
-const LoginScreen = (props) => {
+const LoginScreen: React.FC<Props> = (props: Props) => {
   const {
     children,
     activeCity,
@@ -79,7 +78,5 @@ const LoginScreen = (props) => {
     </div>
   );
 };
-
-LoginScreen.propTypes = propTypes;
 
 export default LoginScreen;

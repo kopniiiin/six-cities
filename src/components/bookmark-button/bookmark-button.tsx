@@ -1,18 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const Size = {WIDTH: 18, HEIGHT: 19};
+enum Size {WIDTH = 18, HEIGHT = 19}
 
-const BigSize = {WIDTH: 31, HEIGHT: 33};
+enum BigSize {WIDTH = 31, HEIGHT = 33}
 
-const propTypes = {
-  blockClassName: PropTypes.string.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  isBig: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired
-};
+interface Props {
+  blockClassName: string;
+  isActive: boolean;
+  isBig: boolean;
+  onClick: () => void;
+}
 
-const BookmarkButton = ({blockClassName, isActive, isBig, onClick}) => {
+const BookmarkButton: React.FC<Props> = ({blockClassName, isActive, isBig, onClick}: Props) => {
   const baseClassName = `${blockClassName}__bookmark-button`;
   const activeClassName = `${baseClassName}--active`;
   const buttonClassName = `${baseClassName} ${isActive ? activeClassName : ``} button`;
@@ -32,7 +31,5 @@ const BookmarkButton = ({blockClassName, isActive, isBig, onClick}) => {
     </button>
   );
 };
-
-BookmarkButton.propTypes = propTypes;
 
 export default BookmarkButton;

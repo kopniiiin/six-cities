@@ -1,7 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {AuthorizationStatus} from "../../const";
+import {AuthorizationStatus, ReviewWithId, ReviewData} from "../../types";
 
 import Review from "../review/review";
 import ReviewForm from "../review-form/review-form";
@@ -12,18 +11,15 @@ const ReviewFormWithReviewData = withReviewData(ReviewForm);
 
 const MAX_REVIEW_AMOUNT = 10;
 
-const reviewPropTypesCopy = Object.assign({}, Review.propTypes);
-reviewPropTypesCopy.id = PropTypes.string.isRequired;
+interface Props {
+  authorizationStatus: AuthorizationStatus;
+  reviews: ReviewWithId[];
+  isReviewFormDisabled: boolean;
+  reviewFormError?: string;
+  onReviewFormSubmit: (reviewData: ReviewData) => void;
+}
 
-const propTypes = {
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape(reviewPropTypesCopy)).isRequired,
-  isReviewFormDisabled: PropTypes.bool.isRequired,
-  reviewFormError: PropTypes.string,
-  onReviewFormSubmit: PropTypes.func.isRequired
-};
-
-const ReviewList = (props) => {
+const ReviewList: React.FC<Props> = (props: Props) => {
   const {
     authorizationStatus,
     reviews,
@@ -53,7 +49,5 @@ const ReviewList = (props) => {
     </section>
   );
 };
-
-ReviewList.propTypes = propTypes;
 
 export default ReviewList;

@@ -1,21 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+
+import {Review as Props} from "../../types";
 
 import {formatDate} from "../../utils";
 
 import StarRating from "../star-rating/star-rating";
 
-const propTypes = {
-  date: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired
-  }).isRequired
-};
-
-const Review = (props) => {
+const Review: React.FC<Props> = (props: Props) => {
   const {
     date,
     text,
@@ -39,7 +30,5 @@ const Review = (props) => {
     </li>
   );
 };
-
-Review.propTypes = propTypes;
 
 export default Review;

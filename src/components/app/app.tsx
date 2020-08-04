@@ -1,11 +1,18 @@
-import React, {PureComponent} from "react";
+import * as React from "react";
 import {Router, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
 
 import history from "../../history";
 
-import {OfferType, City, SortType, Path, AuthorizationStatus} from "../../const";
+import {
+  City,
+  SortType,
+  Path,
+  AuthorizationStatus,
+  Location,
+  Offer,
+  AuthorizationData
+} from "../../types";
 
 import GuestRoute from "../guest-route/guest-route";
 import PrivateRoute from "../private-route/private-route";
@@ -29,42 +36,25 @@ import {getError, getFilteredAndSortedOffers} from "../../reducer/offers/selecto
 const MainWithActiveItem = withActiveItem(Main);
 const LoginScreenWithAuthorizationData = withAuthorizationData(LoginScreen);
 
-const offerScreenPropTypesCopy = Object.assign({}, OfferScreen.propTypes);
-offerScreenPropTypesCopy.id = PropTypes.string.isRequired;
-delete offerScreenPropTypesCopy.nearOffers;
+interface Props {
+  authorizationStatus: AuthorizationStatus;
+  email?: string;
+  activeCity: City;
+  activeSortType: SortType;
+  error?: string;
+  offers: (Offer & {
+    location: Location;
+    city: {location: Location & {zoom: number}};
+  })[];
+  onCityClick: (city: City) => void;
+  onSortTypeChange: (sortType: SortType) => void;
+  onLoginScreenSubmit: (authorizationData: AuthorizationData) => void;
+  onOfferFavoritenessChange: (id: string) => void;
+}
 
-const propTypes = {
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  email: PropTypes.string,
-  activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
-  activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
-  error: PropTypes.string,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
-    name: PropTypes.string.isRequired,
-    mainPhoto: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    location: PropTypes.shape({
-      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-        zoom: PropTypes.number.isRequired
-      }).isRequired
-    }).isRequired
-  })).isRequired,
-  onCityClick: PropTypes.func.isRequired,
-  onSortTypeChange: PropTypes.func.isRequired,
-  onLoginScreenSubmit: PropTypes.func.isRequired,
-  onOfferFavoritenessChange: PropTypes.func.isRequired
-};
+class App extends React.PureComponent<Props> {
+  props: Props;
 
-class App extends PureComponent {
   constructor(props) {
     super(props);
     this._handleLoginScreenSubmit = this._handleLoginScreenSubmit.bind(this);
@@ -147,8 +137,6 @@ class App extends PureComponent {
     history.push(Path.LOGIN);
   }
 }
-
-App.propTypes = propTypes;
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),

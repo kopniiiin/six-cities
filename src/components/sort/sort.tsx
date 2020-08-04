@@ -1,21 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {SortType} from "../../const";
+import {SortType} from "../../types";
 
 import {upperCaseFirstLetter} from "../../utils";
 
-const propTypes = {
-  isActive: PropTypes.bool.isRequired,
-  onActiveStateChange: PropTypes.func.isRequired,
-  activeType: PropTypes.oneOf(Object.values(SortType)).isRequired,
-  onTypeChange: PropTypes.func.isRequired
-};
+interface Props {
+  isActive: boolean;
+  onActiveStateChange: () => void;
+  activeType: SortType;
+  onTypeChange: (sortType: SortType) => void;
+}
 
-const Sort = ({isActive, onActiveStateChange, activeType, onTypeChange}) => (
+const Sort: React.FC<Props> = ({isActive, onActiveStateChange, activeType, onTypeChange}: Props) => (
   <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by </span>
-    <span className="places__sorting-type" tabIndex="0" onClick={onActiveStateChange}>
+    <span className="places__sorting-type" tabIndex={0} onClick={onActiveStateChange}>
       {activeType}
       <svg className="places__sorting-arrow" width="7" height="4">
         <use xlinkHref="#icon-arrow-select"/>
@@ -26,7 +25,7 @@ const Sort = ({isActive, onActiveStateChange, activeType, onTypeChange}) => (
         <li
           key={sortType}
           className={`places__option ${sortType === activeType ? `places__option--active` : ``}`}
-          tabIndex="0"
+          tabIndex={0}
           onClick={() => onTypeChange(sortType)}>
           {upperCaseFirstLetter(sortType)}
         </li>
@@ -34,7 +33,5 @@ const Sort = ({isActive, onActiveStateChange, activeType, onTypeChange}) => (
     </ul>
   </form>
 );
-
-Sort.propTypes = propTypes;
 
 export default Sort;

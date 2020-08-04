@@ -1,10 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import {createStore, compose, applyMiddleware} from "redux";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import {createStore, applyMiddleware} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 
-import {AuthorizationStatus} from "./const";
+import {AuthorizationStatus} from "./types";
 
 import App from "./components/app/app";
 
@@ -18,10 +19,7 @@ const api = createAPI(() => store.dispatch(UserActionCreator.setAuthorizationSta
 
 const store = createStore(
     reducer,
-    compose(
-        applyMiddleware(thunk.withExtraArgument(api)),
-        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
-    )
+    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
 store.dispatch(UserOperation.checkAuthorizationStatus());

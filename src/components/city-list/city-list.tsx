@@ -1,14 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {City} from "../../const";
+import {City} from "../../types";
 
-const propTypes = {
-  activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
-  onClick: PropTypes.func.isRequired
-};
+interface Props {
+  activeCity: City;
+  onClick: (city: City) => void;
+}
 
-const CityList = ({activeCity, onClick}) => (
+const CityList: React.FC<Props> = ({activeCity, onClick}: Props) => (
   <div className="tabs">
     <section className="locations container">
       <ul className="tabs__list locations__list">
@@ -27,7 +26,5 @@ const CityList = ({activeCity, onClick}) => (
     </section>
   </div>
 );
-
-CityList.propTypes = propTypes;
 
 export default CityList;

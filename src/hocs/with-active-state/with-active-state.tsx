@@ -1,11 +1,22 @@
-import React, {PureComponent} from "react";
+import * as React from "react";
+import {Subtract} from "utility-types";
+
+interface State {
+  isActive: boolean;
+}
+
+interface InjectedProps {
+  isActive: boolean;
+  onActiveStateChange: () => void;
+}
 
 const withActiveState = (Component) => {
-  const propTypes = Object.assign({}, Component.propTypes);
-  delete propTypes.isActive;
-  delete propTypes.onActiveStateChange;
+  type Props = Subtract<React.ComponentProps<typeof Component>, InjectedProps>
 
-  class WithActiveState extends PureComponent {
+  return class WithActiveState extends React.PureComponent<Props, State> {
+    props: Props;
+    state: State;
+
     constructor(props) {
       super(props);
       this.state = {isActive: false};
@@ -19,13 +30,9 @@ const withActiveState = (Component) => {
     }
 
     _handleActiveStateChange() {
-      this.setState((prevState) => ({isActive: !prevState.isActive}));
+      this.setState(({isActive}) => ({isActive: !isActive}));
     }
-  }
-
-  WithActiveState.propTypes = propTypes;
-
-  return WithActiveState;
+  };
 };
 
 export default withActiveState;

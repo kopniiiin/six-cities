@@ -1,11 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const propTypes = {
-  activeCity: PropTypes.string.isRequired
-};
+import {City} from "../../types";
 
-const NoOffersMessage = ({activeCity}) => (
+interface Props {
+  activeCity: City;
+}
+
+const NoOffersMessage: React.FC<Props> = ({activeCity}: Props) => (
   <section className="cities__no-places">
     <div className="cities__status-wrapper tabs__content">
       <b className="cities__status">No places to stay available</b>
@@ -15,7 +16,5 @@ const NoOffersMessage = ({activeCity}) => (
     </div>
   </section>
 );
-
-NoOffersMessage.propTypes = propTypes;
 
 export default NoOffersMessage;

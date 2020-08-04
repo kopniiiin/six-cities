@@ -1,23 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Route, Redirect} from "react-router-dom";
+import * as React from "react";
+import {Route, Redirect, RouteProps} from "react-router-dom";
 
-import {Path, AuthorizationStatus} from "../../const";
+import {Path, AuthorizationStatus} from "../../types";
 
-const propTypes = {
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  path: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired,
-  render: PropTypes.func.isRequired
-};
+type Props = RouteProps & {
+  authorizationStatus: AuthorizationStatus;
+  render: () => React.ReactNode;
+}
 
-const PrivateRoute = ({authorizationStatus, path, exact, render}) => (
+const PrivateRoute: React.FC<Props> = ({authorizationStatus, path, exact, render}: Props) => (
   <Route
     path={path}
     exact={exact}
     render={() => authorizationStatus === AuthorizationStatus.AUTHORIZED ? render() : <Redirect to={Path.LOGIN}/>}/>
 );
-
-PrivateRoute.propTypes = propTypes;
 
 export default PrivateRoute;

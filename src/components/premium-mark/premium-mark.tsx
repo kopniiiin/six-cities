@@ -1,10 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const propTypes = {blockClassName: PropTypes.string.isRequired};
+interface Props {
+  blockClassName: string;
+}
 
-const PremiumMark = ({blockClassName}) => <div className={`${blockClassName}__mark`}><span>Premium</span></div>;
-
-PremiumMark.propTypes = propTypes;
+const PremiumMark: React.FC<Props> = ({blockClassName}: Props) => <div className={`${blockClassName}__mark`}><span>Premium</span></div>;
 
 export default PremiumMark;

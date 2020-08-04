@@ -1,15 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import {MAX_RATING} from "../../const";
 
-const propTypes = {
-  blockClassName: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  isValueShown: PropTypes.bool.isRequired
-};
+interface Props {
+  blockClassName: string;
+  value: number;
+  isValueShown: boolean;
+}
 
-const StarRating = ({blockClassName, value, isValueShown}) => {
+const StarRating: React.FC<Props> = ({blockClassName, value, isValueShown}: Props) => {
   const ratingClassName = `${blockClassName}__rating rating`;
   const starsClassName = `${blockClassName}__stars rating__stars`;
   const valueClassName = `${blockClassName}__rating-value rating__value`;
@@ -28,7 +27,5 @@ const StarRating = ({blockClassName, value, isValueShown}) => {
     </div>
   );
 };
-
-StarRating.propTypes = propTypes;
 
 export default StarRating;

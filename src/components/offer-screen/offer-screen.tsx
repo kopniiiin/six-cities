@@ -1,10 +1,9 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {connect} from "react-redux";
 
-import {OfferType, AuthorizationStatus} from "../../const";
+import {AuthorizationStatus, Location, User, Offer, ReviewWithId, ReviewData} from "../../types";
 
-import {upperCaseFirstLetter} from "../../utils";
+import {doNothing, upperCaseFirstLetter} from "../../utils";
 
 import PremiumMark from "../premium-mark/premium-mark";
 import BookmarkButton from "../bookmark-button/bookmark-button";
@@ -23,71 +22,34 @@ import {getReviewSendingStatus, getError, getSortedByDateReviews} from "../../re
 const MapWithMarkers = withMarkers(Map);
 
 const MAX_PHOTO_AMOUNT = 6;
-
 const MAX_NEAR_OFFER_AMOUNT = 3;
 
-const propTypes = {
-  children: PropTypes.element.isRequired,
-  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  id: PropTypes.string.isRequired,
-  offer: PropTypes.shape({
-    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    photos: PropTypes.arrayOf(PropTypes.string).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    bedroomAmount: PropTypes.number.isRequired,
-    guestAmount: PropTypes.number.isRequired,
-    features: PropTypes.arrayOf(PropTypes.string).isRequired,
-    location: PropTypes.shape({
-      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-        zoom: PropTypes.number.isRequired
-      }).isRequired
-    }).isRequired,
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      photo: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired
-    }).isRequired,
-  }).isRequired,
-  nearOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
-    name: PropTypes.string.isRequired,
-    mainPhoto: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    location: PropTypes.shape({
-      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
-    }).isRequired
-  })).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      photo: PropTypes.string.isRequired
-    }).isRequired
-  })).isRequired,
-  loadData: PropTypes.func.isRequired,
-  isReviewFormDisabled: PropTypes.bool.isRequired,
-  reviewFormError: PropTypes.string,
-  onReviewFormSubmit: PropTypes.func.isRequired,
-  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
-};
+interface Props {
+  children: React.ReactNode;
+  authorizationStatus: AuthorizationStatus;
+  id: string;
+  offer: Offer & {
+    description: string;
+    photos: string[];
+    bedroomAmount: number;
+    guestAmount: number;
+    features: string[];
+    location: Location;
+    city: {location: Location & {zoom: number}};
+    host: User & {isPro: boolean};
+  };
+  nearOffers: (Offer & {location: Location})[];
+  reviews: ReviewWithId[];
+  loadData: () => void;
+  isReviewFormDisabled: boolean;
+  reviewFormError?: string;
+  onReviewFormSubmit: (reviewData: ReviewData) => void;
+  onOfferCardBookmarkButtonClick: (id: string) => void;
+}
 
-class OfferScreen extends PureComponent {
+class OfferScreen extends React.PureComponent<Props> {
+  props: Props;
+
   render() {
     const {
       children,
@@ -171,8 +133,8 @@ class OfferScreen extends PureComponent {
       <OfferList
         blockClassName={`near-places`}
         offers={slicedNearOffers}
-        onOfferCardMouseEnter={() => {}}
-        onOfferCardMouseLeave={() => {}}
+        onOfferCardMouseEnter={doNothing}
+        onOfferCardMouseLeave={doNothing}
         onOfferCardBookmarkButtonClick={onOfferCardBookmarkButtonClick}/>
     );
 
@@ -247,8 +209,6 @@ class OfferScreen extends PureComponent {
     loadData();
   }
 }
-
-OfferScreen.propTypes = propTypes;
 
 const mapStateToProps = (state, {id}) => ({
   offer: getOfferWithId(state, id),

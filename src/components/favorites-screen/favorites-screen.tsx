@@ -1,32 +1,26 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {OfferType, Path} from "../../const";
+import {Path, Offer} from "../../types";
+
+import {doNothing} from "../../utils";
 
 import OfferList from "../offer-list/offer-list";
 
 import {Operation as OffersOperation} from "../../reducer/offers/offers";
 import {getGroupedByCityFavoriteOffers} from "../../reducer/offers/selectors";
 
-const propTypes = {
-  children: PropTypes.element.isRequired,
-  citiesToOffers: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
-    name: PropTypes.string.isRequired,
-    mainPhoto: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired
-  }))).isRequired,
-  loadData: PropTypes.func.isRequired,
-  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
-};
+interface Props {
+  children: React.ReactNode;
+  citiesToOffers: {[city: string]: Offer[]};
+  loadData: () => void;
+  onOfferCardBookmarkButtonClick: (id: string) => void;
+}
 
-class FavoritesScreen extends PureComponent {
+class FavoritesScreen extends React.PureComponent<Props> {
+  props: Props;
+
   render() {
     const {children, citiesToOffers, onOfferCardBookmarkButtonClick} = this.props;
 
@@ -57,8 +51,8 @@ class FavoritesScreen extends PureComponent {
                       <OfferList
                         blockClassName={`favorites`}
                         offers={offers}
-                        onOfferCardMouseEnter={() => {}}
-                        onOfferCardMouseLeave={() => {}}
+                        onOfferCardMouseEnter={doNothing}
+                        onOfferCardMouseLeave={doNothing}
                         onOfferCardBookmarkButtonClick={onOfferCardBookmarkButtonClick}/>
                     </li>
                   ))}
@@ -91,8 +85,6 @@ class FavoritesScreen extends PureComponent {
     loadData();
   }
 }
-
-FavoritesScreen.propTypes = propTypes;
 
 const mapStateToProps = (state) => ({
   citiesToOffers: getGroupedByCityFavoriteOffers(state)

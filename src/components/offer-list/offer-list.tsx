@@ -1,23 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+
+import {Offer} from "../../types";
 
 import OfferCard from "../offer-card/offer-card";
 
-const offerCardPropTypesCopy = Object.assign({}, OfferCard.propTypes);
-delete offerCardPropTypesCopy.blockClassName;
-delete offerCardPropTypesCopy.onMouseEnter;
-delete offerCardPropTypesCopy.onMouseLeave;
-delete offerCardPropTypesCopy.onBookmarkButtonClick;
+interface Props {
+  blockClassName: string;
+  offers: Offer[];
+  onOfferCardMouseEnter: (id: string) => void;
+  onOfferCardMouseLeave: (id: string) => void;
+  onOfferCardBookmarkButtonClick: (id: string) => void;
+}
 
-const propTypes = {
-  blockClassName: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape(offerCardPropTypesCopy)).isRequired,
-  onOfferCardMouseEnter: PropTypes.func.isRequired,
-  onOfferCardMouseLeave: PropTypes.func.isRequired,
-  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
-};
-
-const OfferList = (props) => {
+const OfferList: React.FC<Props> = (props: Props) => {
   const {
     blockClassName,
     offers,
@@ -40,7 +35,5 @@ const OfferList = (props) => {
 
   return <div className={listClassName}>{offerCards}</div>;
 };
-
-OfferList.propTypes = propTypes;
 
 export default OfferList;

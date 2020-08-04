@@ -1,6 +1,6 @@
 import {createSelector} from "reselect";
 
-import {SortType} from "../../const";
+import {SortType} from "../../types";
 
 import NameSpace from "../name-space";
 

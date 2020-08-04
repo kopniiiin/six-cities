@@ -1,7 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {OfferType, City, SortType} from "../../const";
+import {City, SortType, Location, Offer} from "../../types";
 
 import CityList from "../city-list/city-list";
 import Sort from "../sort/sort";
@@ -15,38 +14,23 @@ import withMarkers from "../../hocs/with-markers/with-markers";
 const SortWithActiveState = withActiveState(Sort);
 const MapWithMarkers = withMarkers(Map);
 
-const propTypes = {
-  activeItem: PropTypes.string,
-  onActiveItemChange: PropTypes.func.isRequired,
-  onActiveItemRemoval: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
-  activeCity: PropTypes.oneOf(Object.values(City)).isRequired,
-  activeSortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
-    name: PropTypes.string.isRequired,
-    mainPhoto: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    location: PropTypes.shape({
-      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-        zoom: PropTypes.number.isRequired
-      }).isRequired
-    }).isRequired
-  })).isRequired,
-  onCityClick: PropTypes.func.isRequired,
-  onSortTypeChange: PropTypes.func.isRequired,
-  onOfferCardBookmarkButtonClick: PropTypes.func.isRequired
-};
+interface Props {
+  activeItem?: string;
+  onActiveItemChange: (activeItem: string) => void;
+  onActiveItemRemoval: () => void;
+  children: React.ReactNode;
+  activeCity: City;
+  activeSortType: SortType;
+  offers: (Offer & {
+    location: Location;
+    city: {location: Location & {zoom: number}};
+  })[];
+  onCityClick: (city: City) => void;
+  onSortTypeChange: (sortType: SortType) => void;
+  onOfferCardBookmarkButtonClick: (id: string) => void;
+}
 
-const Main = (props) => {
+const Main: React.FC<Props> = (props: Props) => {
   const {
     activeItem: activeOfferId,
     onActiveItemChange: onActiveOfferIdChange,
@@ -109,7 +93,5 @@ const Main = (props) => {
     </div>
   );
 };
-
-Main.propTypes = propTypes;
 
 export default Main;

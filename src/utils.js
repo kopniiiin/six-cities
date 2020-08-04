@@ -13,6 +13,8 @@ const MONTHS = [
   `December`
 ];
 
+export const doNothing = () => {};
+
 export const extend = (target, update) => Object.assign({}, target, update);
 
 export const pushElement = (array, element) => [...array, element];

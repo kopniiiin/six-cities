@@ -1,12 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const propTypes = {
-  text: PropTypes.string.isRequired
-};
+interface Props {
+  text: string;
+}
 
-const ErrorMessage = ({text}) => <div className="error-message">{text}</div>;
-
-ErrorMessage.propTypes = propTypes;
+const ErrorMessage: React.FC<Props> = ({text}: Props) => <div className="error-message">{text}</div>;
 
 export default ErrorMessage;

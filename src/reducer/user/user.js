@@ -1,4 +1,4 @@
-import {ServerURL, AuthorizationStatus} from "../../const";
+import {ServerURL, AuthorizationStatus} from "../../types";
 
 import {extend} from "../../utils";
 

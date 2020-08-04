@@ -1,6 +1,6 @@
-import React, {Fragment} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
+import {ReviewData} from "../../types";
 import {MAX_RATING} from "../../const";
 
 import ErrorMessage from "../error-message/error-message";
@@ -15,17 +15,17 @@ const ratingsToTitles = {
   5: `perfect`
 };
 
-const propTypes = {
-  disabled: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-  text: PropTypes.string,
-  rating: PropTypes.number,
-  onTextChange: PropTypes.func.isRequired,
-  onRatingChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
-};
+interface Props {
+  disabled: boolean;
+  error?: string;
+  text?: string;
+  rating?: number;
+  onTextChange: (text: string) => void;
+  onRatingChange: (rating: number) => void;
+  onSubmit: (reviewData: ReviewData) => void;
+}
 
-const ReviewForm = (props) => {
+const ReviewForm: React.FC<Props> = (props: Props) => {
   const {
     disabled,
     error,
@@ -40,7 +40,7 @@ const ReviewForm = (props) => {
 
   for (let rating = MAX_RATING; rating >= 1; rating--) {
     stars.push(
-        <Fragment key={rating}>
+        <React.Fragment key={rating}>
 
           <input
             className="form__rating-input visually-hidden"
@@ -62,7 +62,7 @@ const ReviewForm = (props) => {
             </svg>
           </label>
 
-        </Fragment>
+        </React.Fragment>
     );
   }
 
@@ -114,7 +114,5 @@ const ReviewForm = (props) => {
     </form>
   );
 };
-
-ReviewForm.propTypes = propTypes;
 
 export default ReviewForm;

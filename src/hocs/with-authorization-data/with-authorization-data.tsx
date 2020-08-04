@@ -1,15 +1,29 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import {Subtract} from "utility-types";
+
+import {AuthorizationData} from "../../types";
+
+interface State {
+  email: string;
+  password: string;
+}
+
+interface InjectedProps {
+  email: string;
+  password: string;
+  onEmailChange: (email: string) => void;
+  onPasswordChange: (password: string) => void;
+}
 
 const withAuthorizationData = (Component) => {
-  const propTypes = Object.assign({}, Component.propTypes);
-  delete propTypes.email;
-  delete propTypes.password;
-  delete propTypes.onEmailChange;
-  delete propTypes.onPasswordChange;
-  propTypes.onSubmit = PropTypes.func.isRequired;
+  type Props = Subtract<React.ComponentProps<typeof Component>, InjectedProps> & {
+    onSubmit: (authorizationData: AuthorizationData) => void;
+  }
 
-  class WithAuthorizationData extends PureComponent {
+  return class WithAuthorizationData extends React.PureComponent<Props, State> {
+    props: Props;
+    state: State;
+
     constructor(props) {
       super(props);
       this.state = {email: ``, password: ``};
@@ -18,7 +32,6 @@ const withAuthorizationData = (Component) => {
     }
 
     render() {
-      // eslint-disable-next-line react/prop-types
       const {onSubmit} = this.props;
       const {email, password} = this.state;
 
@@ -40,11 +53,7 @@ const withAuthorizationData = (Component) => {
     _handlePasswordChange(password) {
       this.setState({password});
     }
-  }
-
-  WithAuthorizationData.propTypes = propTypes;
-
-  return WithAuthorizationData;
+  };
 };
 
 export default withAuthorizationData;

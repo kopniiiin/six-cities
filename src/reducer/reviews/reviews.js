@@ -1,4 +1,5 @@
-import {ServerURL, ERROR_TIMEOUT} from "../../const";
+import {ServerURL} from "../../types";
+import {ERROR_TIMEOUT} from "../../const";
 
 import {extend} from "../../utils";
 

@@ -1,12 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-const propTypes = {
-  blockClassName: PropTypes.string.isRequired
-};
+interface Props {
+  blockClassName: string;
+}
 
-const Map = ({blockClassName}) => <section className={`${blockClassName}__map map`} id="map"/>;
-
-Map.propTypes = propTypes;
+const Map: React.FC<Props> = ({blockClassName}: Props) => <section className={`${blockClassName}__map map`} id="map"/>;
 
 export default Map;

@@ -1,8 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {Link} from "react-router-dom";
 
-import {OfferType, Path} from "../../const";
+import {Path, Offer} from "../../types";
 
 import {upperCaseFirstLetter} from "../../utils";
 
@@ -10,22 +9,14 @@ import PremiumMark from "../premium-mark/premium-mark";
 import BookmarkButton from "../bookmark-button/bookmark-button";
 import StarRating from "../star-rating/star-rating";
 
-const propTypes = {
-  blockClassName: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(Object.values(OfferType)).isRequired,
-  name: PropTypes.string.isRequired,
-  mainPhoto: PropTypes.string.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  isPremium: PropTypes.bool.isRequired,
-  rating: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
-  onBookmarkButtonClick: PropTypes.func.isRequired
-};
+type Props = Offer & {
+  blockClassName: string;
+  onMouseEnter: (id: string) => void;
+  onMouseLeave: (id: string) => void;
+  onBookmarkButtonClick: (id: string) => void;
+}
 
-const OfferCard = (props) => {
+const OfferCard: React.FC<Props> = (props: Props) => {
   const {
     blockClassName,
     id,
@@ -83,7 +74,5 @@ const OfferCard = (props) => {
     </article>
   );
 };
-
-OfferCard.propTypes = propTypes;
 
 export default OfferCard;

@@ -1,15 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {Link} from "react-router-dom";
 
-import {Path} from "../../const";
+import {Path} from "../../types";
 
-const propTypes = {
-  children: PropTypes.element,
-  email: PropTypes.string
-};
+interface Props {
+  children?: React.ReactNode;
+  email?: string;
+}
 
-const Header = ({children, email}) => (
+const Header: React.FC<Props> = ({children, email}: Props) => (
   <header className="header">
     {children}
     <div className="container">
@@ -40,7 +39,5 @@ const Header = ({children, email}) => (
     </div>
   </header>
 );
-
-Header.propTypes = propTypes;
 
 export default Header;

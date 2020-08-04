@@ -1,12 +1,23 @@
-import React, {PureComponent} from "react";
+import * as React from "react";
+import {Subtract} from "utility-types";
+
+interface State {
+  activeItem?: string;
+}
+
+interface InjectedProps {
+  activeItem?: string;
+  onActiveItemChange: (activeItem: string) => void;
+  onActiveItemRemoval: () => void;
+}
 
 const withActiveItem = (Component) => {
-  const propTypes = Object.assign({}, Component.propTypes);
-  delete propTypes.activeItem;
-  delete propTypes.onActiveItemChange;
-  delete propTypes.onActiveItemRemoval;
+  type Props = Subtract<React.ComponentProps<typeof Component>, InjectedProps>
 
-  class WithActiveItem extends PureComponent {
+  return class WithActiveItem extends React.PureComponent<Props, State> {
+    props: Props;
+    state: State;
+
     constructor(props) {
       super(props);
       this.state = {activeItem: null};
@@ -33,11 +44,7 @@ const withActiveItem = (Component) => {
     _handleActiveItemRemoval() {
       this.setState({activeItem: null});
     }
-  }
-
-  WithActiveItem.propTypes = propTypes;
-
-  return WithActiveItem;
+  };
 };
 
 export default withActiveItem;

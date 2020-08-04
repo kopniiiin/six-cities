@@ -1,15 +1,29 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import {Subtract} from "utility-types";
+
+import {ReviewData} from "../../types";
+
+interface State {
+  text?: string;
+  rating?: number;
+}
+
+interface InjectedProps {
+  text?: string;
+  rating?: number;
+  onTextChange: (text: string) => void;
+  onRatingChange: (rating: number) => void;
+}
 
 const withReviewData = (Component) => {
-  const propTypes = Object.assign({}, Component.propTypes);
-  delete propTypes.text;
-  delete propTypes.rating;
-  delete propTypes.onTextChange;
-  delete propTypes.onRatingChange;
-  propTypes.onSubmit = PropTypes.func.isRequired;
+  type Props = Subtract<React.ComponentProps<typeof Component>, InjectedProps> & {
+    onSubmit: (reviewData: ReviewData) => void;
+  }
 
-  class WithReviewData extends PureComponent {
+  return class WithReviewData extends React.PureComponent<Props, State> {
+    props: Props;
+    state: State;
+
     constructor(props) {
       super(props);
       this.state = {text: ``, rating: null};
@@ -18,7 +32,6 @@ const withReviewData = (Component) => {
     }
 
     render() {
-      // eslint-disable-next-line react/prop-types
       const {onSubmit} = this.props;
       const {text, rating} = this.state;
 
@@ -40,11 +53,7 @@ const withReviewData = (Component) => {
     _handleRatingChange(rating) {
       this.setState({rating});
     }
-  }
-
-  WithReviewData.propTypes = propTypes;
-
-  return WithReviewData;
+  };
 };
 
 export default withReviewData;
