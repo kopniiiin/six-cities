@@ -61,6 +61,23 @@ class App extends React.PureComponent<Props> {
     this._handleOfferCardBookmarkButtonClick = this._handleOfferCardBookmarkButtonClick.bind(this);
   }
 
+  _handleLoginScreenSubmit(authorizationData) {
+    const {onLoginScreenSubmit} = this.props;
+
+    onLoginScreenSubmit(authorizationData);
+  }
+
+  _handleOfferCardBookmarkButtonClick(offerId) {
+    const {authorizationStatus, onOfferFavoritenessChange} = this.props;
+
+    if (authorizationStatus === AuthorizationStatus.AUTHORIZED) {
+      onOfferFavoritenessChange(offerId);
+      return;
+    }
+
+    history.push(Path.LOGIN);
+  }
+
   render() {
     const {
       authorizationStatus,
@@ -118,23 +135,6 @@ class App extends React.PureComponent<Props> {
         </Switch>
       </Router>
     );
-  }
-
-  _handleLoginScreenSubmit(authorizationData) {
-    const {onLoginScreenSubmit} = this.props;
-
-    onLoginScreenSubmit(authorizationData);
-  }
-
-  _handleOfferCardBookmarkButtonClick(offerId) {
-    const {authorizationStatus, onOfferFavoritenessChange} = this.props;
-
-    if (authorizationStatus === AuthorizationStatus.AUTHORIZED) {
-      onOfferFavoritenessChange(offerId);
-      return;
-    }
-
-    history.push(Path.LOGIN);
   }
 }
 

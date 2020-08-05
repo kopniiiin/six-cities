@@ -21,6 +21,12 @@ interface Props {
 class FavoritesScreen extends React.PureComponent<Props> {
   props: Props;
 
+  componentDidMount() {
+    const {loadData} = this.props;
+
+    loadData();
+  }
+
   render() {
     const {children, citiesToOffers, onOfferCardBookmarkButtonClick} = this.props;
 
@@ -77,12 +83,6 @@ class FavoritesScreen extends React.PureComponent<Props> {
         </footer>
       </div>
     );
-  }
-
-  componentDidMount() {
-    const {loadData} = this.props;
-
-    loadData();
   }
 }
 

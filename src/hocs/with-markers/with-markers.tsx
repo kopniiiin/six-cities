@@ -36,16 +36,6 @@ const withMarkers = (Component) => {
       this._markers = null;
     }
 
-    render() {
-      const props = Object.assign({}, this.props);
-      delete props.centerCoordinates;
-      delete props.zoom;
-      delete props.markerCoordinates;
-      delete props.activeMarkerCoordinates;
-
-      return <Component {...props}/>;
-    }
-
     componentDidMount() {
       const {centerCoordinates, zoom} = this.props;
 
@@ -90,6 +80,16 @@ const withMarkers = (Component) => {
       ];
 
       this._markers.forEach((marker) => marker.addTo(this._map));
+    }
+
+    render() {
+      const props = Object.assign({}, this.props);
+      delete props.centerCoordinates;
+      delete props.zoom;
+      delete props.markerCoordinates;
+      delete props.activeMarkerCoordinates;
+
+      return <Component {...props}/>;
     }
   };
 };

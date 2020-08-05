@@ -25,6 +25,14 @@ const withActiveItem = (Component) => {
       this._handleActiveItemRemoval = this._handleActiveItemRemoval.bind(this);
     }
 
+    _handleActiveItemChange(activeItem) {
+      this.setState({activeItem});
+    }
+
+    _handleActiveItemRemoval() {
+      this.setState({activeItem: null});
+    }
+
     render() {
       const {activeItem} = this.state;
 
@@ -35,14 +43,6 @@ const withActiveItem = (Component) => {
           onActiveItemChange={this._handleActiveItemChange}
           onActiveItemRemoval={this._handleActiveItemRemoval}/>
       );
-    }
-
-    _handleActiveItemChange(activeItem) {
-      this.setState({activeItem});
-    }
-
-    _handleActiveItemRemoval() {
-      this.setState({activeItem: null});
     }
   };
 };

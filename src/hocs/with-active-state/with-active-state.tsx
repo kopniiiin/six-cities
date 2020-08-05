@@ -23,14 +23,14 @@ const withActiveState = (Component) => {
       this._handleActiveStateChange = this._handleActiveStateChange.bind(this);
     }
 
+    _handleActiveStateChange() {
+      this.setState(({isActive}) => ({isActive: !isActive}));
+    }
+
     render() {
       const {isActive} = this.state;
 
       return <Component {...this.props} isActive={isActive} onActiveStateChange={this._handleActiveStateChange}/>;
-    }
-
-    _handleActiveStateChange() {
-      this.setState(({isActive}) => ({isActive: !isActive}));
     }
   };
 };

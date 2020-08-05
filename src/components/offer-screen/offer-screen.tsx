@@ -56,6 +56,24 @@ interface Props {
 class OfferScreen extends React.PureComponent<Props> {
   props: Props;
 
+  componentDidMount() {
+    this._update();
+  }
+
+  componentDidUpdate({id: oldId}) {
+    const {id: newId} = this.props;
+
+    if (oldId !== newId) {
+      this._update();
+    }
+  }
+
+  _update() {
+    const {loadData} = this.props;
+
+    loadData();
+  }
+
   render() {
     const {
       children,
@@ -195,24 +213,6 @@ class OfferScreen extends React.PureComponent<Props> {
         </main>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this._update();
-  }
-
-  componentDidUpdate({id: oldId}) {
-    const {id: newId} = this.props;
-
-    if (oldId !== newId) {
-      this._update();
-    }
-  }
-
-  _update() {
-    const {loadData} = this.props;
-
-    loadData();
   }
 }
 

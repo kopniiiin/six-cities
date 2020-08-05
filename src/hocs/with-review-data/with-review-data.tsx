@@ -31,6 +31,14 @@ const withReviewData = (Component) => {
       this._handleRatingChange = this._handleRatingChange.bind(this);
     }
 
+    _handleTextChange(text) {
+      this.setState({text});
+    }
+
+    _handleRatingChange(rating) {
+      this.setState({rating});
+    }
+
     render() {
       const {onSubmit} = this.props;
       const {text, rating} = this.state;
@@ -44,14 +52,6 @@ const withReviewData = (Component) => {
           onRatingChange={this._handleRatingChange}
           onSubmit={() => onSubmit({text, rating})}/>
       );
-    }
-
-    _handleTextChange(text) {
-      this.setState({text});
-    }
-
-    _handleRatingChange(rating) {
-      this.setState({rating});
     }
   };
 };

@@ -31,6 +31,14 @@ const withAuthorizationData = (Component) => {
       this._handlePasswordChange = this._handlePasswordChange.bind(this);
     }
 
+    _handleEmailChange(email) {
+      this.setState({email});
+    }
+
+    _handlePasswordChange(password) {
+      this.setState({password});
+    }
+
     render() {
       const {onSubmit} = this.props;
       const {email, password} = this.state;
@@ -44,14 +52,6 @@ const withAuthorizationData = (Component) => {
           onPasswordChange={this._handlePasswordChange}
           onSubmit={() => onSubmit({email, password})}/>
       );
-    }
-
-    _handleEmailChange(email) {
-      this.setState({email});
-    }
-
-    _handlePasswordChange(password) {
-      this.setState({password});
     }
   };
 };
