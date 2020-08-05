@@ -1,7 +1,10 @@
-import React from "react";
-import {shallow} from "enzyme";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
 import withActiveItem from "./with-active-item";
+
+configure({adapter: new Adapter()});
 
 const MockComponent = () => <div/>;
 const MockComponentWithActiveItem = withActiveItem(MockComponent);

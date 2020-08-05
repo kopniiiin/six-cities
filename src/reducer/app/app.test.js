@@ -1,4 +1,5 @@
-import {City, DEFAULT_CITY, SortType, DEFAULT_SORT_TYPE} from "../../const";
+import {City, SortType} from "../../types";
+import {DEFAULT_CITY, DEFAULT_SORT_TYPE} from "../../const";
 
 import {ActionType, ActionCreator, reducer} from "./app";
 

@@ -14,7 +14,7 @@ exports[`snapshot test: Sort component should render active 1`] = `
   <span
     className="places__sorting-type"
     onClick={[Function]}
-    tabIndex="0"
+    tabIndex={0}
   >
     popular
     <svg
@@ -34,7 +34,7 @@ exports[`snapshot test: Sort component should render active 1`] = `
       className="places__option places__option--active"
       key="popular"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Popular
     </li>
@@ -42,7 +42,7 @@ exports[`snapshot test: Sort component should render active 1`] = `
       className="places__option "
       key="price: low to high"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Price: low to high
     </li>
@@ -50,7 +50,7 @@ exports[`snapshot test: Sort component should render active 1`] = `
       className="places__option "
       key="price: high to low"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Price: high to low
     </li>
@@ -58,7 +58,7 @@ exports[`snapshot test: Sort component should render active 1`] = `
       className="places__option "
       key="top rated first"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Top rated first
     </li>
@@ -80,7 +80,7 @@ exports[`snapshot test: Sort component should render correctly 1`] = `
   <span
     className="places__sorting-type"
     onClick={[Function]}
-    tabIndex="0"
+    tabIndex={0}
   >
     popular
     <svg
@@ -100,7 +100,7 @@ exports[`snapshot test: Sort component should render correctly 1`] = `
       className="places__option places__option--active"
       key="popular"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Popular
     </li>
@@ -108,7 +108,7 @@ exports[`snapshot test: Sort component should render correctly 1`] = `
       className="places__option "
       key="price: low to high"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Price: low to high
     </li>
@@ -116,7 +116,7 @@ exports[`snapshot test: Sort component should render correctly 1`] = `
       className="places__option "
       key="price: high to low"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Price: high to low
     </li>
@@ -124,7 +124,7 @@ exports[`snapshot test: Sort component should render correctly 1`] = `
       className="places__option "
       key="top rated first"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Top rated first
     </li>

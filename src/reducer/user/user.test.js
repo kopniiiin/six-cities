@@ -1,6 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 
-import {ServerURL, ServerResponseStatus, AuthorizationStatus} from "../../const";
+import {ServerURL, ServerResponseStatus, AuthorizationStatus} from "../../types";
 
 import createAPI from "../../api";
 

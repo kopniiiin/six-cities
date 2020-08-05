@@ -1,20 +1,35 @@
-import React from "react";
-import {shallow} from "enzyme";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
-import {AuthorizationStatus} from "../../const";
+import {AuthorizationStatus} from "../../types";
 
-import {extend} from "../../utils";
+import {doNothing, extend} from "../../utils";
 
 import ReviewList from "./review-list";
 
-import testMocks from "../../test-mocks/review-list";
+configure({adapter: new Adapter()});
+
+const testMocks = {
+  authorizationStatus: AuthorizationStatus.UNAUTHORIZED,
+  reviews: [{
+    id: `4`,
+    date: `2020-04-04`,
+    text: `Good`,
+    rating: 4,
+    user: {name: `User`, photo: `photo`}
+  }],
+  isReviewFormDisabled: false,
+  onReviewFormSubmit: doNothing
+};
 
 describe(`snapshot test: ReviewList component`, () => {
   it(`should render correctly`, () => expect(
-      shallow(<ReviewList {...testMocks}/>)
+      toJson(shallow(<ReviewList {...testMocks}/>))
   ).toMatchSnapshot());
 
   it(`should render ReviewForm`, () => expect(
-      shallow(<ReviewList {...extend(testMocks, {authorizationStatus: AuthorizationStatus.AUTHORIZED})}/>)
+      toJson(shallow(<ReviewList {...extend(testMocks, {authorizationStatus: AuthorizationStatus.AUTHORIZED})}/>))
   ).toMatchSnapshot());
 });

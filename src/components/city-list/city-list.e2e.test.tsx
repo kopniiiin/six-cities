@@ -1,13 +1,19 @@
-import React from "react";
-import {shallow} from "enzyme";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
-import {City} from "../../const";
+import {City} from "../../types";
 
-import {extend} from "../../utils";
+import {doNothing, extend} from "../../utils";
 
 import CityList from "./city-list";
 
-import testMocks from "../../test-mocks/city-list";
+configure({adapter: new Adapter()});
+
+const testMocks = {
+  activeCity: City.AMSTERDAM,
+  onClick: doNothing
+};
 
 describe(`e2e test: CityList component`, () => {
   it(`should call onClick with city`, () => {

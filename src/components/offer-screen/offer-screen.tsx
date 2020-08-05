@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
 
-import {AuthorizationStatus, Location, User, Offer, ReviewWithId, ReviewData} from "../../types";
+import {OfferType, AuthorizationStatus, Location, User, Offer, ReviewWithId, ReviewData} from "../../types";
 
 import {doNothing, upperCaseFirstLetter} from "../../utils";
 
@@ -28,9 +28,15 @@ interface Props {
   children: React.ReactNode;
   authorizationStatus: AuthorizationStatus;
   id: string;
-  offer: Offer & {
+  offer: {
+    type: OfferType;
+    name: string;
     description: string;
     photos: string[];
+    isFavorite: boolean;
+    isPremium: boolean;
+    rating: number;
+    price: number;
     bedroomAmount: number;
     guestAmount: number;
     features: string[];

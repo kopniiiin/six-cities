@@ -1,14 +1,17 @@
-import React from "react";
-import {shallow} from "enzyme";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
-import {extend} from "../../utils";
+import {doNothing, extend} from "../../utils";
 
 import withAuthorizationData from "./with-authorization-data";
 
-import testMocks from "../../test-mocks/with-authorization-data";
+configure({adapter: new Adapter()});
 
 const MockComponent = () => <div/>;
 const MockComponentWithAuthorizationData = withAuthorizationData(MockComponent);
+
+const testMocks = {onSubmit: doNothing};
 
 describe(`e2e test: withAuthorizationData HOC`, () => {
   it(`should pass email`, () => expect(

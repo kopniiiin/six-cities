@@ -1,11 +1,23 @@
-import React from "react";
-import {shallow} from "enzyme";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
-import {extend} from "../../utils";
+import {City} from "../../types";
+
+import {doNothing, extend} from "../../utils";
 
 import LoginScreen from "./login-screen";
 
-import testMocks from "../../test-mocks/login-screen";
+configure({adapter: new Adapter()});
+
+const testMocks = {
+  activeCity: City.AMSTERDAM,
+  email: `email`,
+  password: `4444`,
+  onEmailChange: doNothing,
+  onPasswordChange: doNothing,
+  onSubmit: doNothing
+};
 
 describe(`e2e test: LoginScreen component`, () => {
   it(`should call onEmailChange with email`, () => {

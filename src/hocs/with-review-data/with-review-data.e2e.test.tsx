@@ -1,14 +1,17 @@
-import React from "react";
-import {shallow} from "enzyme";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
-import {extend} from "../../utils";
+import {doNothing, extend} from "../../utils";
 
 import withReviewData from "./with-review-data";
 
-import testMocks from "../../test-mocks/with-review-data";
+configure({adapter: new Adapter()});
 
 const MockComponent = () => <div/>;
 const MockComponentWithReviewData = withReviewData(MockComponent);
+
+const testMocks = {onSubmit: doNothing};
 
 describe(`e2e test: withReviewData HOC`, () => {
   it(`should pass text`, () => expect(

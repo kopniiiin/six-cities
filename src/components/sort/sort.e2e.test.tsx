@@ -1,13 +1,21 @@
-import React from "react";
-import {shallow} from "enzyme";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
-import {SortType} from "../../const";
+import {SortType} from "../../types";
 
-import {extend} from "../../utils";
+import {doNothing, extend} from "../../utils";
 
 import Sort from "./sort";
 
-import testMocks from "../../test-mocks/sort";
+configure({adapter: new Adapter()});
+
+const testMocks = {
+  isActive: false,
+  onActiveStateChange: doNothing,
+  activeType: SortType.POPULAR,
+  onTypeChange: doNothing
+};
 
 describe(`e2e test: Sort component`, () => {
   it(`should call onActiveStateChange`, () => {
